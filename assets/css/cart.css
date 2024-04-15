@@ -1,0 +1,214 @@
+.cart-wrapper {
+    height: auto;
+    margin: 0 40px;
+    margin-top: 20px;
+}
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+}
+.cart-container-left {
+    width: 1052px;
+    padding: 16px;
+    height: auto;
+}
+.cart-content-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+.cart-title-text {
+    display: inline-block;
+}
+.cart-title-text-1 {
+    width: 480px;
+}
+.cart-title-text-2 {
+    width: 180px;
+}
+.cart-title-text-3 {
+    width: 120px;
+}
+.cart-title-text-4 {
+    width: 120px;
+}
+.cart-content-product-lists {
+    display: flex;
+    flex-direction: column;
+    max-height: 440px;
+    overflow-y: scroll;
+}
+.cart-content-product-lists::-webkit-scrollbar {
+    display: none;
+}
+.cart-product-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin-top: 10px;
+}
+.cart-content-product {
+    width: 480px;
+    min-width: 480px;
+    display: flex;
+
+    column-gap: 5px;
+}
+.cart-content-product .checkBox-product {
+    align-self: center;
+}
+.cart-product-image {
+    min-width: 80px;
+    margin-right: 5px;
+    width: 80px;
+    height: auto;
+    overflow: hidden;
+}
+.cart-product-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+.cart-product-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cart-product-wrapper-action-button {
+    display: flex;
+    justify-content: space-between;
+    max-width: 260px;
+    width: 100%;
+}
+.cart-porduct-price {
+    width: 180px;
+    font-weight: 500;
+}
+.cart-product-quantity {
+    width: 120px;
+    display: flex;
+}
+.cart-product-totail-price {
+    width: 120px;
+    color: red;
+    font-weight: 500;
+}
+.increase-quantity {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+.decrease-quantity {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+.product-quantity {
+    width: 30px;
+    text-align: center;
+}
+.space {
+    height: 25px;
+    width: 25px;
+}
+.cart-product-delete {
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid black;
+    border-radius: 2px;
+    text-align: center;
+}
+.cart-container-right {
+    width: 320px;
+}
+.transport-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+}
+.transport-content-top {
+    width: 100%;
+    display: flex;
+
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+.transport-title {
+    font-size: 20px;
+    font-weight: 500;
+}
+.button-change-address {
+    display: inline-block;
+    font-size: 16px;
+    color: blue;
+}
+.transport-phone-number {
+    display: inline-block;
+    font-size: 16px;
+}
+.transport-title-second {
+    font-size: 18px;
+}
+.transport-infor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.transport-address {
+    max-height: 80px;
+    text-overflow: ellipsis;
+}
+.payment-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 10px;
+}
+.payment-content-top {
+    display: flex;
+    column-gap: 10px;
+    margin-bottom: 10px;
+}
+.payment-price {
+    font-size: 15px;
+    font-weight: 400;
+}
+.payment-totail-price {
+    color: red;
+}
+.button-buy-product {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}

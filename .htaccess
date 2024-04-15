@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Bỏ qua đường dẫn chứa "assets"
+RewriteRule ^(.*/)?assets(/.*)?$ - [PT,L]
+
+# Chuyển hướng các đường dẫn còn lại đến index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [PT,L]

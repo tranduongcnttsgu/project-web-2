@@ -17,13 +17,21 @@ class Order
     private $total_price;
     public function __construct()
     {
-        $this->order_id = $this->get_milliseconds();
+        $this->order_id = $this->autoId();
     }
-    function get_milliseconds()
+    function autoId()
     {
-        list($msec, $sec) = explode(' ', microtime());
-        $time_milli = (int) round(microtime(true) * 1000);
-        return "IP" . $time_milli;
+        $timestamp = time();
+        $id = date('YmdHis', $timestamp); // Năm + tháng + ngày + giờ + phút + giây
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $length = 10;
+        $max = strlen($characters) - 1;
+
+        for ($i = 0; $i < $length; $i++) {
+            $id .= $characters[mt_rand(0, $max)];
+        }
+
+        return $id;
     }
     // Getter và Setter cho $order_id
     public function getOrder_id()

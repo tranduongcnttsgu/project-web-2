@@ -163,7 +163,17 @@ Validator.isRequired = function (selector, message) {
         },
     };
 };
-
+Validator.isNumber = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            const reg = /^\d+$/;
+            return reg.test(value.trim())
+                ? undefined
+                : message || 'trường này phải là số';
+        },
+    };
+};
 Validator.isEmail = function (selector, message) {
     return {
         selector: selector,

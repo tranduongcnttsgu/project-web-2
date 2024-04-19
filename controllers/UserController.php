@@ -49,4 +49,25 @@ class UserController extends Controller
         $type = $this->cookieGet("action_group");
         return $this->responseJSON("người dùng đã login", true, 200, ["data" => $data, "type" => $type]);
     }
+    public function updateInfo()
+    {
+        $payload = $this->getPayload();
+        $userId = $this->cookieGet("userLogin");
+        $info = [$payload["fullName"], $payload["address"], $payload["emailInfo"], $payload["nickname"], $payload["phone"]];
+        // ["name", "address", "email", "nickname", "phone"]
+        $data = $this->userModel->updateInfo($info, $userId);
+        return $this->responseJSON("success", true, 200, ["data" => $payload, "column" => $data]);
+    }
+    public function userOrder()
+    {
+        $userId = $this->cookieGet("userLogin");
+        $data =  $this->userModel->userOrder($userId);
+        return $this->responseJSON("đặt hàng thành công", true, 200, $data);
+    }
+    public function getUserOrder()
+    {
+        $userId  = $this->cookieGet("userLogin");
+        $data = $this->userModel->getUserOrder($userId);
+        return $this->responseJSON("success", true, 200, $data);
+    }
 }

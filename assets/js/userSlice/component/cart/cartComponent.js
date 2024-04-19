@@ -53,21 +53,33 @@ const cartComponent = ({ data, checked, order }) => {
             )}</div>
             <div class="cart-product-wrapper-action-button">
                 <div class="cart-product-quantity">
-                 <button class="decrease-quantity"
+                 <button class="decrease-quantity
+                    ${
+                        checkOrder(product.product_id)
+                            ? 'visibility-hidden'
+                            : 'visibility-visible'
+                    }
+                 "
                  ${
                      product.quantity_purchased === 1
                          ? "style=' pointer-events: none;'"
                          : "style=' pointer-events: auto;'"
                  }
+                 
                    onclick = "dispatch('user/cartProduct/quantity',-1,${
                        product.product_id
                    })" 
                 >-</button>
                
-                <div class="product-quantity">${
-                    product.quantity_purchased
-                }</div>
+                <div class="product-quantity"
+                 
+                >${product.quantity_purchased}</div>
                 <button class="increase-quantity"
+                 ${
+                     checkOrder(product.product_id)
+                         ? "style='  visibility: hidden;'"
+                         : "style=' visibility:visible;'"
+                 }
                 onclick = "dispatch('user/cartProduct/quantity',1,${
                     product.product_id
                 })" 
@@ -77,7 +89,13 @@ const cartComponent = ({ data, checked, order }) => {
                        product.quantity_purchased * product.promo_price
                    )}</div>
             </div>
-            <div class="cart-product-delete"
+            <div class="cart-product-delete
+              ${
+                  checkOrder(product.product_id)
+                      ? 'visibility-hidden'
+                      : 'visibility-visible'
+              }
+            "
               onclick="dispatch('user/popup/cartProduct',1,${
                   product.product_id
               })"

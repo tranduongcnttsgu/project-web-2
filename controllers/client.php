@@ -58,8 +58,8 @@ class client extends Controller
     public function payment()
     {
         $params = [
-            "styled" => ["cart"],
-            "script" => ["user"],
+            "styled" => ["payment"],
+            "script" => ["user", "validation"],
             "titleButton" => "go shop",
             "buttonLink" => "http://localhost/product"
         ];

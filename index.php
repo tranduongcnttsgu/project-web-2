@@ -9,9 +9,12 @@ use controllers\client;
 use controllers\ProductController;
 use controllers\UserController;
 use core\Application;
+
+$basePath = dirname(__DIR__);
+$appPath = $basePath . DIRECTORY_SEPARATOR . 'app';
 // khoi  tao app
-$app = new Application("D:\web\app");
-$app->init("D:\web\app", $config);
+$app = new Application();
+$app->init($appPath, $config);
 // router page
 $app->router->get('/', [client::class, 'home']);
 $app->router->get('/account', [client::class, 'account']);
@@ -32,7 +35,11 @@ $app->router->post("/product-detail", [ProductController::class, "getInfoProduct
 $app->router->get("/orders", [ProductController::class, "getOrders"]);
 $app->router->get("/orderDetail", [ProductController::class, "getOrderDetail"]);
 $app->router->post("/add-one-product-to-order", [ProductController::class, "addOneProductToOrder"]);
+$app->router->post("/user/addManyProductToOrder", [ProductController::class, "addManyProductToOrder"]);
+$app->router->post("/user/deleteManyProductToOrder", [ProductController::class, "deleteManyProductToOrder"]);
+$app->router->post("/delete-one-product-in-order", [ProductController::class, "deleteOneProductInOrder"]);
 $app->router->post("/delete-product-on-cart", [ProductController::class, "deleteProductOnCart"]);
+$app->router->post("/user/addProductToCart", [ProductController::class, "addProductToCart"]);
 // rou
 
 //routerbb  admin
@@ -41,6 +48,8 @@ $app->router->get("/admin", [client::class, 'admin']);
 $app->router->post("/account/login", [UserController::class, "login"]);
 $app->router->get("/account/user-info-login", [UserController::class, "getInfoLoginUser"]);
 $app->router->get("/account/user", [client::class, "user"]);
-$app->router->post("/user/addProductToCart", [ProductController::class, "addProductToCart"]);
+$app->router->post("/user/order", [UserController::class, "userOrder"]);
 $app->router->get("/account/logout", [UserController::class, "logout"]);
+$app->router->post("/user/update-info", [UserController::class, "updateInfo"]);
+$app->router->get('/user/get/user-order', [UserController::class, "getUserOrder"]);
 $app->run();

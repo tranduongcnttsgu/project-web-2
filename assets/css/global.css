@@ -189,6 +189,7 @@ body {
     color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
+/* popup css start ============================================================= */
 .popup-wrapper {
     position: fixed;
     left: 0;
@@ -368,4 +369,10 @@ body {
 }
 #notify-bottom-btn-right:hover {
     box-shadow: unset;
+}
+.visibility-hidden {
+    visibility: hidden;
+}
+.visibility-visible {
+    visibility: visible;
 }

@@ -14,36 +14,6 @@ class ProductModel extends Model
 {
 
 
-    public function update()
-    {
-    }
-
-    public function delete($table, $where)
-    {
-        try {
-
-            $result = null;
-            $conn = $this->db->connect();
-            $sql = "DELETE FROM $table
-               WHERE $where";
-
-
-            $stmt = $conn->prepare($sql);
-
-
-            $stmt->execute();
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $stmt->rowCount();
-            return $result ?? null;
-        } catch (PDOException $e) {
-            echo "ERROR! Co loi xay ra voi PDO";
-            $error = date('Y/m/d H:i:s') . " index:productmedoel function| messge:" . $e->getMessage() . "Query: $sql";
-            $file = fopen("D:/web/app/runtime/PDOErrors.txt", "a");
-
-            fwrite($file, $error . PHP_EOL);
-            fclose($file);
-        }
-    }
     public function getCategory()
     {
         $data = $this->getAll("product_categorys");
@@ -186,13 +156,13 @@ class ProductModel extends Model
 
             $result = [];
             $conn = $this->db->connect();
-            $sql = "SELECT * FROM orders WHERE orders.customer_id =?; ";
+            $sql = "SELECT * FROM orders WHERE orders.customer_id =?  AND status =1";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(1, $userId);
             $stmt->execute();
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
             return $result ?? [];
         } catch (PDOException $e) {
             echo "ERROR! Co loi xay ra voi PDO";
@@ -210,7 +180,7 @@ class ProductModel extends Model
             $result = [];
             $conn = $this->db->connect();
             $sql = "SELECT * FROM orders,orders_detail WHERE orders.customer_id =?
-             AND orders.order_id = orders_detail.order_id
+             AND orders.order_id = orders_detail.order_id  AND orders.status =1
             ; ";
 
             $stmt = $conn->prepare($sql);
@@ -230,39 +200,30 @@ class ProductModel extends Model
     }
     public function addProductToCart($userId = "", $productId = "", $quantity = 1)
     {
-        try {
-            $checkProduct = $this->getById($productId, "product_id", "cart") ?? false;
-            if ($checkProduct) {
-                return false;
-            }
-
-            $result = [];
-            $conn = $this->db->connect();
-            $sql = "INSERT INTO cart(user_id,product_id,quantity_purchased) VALUES (?,?,?); ";
-
-
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(1, $userId);
-            $stmt->bindValue(2, $productId);
-            $stmt->bindValue(3, $quantity);
-            $stmt->execute();
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $result = $conn->lastInsertId();
-            return $result ?? [];
-        } catch (PDOException $e) {
-            echo "ERROR! Co loi xay ra voi PDO";
-            $error = date('Y/m/d H:i:s') . " index:findname function| messge:" . $e->getMessage() . "Query: $sql";
-            $file = fopen("D:/web/app/runtime/PDOErrors.txt", "a");
-
-            fwrite($file, $error . PHP_EOL);
-            fclose($file);
+        $check = $this->get("cart", ["user_id = ?", "product_id= ?"], [$userId, $productId]);
+        if ($check !== false) {
+            return false;
         }
+        $addProduct = $this->insert("cart", "product_id,user_id,quantity_purchased", [$productId, $userId, $quantity]);
+        return $addProduct;
     }
+
     public function deleteProductOnCart($userId = "", $productId = "")
     {
-        $conditions = " cart.user_id=$userId AND  cart.product_id=$productId";
-        $data = $this->delete("cart", $conditions);
+        $conditions = ["user_id =?", "product_id =?"];
+        $values = [$userId, $productId];
+        $table = "cart";
+        $data = $this->delete($table, $conditions, $values);
         return $data;
+    }
+    public function deleteManyProductToOrder($userId)
+    {
+        $check = $this->get("orders", ["customer_id=?", "status =?"], [$userId, 1]);
+        if ($check) {
+            $orderId = $check["order_id"];
+            $this->update("orders", ["totail_product", "totail_price"], [0, 0], ["order_id =?", "customer_id=?"], [$orderId, $userId]);
+            return $this->delete("orders_detail", ["order_id=?"], [$orderId]) ?? false;
+        }
     }
     public function getInfoProductDetail($productId)
     {
@@ -270,7 +231,7 @@ class ProductModel extends Model
 
         return $product[0] ?? null;
     }
-    public function addOneProductToOrder(Order $order, OrderDetail $orderDetail)
+    public function addOneProductToOrder($userId, Order $order, OrderDetail $orderDetail)
     {
         $table = "orders";
         $columns = "order_id, status, customer_id, totail_product, status_payment, status_stransport, totail_price";
@@ -299,10 +260,41 @@ class ProductModel extends Model
             $orderDetail->getTotal_price(),
             $orderDetail->getStatus(),
             $orderDetail->getQuantity(),
-            $orderDetail->getOrder_id()
+
         ];
+        $checkOrder  = $this->get("orders", ["customer_id =?", "status=?"], [$userId, 1]);
+
+        if ($checkOrder) {
+            array_push($orderDetailValues, $checkOrder["order_id"]);
+            $this->insert($orderDetailTable, $orderDetailColumns, $orderDetailValues) ?? false;
+            return $this->update("orders", ["totail_product", "totail_price"], [(int)$checkOrder["totail_product"] + 1, (int)$checkOrder["totail_price"] + (int)$orderDetail->getTotal_price()], ["customer_id =?", "status=?"], [$userId, 1]);
+        }
+        array_push($orderDetailValues, $order->getOrder_id());
 
         $this->insert($table, $columns, $values);
         return $this->insert($orderDetailTable, $orderDetailColumns, $orderDetailValues) ?? false;
+    }
+    public function deleteOneProductInOrder($userId, $productId)
+    {
+        $checkConditions = ["customer_id =?", "status =?"];
+        $valuesConditons = [$userId, 1];
+        $checkProduct = $this->get("orders", $checkConditions, $valuesConditons) ?? false;
+        if (!$checkProduct) {
+            return null;
+        }
+
+        $orderId = $checkProduct["order_id"];
+        $orderDetailCondition = ["order_id = ?", "product_id =?"];
+        $orderDetailValue  = [$orderId, $productId];
+        $productDelete = $this->get("orders_detail", $orderDetailCondition, $orderDetailValue);
+        $delete = $this->delete("orders_detail", $orderDetailCondition, $orderDetailValue);
+
+
+        $updateOrderColumn = ["totail_product", "totail_price"];
+        $updateOrderValue = [(int)$checkProduct["totail_product"] - 1, (int)$checkProduct["totail_price"] - (int)$productDelete["totail_price"]];
+        $updateConditions = ["customer_id =?", "status =?"];
+        $updateValueConditions = [$userId, 1];
+        $updateOrder = $this->update("orders", $updateOrderColumn, $updateOrderValue, $updateConditions, $updateValueConditions);
+        return $updateOrder ?? false;
     }
 }

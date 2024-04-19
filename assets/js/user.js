@@ -45,6 +45,13 @@ const handleAddProductOrder = (ele, productId) => {
     if (ele.checked === true) {
         dispatch('user/cartProduct/addoneOrder', productId);
     } else if (ele.checked === false) {
-        console.log('ddlele');
+        dispatch('user/cartProduct/deleteoneOrder', productId);
+    }
+};
+const handleAddManyProduct = (ele) => {
+    if (ele.checked === true) {
+        dispatch('user/cartProduct/addManyorder');
+    } else if (ele.checked === false) {
+        dispatch('user/cartProduct/deleteManyOrder');
     }
 };

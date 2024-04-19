@@ -39,12 +39,25 @@
 
             </div>
         </main>
+
+
+
+        <main class="user-order-main">
+            <div class="order-main-wrapper">
+                <h2 class="main-title">đơn hàng của tôi</h2>
+                <ul class="list-order-detail" id="container-list-order">
+
+
+                </ul>
+            </div>
+        </main>
         <main class="user-cart-main">
             cart
         </main>
-        <main class="user-order-main">
-            order
+        <main class="user-like-main">
+            like
         </main>
+
     </div>
 </section>
 <script>

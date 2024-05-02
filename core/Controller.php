@@ -9,6 +9,16 @@ class Controller
     {
         return Application::$app->router->renderView($view, $params);
     }
+    public function renderLayout($content, $params = [])
+    {
+        return Application::$app->router->renderViewContent($content, $params);
+    }
+    public function renderUI(
+        $path,
+        $params
+    ) {
+        return Application::$app->router->renderLayout($path, $params);
+    }
     public function setLayout($layout)
     {
         $this->layout = $layout;

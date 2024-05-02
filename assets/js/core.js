@@ -52,47 +52,19 @@ const MessageBox = (
         main.appendChild(toast);
     }
 };
-const Notify = () => {
-    const Notify = (message) => {
-        const container = document.getElementById('notifiBox');
-        container.classList.add('active');
-        const html = `
-       <div id="notifi-header">thông báo</div>
-      <div id="notify-body">
-           ${message} 
-        
-      </div>
-    <div id="notify-bottom">
-    <button id="notify-bottom-btn-left" onclick=" handleCloseBtnNotify()">
-        hủy bỏ
-    </button>
-    <button id="notify-bottom-btn-right" onclick="handleBtnAgree()">
-        đồng ý
-    </button>
-</div>`;
-        container.innerHTML = html;
-    };
-    const state = false;
-    const handleCloseBtnNotify = () => {
-        const notify = document.getElementById('notifiBox');
-        notify.classList.remove('active');
-        return state;
-    };
-    const handleBtnAgree = () => {
-        const notify = document.getElementById('notifiBox');
-
-        notify.classList.remove('active');
-        state = true;
-        return state;
-    };
-    return {
-        Notify,
-        state,
-        handleBtnAgree,
-        handleCloseBtnNotify,
+const useDebounce = (fn, delay) => {
+    delay = delay || 200;
+    let timerId;
+    return () => {
+        if (timerId) {
+            clearInterval(timerId);
+        }
+        timerId = setTimeout(() => {
+            fn();
+        }, delay);
     };
 };
-window.Notify = Notify;
+window.useDebounce = useDebounce;
 window.MessageBox = MessageBox;
 window.render = render;
 window.html = html;

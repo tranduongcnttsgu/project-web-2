@@ -6,6 +6,15 @@ class UserPermission
 {
     private $user_permission_id;
     private $user_id;
+    private $permission_id;
+    public function getPermissionId()
+    {
+        return $this->permission_id;
+    }
+    public function setPermissionId($id)
+    {
+        $this->permission_id = $id;
+    }
     // Getter và Setter cho $user_permission_id
     public function getUser_permission_id()
     {

@@ -15,7 +15,7 @@ const card = ({ data }) => {
         ${data.map((product) => {
             return `
                <li class="item-product-order">
-                    <img src="${
+                    <img src="http://localhost/assets/Db_img/${
                         product.product_image
                     }" alt="" class="img-product-order">
                     <div class="title-product-order">${

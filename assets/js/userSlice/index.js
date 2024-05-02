@@ -10,7 +10,8 @@ import detailContentRight from './component/product/detailContentRight.js';
 import cartComponent from './component/cart/cartComponent.js';
 import payment from './component/payment.js';
 import buttonPayment from './buttonPayment.js';
-import listOrder from './component/order/order.js';
+
+import pagination from './pagination.js';
 const containerProduct = document.getElementById('list-product-productpage');
 const iconCart = document.getElementById('icon-cart-header');
 const userAvatar = document.getElementById('rootUserAvatar');
@@ -26,10 +27,11 @@ const contanerProductDetaiRight = document.getElementById(
 const containerCartShowListProduct = document.getElementById(
     'rootCartShowListProduct'
 );
+const elePagination = document.getElementById('pagination');
 const contaienrPaymentCart = document.getElementById('rootPaymentCart');
 const OrderContaienrListProduct = document.getElementById('list-product-order');
 const buttonPaymentOrder = document.getElementById('button-payment-order');
-const containerListOrder = document.getElementById('container-list-order');
+
 render(containerProduct, card);
 render(iconCart, cart);
 render(userAvatar, avatar);
@@ -42,4 +44,5 @@ render(containerCartShowListProduct, cartComponent);
 render(contaienrPaymentCart, showPrice);
 render(OrderContaienrListProduct, payment);
 render(buttonPaymentOrder, buttonPayment);
-render(containerListOrder, listOrder);
+
+render(elePagination, pagination);

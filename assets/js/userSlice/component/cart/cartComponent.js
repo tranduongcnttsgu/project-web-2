@@ -21,6 +21,18 @@ const cartComponent = ({ data, checked, order }) => {
             }).length > 0;
         return statusChecked;
     };
+    if (data.length === 0) {
+        return html`
+            <div class="no-product-title">
+                <h3>không có sản phẩm nào trong giỏ hàng</h3>
+            </div>
+            <div class="no-product-button">
+                <a href="http://localhost/product">
+                    <button class="button-to-shopPage">Đến cửa hàng</button></a
+                >
+            </div>
+        `;
+    }
     return html` ${data.map(
         (product) => `
           <div class="cart-product-wrapper">
@@ -40,7 +52,9 @@ const cartComponent = ({ data, checked, order }) => {
                 </label>
                 <div class="cart-product-image">
                     <img
-                        src="${product.MainImage}"
+                        src="http://localhost/assets/Db_img/${
+                            product.MainImage
+                        }"
                         alt=""
                     />
                 </div>

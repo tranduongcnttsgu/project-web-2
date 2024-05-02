@@ -3,8 +3,11 @@
 namespace controllers;
 
 use core\Controller;
+use dto\Author;
+use dto\categories;
 use dto\Order;
 use dto\OrderDetail;
+use dto\Products;
 use models\ProductModel;
 
 
@@ -23,19 +26,50 @@ class ProductController extends Controller
     {
         return $this->productModel->getAuthor();
     }
-    public function getProducts()
+    public function getNewProduct()
     {
-        $data =  $this->productModel->getAll("products");
-
-
-        return json_encode($data);
+        $data = $this->productModel->getNewProduct();
+        if ($data === false) {
+            return false;
+        }
+        return  $data;
     }
+    public function getProduct()
+    {
+        $payload = $this->getPayload();
+        $start = $payload["start"];
+        $end = $payload["end"];
+        $data = $this->productModel->getProduct($start, $end);
+        return $this->responseJSON("success", true, 200, $data);
+    }
+    public function getTotalProduct()
+    {
+        $data = $this->productModel->getAll("products");
+        return $this->responseJSON("success", true, 200, sizeof($data));
+    }
+    public function userSearch()
+    {
+        $payload = $this->getPayload();
+        $condition = false;
+        if (strcmp($payload["condition"], 'false') !== 0) {
+            $condition  =  explode(":", $payload["condition"]);
+        }
+        $sort = false;
+        if (strcmp($payload["sort"], 'false') !== 0) {
+            $sort  =  explode("-", $payload["sort"]);
+        }
+
+        $data = $this->productModel->userSearch($payload["searchKey"] ?? null, $payload["limit"], $condition, $sort);
+
+        return $this->responseJSON("success", true, 200, $data);
+    }
+
     public function getCart()
     {
         $checkLogin = $this->getHeader("userLogin") ?? false;
         if (!$checkLogin) {
 
-            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 401);
         }
 
         $data = $this->productModel->getCart($checkLogin);
@@ -46,7 +80,7 @@ class ProductController extends Controller
         $checkLogin = $this->getHeader("userLogin") ?? false;
         if (!$checkLogin) {
 
-            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 401);
         }
         $data = $this->productModel->getOrders($checkLogin);
         return $this->responseJSON("lấy dữ liệu thành công", true, 200, $data);
@@ -56,35 +90,18 @@ class ProductController extends Controller
         $checkLogin = $this->getHeader("userLogin") ?? false;
         if (!$checkLogin) {
 
-            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 401);
         }
         $data = $this->productModel->getOrderDetail($checkLogin);
         return $this->responseJSON("lấy dữ liệu thành công", true, 200, $data);
     }
-    public function searchProductByName()
-    {
-        $payload = $this->getPayload();
-        $data = $this->productModel->findByName($payload["searchKey"]);
-        return $this->responseJSON("success", true, 200, $data);
-    }
-    public function searchProductByCategory()
-    {
-        $payload = $this->getPayload();
-        $data = $this->productModel->findByCateory($payload["category"]);
-        return  $this->responseJSON("success", true, 200, $data);
-    }
-    public function  searchProductByAuthor()
-    {
-        $payload = $this->getPayload();
-        $data = $this->productModel->findByCateory($payload["author"]);
-        return $this->responseJSON("success", true, 200, $data);
-    }
+
     public function addProductToCart()
     {
         $checkLogin = $this->cookieGet("userLogin") ?? false;
         if (!$checkLogin) {
 
-            return  $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+            return  $this->responseJSON("Người dùng chưa đăng nhập", false, 401);
         }
         $payload = $this->getPayload();
         $data = $this->productModel->addProductToCart($checkLogin, $payload["productId"], $payload["quantity"]);
@@ -139,7 +156,7 @@ class ProductController extends Controller
         $checkLogin = $this->getHeader("userLogin") ?? false;
         if (!$checkLogin) {
 
-            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 401);
         }
         $payload = $this->getPayload();
         $result = $this->productModel->deleteProductOnCart($checkLogin, $payload["productId"]);
@@ -152,6 +169,23 @@ class ProductController extends Controller
         $data = $this->productModel->getInfoProductDetail($payload["productId"]);
 
         return $this->responseJSON("success", true, 200, $data);
+    }
+    public function userProductDetailOrder()
+    {
+        $payload = $this->getPayloadJson();
+        $check = $payload["check"];
+        $product = $payload["data"];
+        $userId = $this->cookieGet("userLogin");
+        $res  = $this->productModel->userProductDetailOrder($check, $product, $userId);
+        if ($res === false) {
+            return $this->responseJSON("faild", false, 404, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $payload);
+    }
+    public function usergetListProductPurchased()
+    {
+        $userId =  $this->cookieGet("userLogin");
+        return $this->productModel->usergetListProductPurchased($userId);
     }
     public function addOneProductToOrder()
     {
@@ -193,5 +227,122 @@ class ProductController extends Controller
             return $this->responseJSON("xóa không thành công", false, 400, $data);
         }
         return $this->responseJSON("success", true, 200, $data);
+    }
+    public function userGetOrders()
+    {
+        $userId =  $this->cookieGet("userLogin");
+        $data = $this->productModel->userGetOrders($userId);
+        return $data;
+    }
+    public function adminGetOrders()
+    {
+        return $this->productModel->adminGetOrders();
+    }
+    public function  adminGetInfoOrder()
+    {
+        $payload = $this->getPayload();
+        $data = $this->productModel->adminGetInfoOrder($payload["orderId"]);
+        return  $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminUpdateStatusOrder()
+    {
+        $payload    = $this->getPayload();
+        $orderId = $payload["orderId"];
+        $status =  $payload["status"];
+        $status_transport = 0;
+        if (strcmp($status, "đang giao hàng") === 0) {
+            $status_transport = 1;
+        }
+        if (strcmp($status, "đã giao hàng") === 0) {
+            $status_transport = 2;
+        }
+        if (strcmp($status, "đang chờ sử lý") === 0) {
+            $status_transport = 0;
+        }
+        if (strcmp($status, "đơn hàng bị hủy") === 0) {
+            $status_transport = -1;
+        }
+        $update  = $this->productModel->adminUpdateStatusOrder($orderId, $status, $status_transport);
+        if ($update === false) {
+            return  $this->responseJSON("success", false, 404, $payload);
+        }
+        return  $this->responseJSON("success", true, 200, $payload);
+    }
+    public  function userOrderUpdatePayment()
+    {
+        $payload  = $this->getPayload();
+        $orderId = $payload["orderId"];
+        $status = $payload["status"];
+        $update  = $this->productModel->userOrderUpdatePayment($orderId, $status);
+        if ($update === false) {
+            return  $this->responseJSON("success", false, 404, $payload);
+        }
+        return  $this->responseJSON("success", true, 200, $payload);
+    }
+    public function adminGetListProduct($limit)
+    {
+        return $this->productModel->adminGetListProduct($limit);
+    }
+    public function  adminGetInfoProduct()
+    {
+        $payload = $this->getPayload();
+        $data = $this->productModel->adminGetInfoProduct($payload["productId"]);
+        return $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminShowProductList()
+    {
+        $payload   = $this->getPayload();
+        $data = $this->productModel->adminShowProductList($payload["limit"]);
+        if ($data === false) {
+            return $this->responseJSON("success", false, 404, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $data);
+    }
+    public function  adminManagerProductSearch()
+    {
+        $payload = $this->getPayload();
+        $searchKey = $payload["searchKey"];
+        $searchKey = preg_replace('/\s+/', '', $searchKey);
+        $categoryId = false;
+        if (strcmp(preg_replace('/\s+/', '', $payload["category"]), 'false') !== 0) {
+            $categoryId =  $payload["category"];
+        }
+        $data = $this->productModel->adminManagerProductSearch($searchKey, $categoryId, "0,7");
+        if ($data === false) {
+            return $this->responseJSON("success", false, 200, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminManagerProductUpdate()
+    {
+        $payload = $this->getPayloadJson();
+        return $this->responseJSON("success", true, 200, $payload);
+    }
+    public function adminManagerProductAddNew()
+    {
+        $payload = $this->getPayloadJson();
+        $data = $payload["data"];
+        $product = new Products();
+        $category = new categories();
+        $author = new Author();
+        $product->setProduct_id($this->productModel->autoId());
+        $product->setName($data["name"]);
+        $price = (int) str_replace(',', '', $data["price"]);
+        $product->setPrice($price / 1000);
+        $promo_price = (int) str_replace(',', '', $data["promo_price"]);
+        $product->setPromo_price($promo_price / 1000);
+        $import_price = (int) str_replace(',', '', $data["import_price"]);
+        $product->setImport_price($import_price / 1000);
+        $product->setMainImage($data["MainImage"]);
+        $product->setQuantity($data["quantity"]);
+        $category->setCategory_id($this->productModel->autoId());
+        $category->setName($data["category"]);
+        $author->setAuthorId($this->productModel->autoId());
+        $author->setName($data["author"]);
+        $add = $this->productModel->adminManagerProductAddNew($author, $category, $product);
+        if ($add === false) {
+            return  $this->responseJSON("faild", false, 400, $payload);
+        }
+        return  $this->responseJSON("success", true, 200, $payload);
     }
 }

@@ -174,6 +174,18 @@ Validator.isNumber = function (selector, message) {
         },
     };
 };
+Validator.isPrice = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            value = value.replace(/,/g, '');
+            const reg = /^\d+$/;
+            return reg.test(value.trim())
+                ? undefined
+                : message || 'trường này phải là số';
+        },
+    };
+};
 Validator.isEmail = function (selector, message) {
     return {
         selector: selector,

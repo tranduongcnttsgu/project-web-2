@@ -223,8 +223,8 @@
     display: inline-block;
     padding: 5px;
     font-size: 14px;
-    background: linear-gradient(to bottom, #fcff9e 0%, #c67700 100%);
-    color: black;
+    background-color: #222;
+    color: rgb(255, 255, 255);
     font-weight: 500;
     border-radius: 4px;
     user-select: none;

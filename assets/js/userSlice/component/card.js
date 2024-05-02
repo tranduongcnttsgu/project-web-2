@@ -16,7 +16,7 @@ const card = ({ data }) => {
             return `
            <li class="listProduct-item-product">
     <div class="listProduct-product">
-        <img src="${product.MainImage}" alt="" />
+        <img src="http://localhost/assets/Db_img/${product.MainImage}" alt="" />
         <div class="content-product">
             <span class="product-star"
                 ><i class="fa-solid fa-star"></i>

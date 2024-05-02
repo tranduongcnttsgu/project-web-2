@@ -284,8 +284,8 @@
     width: 150px;
     height: 100%;
     align-items: center;
-    background-color: #ffbb38;
-    color: black;
+    background-color: #0b1121;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     font-weight: 500;
     box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
@@ -389,7 +389,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffbb38;
+    background-color: #0b1121;
 }
 
 .header-bottom-content {
@@ -406,7 +406,6 @@
     padding-left: 10px;
     padding-right: 10px;
 }
-
 .header-bottom-item::after {
     position: absolute;
     content: '';
@@ -424,7 +423,7 @@
 }
 
 .header-bottom-item a {
-    color: black;
+    color: rgb(255, 255, 255);
     font-size: 16px;
     font-weight: 500;
 }

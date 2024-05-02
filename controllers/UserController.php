@@ -3,6 +3,10 @@
 namespace controllers;
 
 use core\Controller;
+use dto\Permission;
+use dto\Services;
+use dto\User;
+use dto\UserPermission;
 use models\UserModel;
 
 class UserController extends Controller
@@ -11,6 +15,11 @@ class UserController extends Controller
     public function __construct()
     {
         $this->userModel = new UserModel();
+    }
+    public function getPermission($userId)
+    {
+
+        return $this->userModel->getPermission($userId);
     }
     public function login()
     {
@@ -25,6 +34,9 @@ class UserController extends Controller
             $this->cookiePush("userLogin", $data[0]["user_id"], 7, "/");
 
             $this->cookiePush("action_group", $data[0]["action_group"], 7, "/");
+            if ($data[0]["action_group"] === 1) {
+                $this->cookiePush("permission_id", $data[0]["user_permission_id"], 7, "/");
+            }
             return json_encode(["message" => "login success", "success" => true, "code" => 200, "info" => ["userId" => $data[0]["user_id"], "action_group" => $data[0]["action_group"]]]);
         }
         return  json_encode(["message" => "password or   email invalid!", "success" => false, "code" => 200]);
@@ -33,6 +45,7 @@ class UserController extends Controller
     {
         $this->cookieDelete("userLogin");
         $this->cookieDelete("action_group");
+        $this->cookieDelete("permission_id");
         return $this->responseJSON("logout success", true, 200);
     }
     public function getInfoLoginUser()
@@ -69,5 +82,80 @@ class UserController extends Controller
         $userId  = $this->cookieGet("userLogin");
         $data = $this->userModel->getUserOrder($userId);
         return $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminGetAccount()
+    {
+        return $this->userModel->adminGetAccount();
+    }
+    public function adminAddnewAccount()
+    {
+        $payload = $this->getPayloadJson();
+        $user = new User();
+        $user_permission = new UserPermission();
+
+        $user->setUser_id($this->userModel
+
+            ->autoId());
+        $user->setName($payload["account"]["fullName"]);
+        $user->setEmail($payload["account"]["emailInfo"]);
+        $user->setPassword($payload["account"]["password"]);
+        $user->setPhone($payload["account"]["phone"]);
+        $user->setAddress($payload["account"]["address"]);
+        $user_permission->setUser_id($user->getUser_id());
+        $user_permission->setPermissionId($this->userModel->autoId());
+        $user_permission->setUser_permission_id($this->userModel->autoId());
+        $roles = $payload["roles"];
+
+        $res = $this->userModel->adminAddnewAccount($user, $user_permission, $roles);
+        if ($res === false) {
+            return $this->responseJSON("faild", false, 404, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $payload);
+    }
+    public function adminDeleteAccount()
+    {
+        $payload = $this->getPayload();
+        $userId = $payload["userId"];
+        $req = $this->userModel->adminDeleteAccount($userId);
+        if ($req === false) {
+            return $this->responseJSON("xóa không thành công", false, 404, $payload);
+        }
+        return $this->responseJSON("xóa thành công", true, 200, $payload);
+    }
+    public function adminEditGetAccount()
+    {
+        $payload = $this->getPayload();
+        $usrId = $payload["userId"];
+        $data = $this->userModel->adminEditGetAccount($usrId);
+        if (sizeof($data) === 0) {
+            return $this->responseJSON("success", false, 200, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $data[0]);
+    }
+    public function  adminEditAccount()
+    {
+        $payload = $this->getPayloadJson();
+        $userid  = $payload["userId"];
+        $roles = $payload["roles"];
+        $user = new User();
+        $user_permission = new UserPermission();
+        $user->setUser_id($userid);
+        $user->setName($payload["account"]["fullName"]);
+        $user->setEmail($payload["account"]["emailInfo"]);
+        $user->setPassword($payload["account"]["password"]);
+        $user->setPhone($payload["account"]["phone"]);
+        $user->setAddress($payload["account"]["address"]);
+        $user_permission->setUser_id($user->getUser_id());
+        $update = $this->userModel->adminEditAccount($user, $user_permission, $roles);
+        if ($update === false) {
+            return $this->responseJSON("faild", false, 400, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $payload);
+    }
+    public function adminCheckPermision()
+    {
+        $userId = $this->cookieGet("userLogin");
+        $permission = $this->userModel->adminCheckPermision($userId);
+        return $this->responseJSON("success", true, 200, $permission);
     }
 }

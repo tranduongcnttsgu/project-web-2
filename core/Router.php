@@ -28,8 +28,12 @@ class Router
         if (!$callback) {
 
             $this->response->setStatusCode(404);
-
-            return $this->renderView('_404');
+            $params  = [
+                "titleButton" => "go home",
+                "buttonLink" => "http://localhost",
+                "script" => ["validation", "login"]
+            ];
+            return $this->renderView('_404', $params);
         }
         if (is_string($callback)) {
 
@@ -52,9 +56,9 @@ class Router
         $viewContent  = $this->renderOnlyView($callback, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
-    public function renderViewContent($content)
+    public function renderViewContent($content, $params = [])
     {
-        $layoutContent = $this->layoutContent();
+        $layoutContent = $this->layoutContent($params);
 
         return str_replace('{{content}}', $content, $layoutContent);
     }
@@ -75,6 +79,16 @@ class Router
         }
         ob_start();
         require_once Application::$ROOTDIR . "/views/pages/$view/$view.php";
+        return ob_get_clean();
+    }
+    public function renderLayout($path, $params = [])
+    {
+
+        foreach ($params as $key => $value) {
+            $$key = $value;
+        }
+        ob_start();
+        require_once Application::$ROOTDIR . "/views/pages/$path.php";
         return ob_get_clean();
     }
 }

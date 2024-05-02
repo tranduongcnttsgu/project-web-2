@@ -14,7 +14,7 @@
             <h1 class="container-right-middle-title">số lượng</h1>
             <div id="rootProductDetailRight"></div>
             <div class="container-right-middle">
-                <button class="button-buy">mua ngay</button>
+                <button class="button-buy" id="button-product-detail-buy-now">mua ngay</button>
                 <button class="button-add-to-cart" onclick="dispatch('user/detail/addProduct')">
                     thêm vào giỏ hàng
                     <i class="fa-solid fa-basket-shopping"></i>
@@ -22,6 +22,3 @@
             </div>
     </section>
 </section>
-<?php
-require_once __DIR__ . "/../../components/accessory.php";
-?>

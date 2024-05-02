@@ -1,0 +1,200 @@
+const name_permission = 'quản lý sản phẩm';
+let permission = {};
+
+const checkPermissions = async () => {
+    const req = await fetch('http://localhost/admin/check-permission');
+    const res = await req.json();
+    permission = res.data.find((role) => {
+        return role.permission.service === name_permission;
+    }).service;
+
+    console.log(permission);
+};
+checkPermissions();
+const showDetailProduct = document.getElementById('show-product-detail-page');
+const getInfoOrder = () => {
+    const name = document.getElementById('name');
+    const price = document.getElementById('price');
+    const author = document.getElementById('author');
+    const category = document.getElementById('category');
+    const quantity = document.getElementById('quantity');
+    const rating = document.getElementById('rating');
+    const promo_price = document.getElementById('promo_price');
+    const import_price = document.getElementById('import_price');
+    const img_product = document.getElementById('img-product');
+    const productId = JSON.parse(localStorage.getItem('ad-manager-productId'));
+    const formatPrice = (price) => {
+        return (price * 1000).toLocaleString();
+    };
+    const payload = new URLSearchParams();
+    payload.set('productId', productId);
+    fetch('http://localhost/admin/manager-product/info-product', {
+        method: 'post',
+        body: payload,
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            const product = data.data.product;
+            const categoryP = data.data.category;
+            const authorP = data.data.author;
+            name.value = product.name;
+            price.value = formatPrice(product.price);
+            rating.value = product.rating;
+            quantity.value = product.quantity;
+            promo_price.value = formatPrice(product.promo_price);
+            import_price.value = formatPrice(product.import_price);
+            img_product.src =
+                'http://localhost/assets/Db_img/' + product.MainImage;
+            img_product.setAttribute('data-img', product.MainImage);
+            author.value = authorP.name;
+
+            category.value = categoryP.name;
+        });
+};
+if (showDetailProduct) {
+    getInfoOrder();
+    Validator({
+        form: '#form-edit-product',
+        formGroupSelector: '.form-group',
+        errorSelector: '.error-message',
+        rules: [
+            Validator.isRequired('#name', 'Vui lòng nhập tên sản  phẩm'),
+            Validator.minLength('#name', 2),
+            Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#price', 1),
+            Validator.isPrice('#price'),
+            Validator.isRequired('#author', 'Vui lòng nhập tên tác giả'),
+            Validator.isRequired('#category', 'Vui lòng nhập tên thể  '),
+            Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
+            Validator.minLength('#quantity', 1),
+            Validator.isNumber('#quantity'),
+            Validator.isRequired('#promo_price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#promo_price', 1),
+            Validator.isPrice('#promo_price'),
+            Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#import_price', 1),
+            Validator.isPrice('#import_price'),
+        ],
+        onSubmit: function (data) {
+            const inputPriviewImage = document.getElementById('img-product');
+            data.MainImage = inputPriviewImage.getAttribute('data-img');
+            const productId = JSON.parse(
+                localStorage.getItem('ad-manager-productId')
+            );
+            const payload = JSON.stringify({ data, productId });
+            fetch('http://localhost/admin/manager-product/update-product', {
+                method: 'post',
+                body: payload,
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => console.log(data));
+        },
+    });
+    const buttonSubmit = document.getElementById(
+        'button-form-edit-product-submit'
+    );
+    buttonSubmit.addEventListener('click', () => {
+        const form = document.getElementById('form-edit-product');
+        form.requestSubmit();
+    });
+    const buttonChangeImage = document.getElementById('button-change-image');
+    const inputSelectorImage = document.getElementById('input-selector-img');
+    const inputPriviewImage = document.getElementById('img-product');
+    const buttondeleteImg = document.getElementById('btn-delete-img-product');
+    buttondeleteImg.addEventListener('click', () => {
+        inputPriviewImage.src =
+            'http://localhost/assets/Db_img/default-img-product.png';
+        inputPriviewImage.setAttribute('data-img', 'default-img-product.png');
+    });
+    buttonChangeImage.addEventListener('click', () => {
+        inputSelectorImage.click();
+    });
+    inputSelectorImage.addEventListener('change', () => {
+        const [file] = inputSelectorImage.files;
+        if (file) {
+            inputPriviewImage.src = URL.createObjectURL(file);
+
+            inputPriviewImage.setAttribute('data-img', file.name);
+        }
+    });
+}
+const addNewProduct = document.getElementById('mnp-add-product');
+if (addNewProduct) {
+    Validator({
+        form: '#form-add-new-product',
+        formGroupSelector: '.form-group',
+        errorSelector: '.error-message',
+        rules: [
+            Validator.isRequired('#name', 'Vui lòng nhập tên sản phẩm'),
+            Validator.minLength('#name', 2),
+            Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#price', 1),
+            Validator.isPrice('#price'),
+            Validator.isRequired('#author', 'Vui lòng nhập tên tác giả'),
+            Validator.isRequired('#category', 'Vui lòng nhập tên thể  '),
+            Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
+            Validator.minLength('#quantity', 1),
+            Validator.isNumber('#quantity'),
+            Validator.isRequired('#promo_price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#promo_price', 1),
+            Validator.isPrice('#promo_price'),
+            Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
+            Validator.minLength('#import_price', 1),
+            Validator.isPrice('#import_price'),
+        ],
+        onSubmit: function (data) {
+            const inputPriviewImage = document.getElementById('img-product');
+            data.MainImage = inputPriviewImage.getAttribute('data-img');
+
+            const payload = JSON.stringify({ data });
+            fetch('http://localhost/admin/manager-product/add-product', {
+                method: 'post',
+                body: payload,
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.success) {
+                        MessageBox('thêm sản phẩm thành công', 'thông báo');
+                    } else {
+                        MessageBox('lỗi thêm sản phẩm', 'error');
+                    }
+                });
+        },
+    });
+    const buttonSubmit = document.getElementById(
+        'button-form-edit-product-submit'
+    );
+    buttonSubmit.addEventListener('click', () => {
+        const form = document.getElementById('form-add-new-product');
+        form.requestSubmit();
+    });
+    const buttonChangeImage = document.getElementById('button-change-image');
+    const inputSelectorImage = document.getElementById('input-selector-img');
+    const inputPriviewImage = document.getElementById('img-product');
+    const buttondeleteImg = document.getElementById('btn-delete-img-product');
+    buttondeleteImg.addEventListener('click', () => {
+        inputPriviewImage.src =
+            'http://localhost/assets/Db_img/default-img-product.png';
+        inputPriviewImage.setAttribute('data-img', 'default-img-product.png');
+    });
+    buttonChangeImage.addEventListener('click', () => {
+        inputSelectorImage.click();
+    });
+    inputSelectorImage.addEventListener('change', () => {
+        const [file] = inputSelectorImage.files;
+        if (file) {
+            inputPriviewImage.src = URL.createObjectURL(file);
+
+            inputPriviewImage.setAttribute('data-img', file.name);
+        }
+    });
+}

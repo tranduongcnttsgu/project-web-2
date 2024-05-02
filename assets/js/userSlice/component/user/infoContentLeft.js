@@ -17,7 +17,12 @@ const Avatar = ({ userData }) => {
                         <span>${userData.phone}</span>
                     </div>
                 </div>
-                <div class="button-edit-info-phone">cập nhật</div>
+                <div
+                    class="button-edit-info-phone "
+                    style=" visibility: hidden;"
+                >
+                    cập nhật
+                </div>
             </div>
             <div class="user-info-content-phone-email">
                 <div class="user-info-phone">
@@ -29,7 +34,12 @@ const Avatar = ({ userData }) => {
                         <span>${userData.email}</span>
                     </div>
                 </div>
-                <div class="button-edit-info-phone">cập nhật</div>
+                <div
+                    class="button-edit-info-phone"
+                    style=" visibility: hidden;"
+                >
+                    cập nhật
+                </div>
             </div>
         </div>
     `;

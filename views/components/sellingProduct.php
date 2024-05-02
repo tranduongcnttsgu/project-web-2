@@ -377,14 +377,8 @@
 </style>
 <section class="selling-container">
     <div class="selling-top-content">
-        <h1 class="selling-titile">sản phẩm đang giảm giá</h1>
-        <div class="selling-clock">
-            <h5 class="selling-clock-title">giờ giảm giá</h5>
-            <div class="day-selling" id="ele-sale-day-Home">1</div>
-            <div class="hour-selling" id="ele-sale-hour-Home">20</div>
-            <div class="minutes-selling" id="ele-sale-minutes-Home">10</div>
-            <div class="second-selling" id="ele-sale-second-Home">10</div>
-        </div>
+        <h1 class="selling-titile">sản phẩm mới</h1>
+
     </div>
     <div class="selling-controll-slide">
         <div class="prev-selling-slide swiper-button-prev-card " id="button-selling-prev"><i class="fa-solid fa-chevron-left"></i></div>
@@ -394,12 +388,19 @@
 
         <div class="swiper cardSellingSlide">
             <div class="swiper-wrapper">
-                <?php for ($i = 0; $i < 10; $i++) : ?>
-                    <div class="swiper-slide slide-card">
+                <?php
+
+                use controllers\ProductController;
+
+                $pc = new ProductController();
+                $products  =  $pc->getNewProduct();
+
+                foreach ($products  as  $key => $value) : ?>
+                    <div class="swiper-slide slide-card" onclick='dispatch("user/detailProduct","<?php echo $value["product_id"] ?>")'>
 
                         <div class="selling-item-product card-selling-item-product " id="selling-item-slide">
                             <div class="selling-product">
-                                <img src="http://localhost/assets/img/blank-image.png" alt="" />
+                                <img src='http://localhost/assets/Db_img/<?php echo  $value["MainImage"] ?>' alt="" />
                                 <div class="content-product">
                                     <span class="product-star"><i class="fa-solid fa-star"></i>
                                         <i class="fa-solid fa-star"></i>
@@ -408,14 +409,18 @@
                                         <i class="fa-solid fa-star"></i>
                                     </span>
                                     <h2 class="product-title">
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting
-                                        industry.
+                                        <?php echo $value["name"] ?>
                                     </h2>
                                     <h2 class="product-price">
-                                        <span class="sell-price">200.000 đ</span>
-                                        <span class="current-price">100.000đ</span>
+                                        <span class="sell-price">
+                                            <?php echo    number_format($value["price"] * 1000, 0, '', ','); ?> đ
+                                        </span>
+                                        <span class="current-price">
+
+                                            <?php echo    number_format($value["promo_price"] * 1000, 0, '', ','); ?>đ
+                                        </span>
                                     </h2>
-                                    <span class="selling-precenta">10%</span>
+                                    <span class="selling-precenta">new</span>
                                     <div class="product-option">
                                         <div class="product-option-top">
                                             <div class="like-product">
@@ -438,7 +443,7 @@
                         </div>
 
                     </div>
-                <?php endfor; ?>
+                <?php endforeach; ?>
 
 
             </div>
@@ -449,53 +454,3 @@
     </div>
 
 </section>
-<script>
-    function countDow(
-        idEDays,
-        IdEHour,
-        IdEMinutes,
-        IdESecond,
-        timeEnd = "2024-12-1"
-    ) {
-        const eDay = document.getElementById(idEDays);
-        const eHour = document.getElementById(IdEHour);
-        const eMinutes = document.getElementById(IdEMinutes);
-        const eSecond = document.getElementById(IdESecond);
-        if (!eDay) {
-            return;
-        }
-
-        let countDownDay = new Date(timeEnd).getTime();
-        console.log(countDownDay);
-        let start = setInterval(() => {
-            let now = new Date().getTime();
-            let distance = countDownDay - now;
-            let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            let hours = Math.floor(
-                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            );
-            let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            eDay.innerText = days;
-            eHour.innerText = hours;
-            eMinutes.innerText = minutes;
-            eSecond.innerText = seconds;
-
-            if (distance < 0) {
-                clearInterval(start);
-                eDay.innerText = 0;
-                eHour.innerText = 0;
-                eMinutes.innerText = 0;
-                eSecond.innerText = 0;
-            }
-        }, 1000);
-    }
-    countDow(
-        "ele-sale-day-Home",
-        "ele-sale-hour-Home",
-        "ele-sale-minutes-Home",
-        "ele-sale-second-Home",
-        "2024-5-25"
-    );
-    // selling slider 
-</script>

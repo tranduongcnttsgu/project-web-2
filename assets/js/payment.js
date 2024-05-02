@@ -50,7 +50,7 @@ buttonPayment.addEventListener('click', () => {
         .then((res) => res.json())
         .then((data) => {
             if (data.success) {
-                window.location.href = 'http://localhost/account/user';
+                window.location.href = 'http://localhost/account/user/order';
             }
         });
 });

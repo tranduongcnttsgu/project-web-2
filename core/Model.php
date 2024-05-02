@@ -14,12 +14,15 @@ abstract  class Model
     {
         $this->db = Application::$app->database;
     }
-    public function getAll($table)
+    public function getAll($table, $limit = false)
     {
         try {
             $result = null;
             $conn = $this->db->connect();
             $sql = "SELECT  DISTINCT * FROM $table";
+            if ($limit) {
+                $sql  .= " LIMIT $limit";
+            }
             $stmt  = $conn->query($sql);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC); // ->  return  array value
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -27,7 +30,7 @@ abstract  class Model
         } catch (PDOException $e) {
             echo "ERROR! Co loi xay ra voi PDO";
             $error = date('Y/m/d H:i:s') . " index:getAll function| messge:" . $e->getMessage();
-            $file = fopen("D:/web/app/runtime/PDOErrors.txt", "a");
+            $file = fopen(Application::$ROOTDIR . "/runtime/PDOErrors.txt", "a");
 
             fwrite($file, $error . PHP_EOL);
             fclose($file);
@@ -56,7 +59,7 @@ abstract  class Model
     /*
      attibute => ten column 
     */
-    public function get($table, $conditions, $values, $limit = 1)
+    public function get($table, $conditions = [], $values = [], $limit = 1)
     {
         try {
             $conn = $this->db->connect();
@@ -87,7 +90,7 @@ $values = array("value1", 10, "%search%");
 $result = $yourObject->get($table, $conditions, $values);
 
   */
-    public function findAll($table, $conditions = [], $values = [], $orderBY = false)
+    public function findAll($table, $conditions = [], $values = [], $orderBY = false, $limit = false)
     {
         try {
             $conn = $this->db->connect();
@@ -97,7 +100,12 @@ $result = $yourObject->get($table, $conditions, $values);
             $conditionStr = implode(' AND ', $conditions);
             $sql = "SELECT   DISTINCT * FROM $table WHERE $conditionStr   ";
             if ($orderBY) {
-                $sql .= " ORDER BY $orderBY ";
+                $sql .= "    
+               ORDER BY $orderBY ";
+            }
+            if ($limit) {
+                $sql .= " 
+              LIMIT $limit ";
             }
             $stmt = $conn->prepare($sql);
 
@@ -116,7 +124,7 @@ $result = $yourObject->get($table, $conditions, $values);
     }
 
 
-    public function insert($table, $columns, $values)
+    public function insert($table, $columns = [], $values = [])
     {
         try {
             $conn = $this->db->connect();
@@ -147,7 +155,7 @@ $result = $yourObject->get($table, $conditions, $values);
     /* 
 $table = "your_table_name";
 
-$columns = array("column1", "column2", ...);
+$columns ="column1, column2",;
 // Các cột 
 
 $values = array("new_value1", "new_value2", ...); 

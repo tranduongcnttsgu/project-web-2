@@ -27,9 +27,11 @@
                     <h2 class=" transport-title">
                         Giao tới
                     </h2>
-                    <span class="button-change-address">Thay đổi</span>
+                    <a href="http://localhost/account/user">
+                        <span class="button-change-address">Thay đổi</span>
+                    </a>
                 </div>
-                <div class="transport-content-bottom">
+                <div class="transport-content-bottom" id="transport-info">
                     <div class="transport-infor">
                         <h2 class=" transport-title transport-title-second ">
                             user name

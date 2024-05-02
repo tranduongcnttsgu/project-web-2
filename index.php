@@ -19,37 +19,70 @@ $app->init($appPath, $config);
 $app->router->get('/', [client::class, 'home']);
 $app->router->get('/account', [client::class, 'account']);
 $app->router->get('/account/register', [client::class, 'register']);
+$app->router->get("/account/user", [client::class, "user"]);
+$app->router->get('/account/user/order', [client::class, "userShowOrder"]);
+$app->router->get('/account/user/purchased', [client::class, "userShowPurchasedProduct"]);
+$app->router->get("/admin", [client::class, 'admin']);
+
 $app->router->get('/product', [client::class, 'products']);
 $app->router->get('/detail-product', [client::class, 'productDetail']);
 $app->router->get("/checkout/cart", [client::class, "cart"]);
 $app->router->get("/checkout/payment", [client::class, "payment"]);
+$app->router->get("/admin/addAccount", [client::class, "adminAddAcount"]);
+$app->router->get("/admin/adminEditAccount", [client::class, "adminEditAccount"]);
+$app->router->get("/admin/order/detail", [client::class, "adminOrderViewDetail"]);
+$app->router->get("/admin/manager/customer", [client::class, "adminManagerCustomerView"]);
+$app->router->get("/admin/manager/products", [client::class, "adminManagerProductsView"]);
+$app->router->get("/admin/manager/orders", [client::class, "adminManagerOrdersView"]);
+$app->router->get("/admin/product/detail", [client::class, "adminManagerProductShowDetail"]);
+$app->router->get("/admin/product/addNew", [client::class, "adminManagerProductAddNewProduct"]);
+
 //   get data
-$app->router->get('/api/sell-product', [ProductController::class, 'getSellProduct']);
+
 // get post product
-$app->router->get("/product-lists", [ProductController::class, "getProducts"]);
+
 $app->router->get("/product-cart", [ProductController::class, "getCart"]);
-$app->router->post('/product', [ProductController::class, 'searchProductByName']);
-$app->router->post('/product-category', [ProductController::class, 'searchProductByCategory']);
-$app->router->post('/product-author', [ProductController::class, 'searchProductByAuthor']);
+$app->router->post('/product', [ProductController::class, "getProduct"]);
+$app->router->get('/total-product', [ProductController::class, "getTotalProduct"]);
+$app->router->post('/user/search', [ProductController::class, "userSearch"]);
+
 $app->router->post("/product-detail", [ProductController::class, "getInfoProductDetail"]);
 $app->router->get("/orders", [ProductController::class, "getOrders"]);
 $app->router->get("/orderDetail", [ProductController::class, "getOrderDetail"]);
 $app->router->post("/add-one-product-to-order", [ProductController::class, "addOneProductToOrder"]);
+
+
 $app->router->post("/user/addManyProductToOrder", [ProductController::class, "addManyProductToOrder"]);
 $app->router->post("/user/deleteManyProductToOrder", [ProductController::class, "deleteManyProductToOrder"]);
 $app->router->post("/delete-one-product-in-order", [ProductController::class, "deleteOneProductInOrder"]);
+$app->router->post('/user/order/update/status-order/payment', [ProductController::class, "userOrderUpdatePayment"]);
+$app->router->post("/user/product-detail/order", [ProductController::class, "userProductDetailOrder"]);
+
+
 $app->router->post("/delete-product-on-cart", [ProductController::class, "deleteProductOnCart"]);
 $app->router->post("/user/addProductToCart", [ProductController::class, "addProductToCart"]);
+$app->router->post("/admin/getOrderCustomer", [ProductController::class, "adminGetInfoOrder"]);
+$app->router->post("/admin/order/update/status-order", [ProductController::class, "adminUpdateStatusOrder"]);
+$app->router->post('/admin/manager-product/info-product', [ProductController::class, "adminGetInfoProduct"]);
+$app->router->post("/admin/manager-product/show-product", [ProductController::class, "adminShowProductList"]);
+$app->router->post("/admin/manager-product/search-product", [ProductController::class, "adminManagerProductSearch"]);
+$app->router->post('/admin/manager-product/update-product', [ProductController::class, "adminManagerProductUpdate"]);
+$app->router->post('/admin/manager-product/add-product', [ProductController::class, "adminManagerProductAddNew"]);
 // rou
 
 //routerbb  admin
-$app->router->get("/admin", [client::class, 'admin']);
 // router login
 $app->router->post("/account/login", [UserController::class, "login"]);
 $app->router->get("/account/user-info-login", [UserController::class, "getInfoLoginUser"]);
-$app->router->get("/account/user", [client::class, "user"]);
 $app->router->post("/user/order", [UserController::class, "userOrder"]);
 $app->router->get("/account/logout", [UserController::class, "logout"]);
 $app->router->post("/user/update-info", [UserController::class, "updateInfo"]);
 $app->router->get('/user/get/user-order', [UserController::class, "getUserOrder"]);
+
+
+$app->router->get('/admin/check-permission', [UserController::class, "adminCheckPermision"]);
+$app->router->post('/admin/addAccount', [UserController::class, "adminAddnewAccount"]);
+$app->router->post("/admin/deleteAccount", [UserController::class, "adminDeleteAccount"]);
+$app->router->post('/admin/edit/getAccount', [UserController::class, "adminEditGetAccount"]);
+$app->router->post("/admin/editAccount", [UserController::class, "adminEditAccount"]);
 $app->run();

@@ -11,6 +11,15 @@ class User
     private $address;
     private $avatar;
     private $status;
+    private $phone;
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    public function setPhone($p)
+    {
+        $this->phone = $p;
+    }
     // Getter và Setter cho $user_id
     public function getUser_id()
     {

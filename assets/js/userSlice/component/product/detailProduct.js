@@ -48,7 +48,10 @@ const productDetail = async () => {
     return html`
         <section class="container-left">
             <div class="product-image">
-                <img src="${product.MainImage}" alt="" />
+                <img
+                    src="http://localhost/assets/Db_img/${product.MainImage}"
+                    alt=""
+                />
             </div>
             <div class="banner-left">
                 <ul class="banner-list">

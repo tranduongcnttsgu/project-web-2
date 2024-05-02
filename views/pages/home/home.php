@@ -179,7 +179,7 @@ require_once __DIR__ . "/../../components/banner.php";
     <?php
     require_once __DIR__ . "/../../components/service_cart.php";
     require_once __DIR__ . "/../../components/sellingProduct.php";
-    require_once __DIR__ . "/../../components/outstanding.php";
+
     ?>
     <section class="promotion-container">
         <div class="promotion-wrapper">
@@ -194,9 +194,7 @@ require_once __DIR__ . "/../../components/banner.php";
         </div>
     </section>
     <!-- comuniti  -->
-    <?php
-    require_once __DIR__ . "/../../components/accessory.php";
-    ?>
+
     <section class="blog">
         <h3 class="blog-title">Blog sách và cuộc sống</h3>
         <section class="Community-Updates">

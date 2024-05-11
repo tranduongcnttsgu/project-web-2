@@ -163,7 +163,29 @@ Validator.isRequired = function (selector, message) {
         },
     };
 };
-
+Validator.isNumber = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            const reg = /^\d+$/;
+            return reg.test(value.trim())
+                ? undefined
+                : message || 'trường này phải là số';
+        },
+    };
+};
+Validator.isPrice = function (selector, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            value = value.replace(/,/g, '');
+            const reg = /^\d+$/;
+            return reg.test(value.trim())
+                ? undefined
+                : message || 'định dạng không đúng ex:10,000';
+        },
+    };
+};
 Validator.isEmail = function (selector, message) {
     return {
         selector: selector,

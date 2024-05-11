@@ -5,9 +5,6 @@ const connector = connect((state) => ({
 }));
 const Avatar = ({ userData }) => {
     return html`
-        <div class="user-avatar">
-            <img src="${userData.avatar}" alt="" />
-        </div>
         <div class="user-info">
             <span class="user-info-title">Tài Khoản Của</span>
             <h3 class="user-info-name">${userData.name}</h3>

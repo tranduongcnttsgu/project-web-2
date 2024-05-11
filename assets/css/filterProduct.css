@@ -142,3 +142,38 @@
     margin-bottom: 10px;
     text-align: start;
 }
+.pagination-wrap {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.list-pagination {
+    display: flex;
+}
+.pagination-prev {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.pagination-next {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.pagiantion-number {
+    cursor: pointer;
+    width: 40px;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-align: center;
+}
+.pagiantion-number.active {
+    border: 1px solid rgb(107, 107, 249);
+}

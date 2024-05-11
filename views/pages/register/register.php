@@ -10,7 +10,7 @@
     }
 
     .container-f {
-        max-width: 600px;
+        max-width: 500px;
         width: 100%;
         height: auto;
         margin: 0 auto;

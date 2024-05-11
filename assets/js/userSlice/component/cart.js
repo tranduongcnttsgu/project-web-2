@@ -25,16 +25,14 @@ const cart = ({ data }) => {
                 >${data.length}</span
             >
         </div>
-        <div>số tiền:${formatPrice(totalPrice)}</div>
     `;
 };
 export default connector(cart);
 const getTotailPriceOrder = connect((state) => ({
-    prductId: state.orders.data,
-    data: state.cart,
+    data: state.orders.data,
 }));
-const showTotalPriceOrder = ({ data, prductId }) => {
-    const totalPrice = 0;
+const showTotalPriceOrder = ({ data }) => {
+    const totalPrice = data.totail_price ?? 0;
     const formatPrice = (price) => {
         const VND = new Intl.NumberFormat('vi-VN', {
             style: 'currency',
@@ -55,7 +53,7 @@ const showTotalPriceOrder = ({ data, prductId }) => {
             class="button-buy-product"
             onclick="dispatch('user/cart/order')"
         >
-            mua ngay
+            đặt hàng(${data.totail_product})
         </button>
     `;
 };

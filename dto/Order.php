@@ -7,6 +7,9 @@ class Order
     private $order_id;
     private $order_date;
     private $status;
+    private  $messge_status;
+    private $message_status_payment;
+    private $message_admin;
     private $customer_id;
     private $total_product;
     private $total_discount;
@@ -17,13 +20,47 @@ class Order
     private $total_price;
     public function __construct()
     {
-        $this->order_id = $this->get_milliseconds();
+        $this->order_id = $this->autoId();
+        $this->messge_status = "đang chở xác nhận";
+        $this->message_status_payment = "chưa thanh toán";
     }
-    function get_milliseconds()
+    function autoId()
     {
-        list($msec, $sec) = explode(' ', microtime());
-        $time_milli = (int) round(microtime(true) * 1000);
-        return "IP" . $time_milli;
+        $timestamp = time();
+        $id = date('YmdHis', $timestamp); // Năm + tháng + ngày + giờ + phút + giây
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $length = 10;
+        $max = strlen($characters) - 1;
+
+        for ($i = 0; $i < $length; $i++) {
+            $id .= $characters[mt_rand(0, $max)];
+        }
+
+        return $id;
+    }
+    public  function  getMessage_status()
+    {
+        return $this->messge_status;
+    }
+    public   function getMessage_status_payment()
+    {
+        return  $this->message_status_payment;
+    }
+    public  function getMessage_admin()
+    {
+        return  $this->message_admin;
+    }
+    public  function setMessage_status($mes)
+    {
+        $this->messge_status = $mes;
+    }
+    public  function setMessae_status_payment($mes)
+    {
+        $this->message_status_payment = $mes;
+    }
+    public  function setMessage_admin($mes)
+    {
+        $this->message_admin = $mes;
     }
     // Getter và Setter cho $order_id
     public function getOrder_id()

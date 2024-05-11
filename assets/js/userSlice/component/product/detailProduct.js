@@ -1,6 +1,6 @@
 import html from '../../../redux/core.js';
 
-const renderContentDetail = (content = [' ', ' ', ' ', ' ', ' ']) => {
+const renderContentDetail = (content = [' ', ' ']) => {
     return html`
         ${content.map((item) => {
             return `
@@ -48,7 +48,10 @@ const productDetail = async () => {
     return html`
         <section class="container-left">
             <div class="product-image">
-                <img src="${product.MainImage}" alt="" />
+                <img
+                    src="http://localhost/assets/Db_img/${product.MainImage}"
+                    alt=""
+                />
             </div>
             <div class="banner-left">
                 <ul class="banner-list">
@@ -85,7 +88,7 @@ const productDetail = async () => {
                     <span>(${product.totail_rating})</span>
                 </div>
                 <div class="product-totail-buy">
-                    đã bán:${product.tatail_pay} sản phẩm
+                    đã bán:${product.totail_pay} sản phẩm
                 </div>
                 <div class="product-quantity">
                     còn lại:${product.quantity} sản phẩm
@@ -105,20 +108,7 @@ const productDetail = async () => {
             </div>
             <div class="description-product">
                 <h1>mô tả sản phẩm</h1>
-                <div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Voluptatum autem voluptates voluptatibus, atque nam harum
-                    quae minus in at? Nesciunt ipsa dicta rem laboriosam dolore
-                    maxime consectetur, qui nam? Natus! Lorem ipsum dolor sit
-                    amet consectetur adipisicing elit. Voluptatum autem
-                    voluptates voluptatibus, atque nam harum quae minus in at?
-                    Nesciunt ipsa dicta rem laboriosam dolore maxime
-                    consectetur, qui nam? Natus! Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Voluptatum autem voluptates
-                    voluptatibus, atque nam harum quae minus in at? Nesciunt
-                    ipsa dicta rem laboriosam dolore maxime consectetur, qui
-                    nam? Natus!
-                </div>
+                <div>${product.description}</div>
             </div>
         </section>
     `;

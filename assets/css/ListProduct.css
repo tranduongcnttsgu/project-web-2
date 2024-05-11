@@ -223,8 +223,8 @@
     display: inline-block;
     padding: 5px;
     font-size: 14px;
-    background: linear-gradient(to bottom, #fcff9e 0%, #c67700 100%);
-    color: black;
+    background-color: #222;
+    color: rgb(255, 255, 255);
     font-weight: 500;
     border-radius: 4px;
     user-select: none;
@@ -254,4 +254,19 @@
     opacity: 0.1;
     z-index: -1;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.no-product-title {
+    text-align: center;
+    margin-top: 20px;
+}
+.no-product-search-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    row-gap: 10px;
+}
+.no-product-search-wrapper img {
+    object-fit: contain;
 }

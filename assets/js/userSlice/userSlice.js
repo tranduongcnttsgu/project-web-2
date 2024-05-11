@@ -1,5 +1,39 @@
-const getData = async () => {
-    const req = await fetch('http://localhost/product-lists');
+const getData = async (start = 0, size = 6) => {
+    const payload = new URLSearchParams();
+    payload.set('start', start);
+    payload.set('end', size);
+    const res = await fetch('http://localhost/product', {
+        method: 'post',
+        body: payload,
+    });
+    const data = await res.json();
+    return data.data;
+};
+const getTotalProduct = async () => {
+    const payload = new URLSearchParams();
+
+    const res = await fetch('http://localhost/total-product', {
+        method: 'get',
+    });
+    const data = await res.json();
+    return data.data;
+};
+const getSearchData = async (
+    search,
+    start,
+    size,
+    condition = false,
+    sort = false
+) => {
+    const payload = new URLSearchParams();
+    payload.set('limit', start + ', ' + size);
+    payload.set('searchKey', search);
+    payload.set('condition', condition);
+    payload.set('sort', sort);
+    const req = await fetch('http://localhost/user/search', {
+        method: 'post',
+        body: payload,
+    });
     const res = await req.json();
     return res;
 };
@@ -41,9 +75,25 @@ const getOrderDetail = async () => {
     const res = await req.json();
     return res.data;
 };
+const getUserOrder = async () => {
+    const res = await fetch('http://localhost/user/get/user-order');
+    const data = await res.json();
+    return data.data;
+};
 const init = {
     data: await getData(),
-    prevData: await getData(),
+    searchData: [],
+    searchKey: '',
+    conditionSearch: false,
+    sortCondition: false,
+    pagination: {
+        itemPerPage: 6,
+        currentPage: 1,
+        start: 0,
+        end: 6,
+        totalProduct: await getTotalProduct(),
+        totalPage: 1,
+    },
     cart: await getCart(),
     userData: await getUser(),
     popup: {
@@ -57,108 +107,286 @@ const init = {
     detailProduct: await getDetailProduct(),
     orders: { statusChecked: false, data: await getOrders() },
     ordersDetail: await getOrderDetail(),
+    userOrder: await getUserOrder(),
 };
 const reducer = async (state = init, action, args) => {
     switch (action) {
         case 'user/search': {
-            const payload = new URLSearchParams(new FormData(args[0]));
-
-            try {
-                const response = await fetch('http://localhost/product', {
-                    method: 'post',
-                    body: payload,
-                    headers: {
-                        'Content-Type':
-                            'application/x-www-form-urlencoded; charset=UTF-8',
-                    },
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    const newState = result.data;
-
-                    return {
-                        ...state,
-                        data: newState,
-                    };
-                }
-            } catch (error) {
-                console.error('Error:', error);
-            }
-
+            const form = args[0];
+            const payload = new URLSearchParams(form);
+            let newPagiantion = {
+                itemPerPage: 6,
+                currentPage: 1,
+                start: 0,
+                end: 6,
+                totalProduct: 0,
+                totalPage: 1,
+            };
+            const res = await getSearchData(
+                payload.get('searchKey'),
+                newPagiantion.start,
+                newPagiantion.itemPerPage,
+                state.conditionSearch,
+                state.sortCondition
+            );
+            console.log(res);
+            const totalPage = Math.ceil(
+                res.data.totalResult / newPagiantion.itemPerPage
+            );
+            newPagiantion = {
+                ...newPagiantion,
+                totalProduct: res.data.totalResult,
+                totalPage: totalPage,
+            };
+            const newSearchData = res.data.data;
             return {
                 ...state,
+                pagination: newPagiantion,
+                data: newSearchData,
+                searchData: newSearchData,
+                searchKey: payload.get('searchKey'),
+            };
+        }
+        case 'user/nextPage': {
+            const currentPage = state.pagination.currentPage + 1;
+            const start = (currentPage - 1) * state.pagination.itemPerPage;
+            let end = currentPage * state.pagination.itemPerPage;
+            if (end > state.pagination.totalProduct) {
+                end = state.pagination.totalProduct;
+            }
+            const newPage = {
+                ...state.pagination,
+                currentPage: currentPage,
+                start: start,
+                end: end,
+            };
+            let newData;
+            if (state.searchData.length === 0) {
+                newData = await getData(start, state.pagination.itemPerPage);
+            } else {
+                newData = await getSearchData(
+                    state.searchKey,
+                    start,
+                    state.pagination.itemPerPage,
+                    state.conditionSearch,
+                    state.sortCondition
+                );
+                newData = newData.data.data;
+            }
+            return {
+                ...state,
+                data: newData,
+                pagination: newPage,
+            };
+        }
+        case 'user/prevPage': {
+            const currentPage = state.pagination.currentPage - 1;
+            const start = (currentPage - 1) * state.pagination.itemPerPage;
+            const end = currentPage * state.pagination.itemPerPage;
+            const newPage = {
+                ...state.pagination,
+                currentPage: currentPage,
+                start: start,
+                end: end,
+            };
+            let newData;
+            if (state.searchData.length === 0) {
+                newData = await getData(start, state.pagination.itemPerPage);
+            } else {
+                newData = await getSearchData(
+                    state.searchKey,
+                    start,
+                    state.pagination.itemPerPage,
+                    state.conditionSearch,
+                    state.sortCondition
+                );
+
+                newData = newData.data.data;
+            }
+            return {
+                ...state,
+                data: newData,
+                pagination: newPage,
+            };
+        }
+        case 'user/changePage': {
+            const currentPage = +args[0];
+            const start = (currentPage - 1) * state.pagination.itemPerPage;
+            let end = currentPage * state.pagination.itemPerPage;
+            if (end > state.pagination.totalProduct) {
+                end = state.pagination.totalProduct;
+            }
+            const newPage = {
+                ...state.pagination,
+                currentPage: currentPage,
+                start: start,
+                end: end,
+            };
+            let newData;
+            if (state.searchData.length === 0) {
+                newData = await getData(start, state.pagination.itemPerPage);
+            } else {
+                newData = await getSearchData(
+                    state.searchKey,
+                    start,
+                    state.pagination.itemPerPage,
+                    state.conditionSearch,
+                    state.sortCondition
+                );
+
+                newData = newData.data.data;
+            }
+            return {
+                ...state,
+                data: newData,
+                pagination: newPage,
             };
         }
         case 'user/searchCategory': {
-            const categoryId = args[0].getAttribute('category');
-            const payload = new URLSearchParams();
-            payload.set('category', categoryId);
-            const res = await fetch('http://localhost/product-category', {
-                method: 'post',
-                body: payload,
-                headers: {
-                    'Content-Type':
-                        'application/x-www-form-urlencoded; charset=UTF-8',
-                },
+            const index = args[0];
+            console.log(index.parentElement.children);
+            const li = [...index.parentElement.children];
+            li.forEach((ele) => {
+                ele.classList.remove('active');
             });
-            const result = await res.json();
-            if (result.success) {
-                return {
-                    ...state,
-                    data: result.data,
-                };
+            index.classList.add('active');
+            const value = index.getAttribute('category');
+            state.conditionSearch = 'category:' + value;
+            if (value === 'false') {
+                state.conditionSearch = false;
             }
+            let newPagiantion = {
+                itemPerPage: 6,
+                currentPage: 1,
+                start: 0,
+                end: 6,
+                totalProduct: 0,
+                totalPage: 1,
+            };
+            const res = await getSearchData(
+                '',
+                newPagiantion.start,
+                newPagiantion.itemPerPage,
+                state.conditionSearch,
+                state.sortCondition
+            );
 
+            const totalPage = Math.ceil(
+                res.data.totalResult / newPagiantion.itemPerPage
+            );
+
+            newPagiantion = {
+                ...newPagiantion,
+                totalProduct: res.data.totalResult,
+                totalPage: totalPage,
+            };
+            const newSearchData = res.data.data;
             return {
                 ...state,
+                pagination: newPagiantion,
+                data: newSearchData,
+                searchData: newSearchData,
+                searchKey: '',
             };
         }
-        case 'user/searchSort': {
+        case 'user/searchAuthor': {
+            const index = args[0];
+            console.log(index.parentElement.children);
+            const li = [...index.parentElement.children];
+            li.forEach((ele) => {
+                ele.classList.remove('active');
+            });
+            index.classList.add('active');
+            const value = index.getAttribute('author');
+            state.conditionSearch = 'author:' + value;
+            if (value === 'false') {
+                state.conditionSearch = false;
+            }
+            let newPagiantion = {
+                itemPerPage: 6,
+                currentPage: 1,
+                start: 0,
+                end: 6,
+                totalProduct: 0,
+                totalPage: 1,
+            };
+            const res = await getSearchData(
+                '',
+                newPagiantion.start,
+                newPagiantion.itemPerPage,
+                state.conditionSearch,
+                state.sortCondition
+            );
+
+            const totalPage = Math.ceil(
+                res.data.totalResult / newPagiantion.itemPerPage
+            );
+
+            newPagiantion = {
+                ...newPagiantion,
+                totalProduct: res.data.totalResult,
+                totalPage: totalPage,
+            };
+            const newSearchData = res.data.data;
+            return {
+                ...state,
+                pagination: newPagiantion,
+                data: newSearchData,
+                searchData: newSearchData,
+                searchKey: '',
+            };
+        }
+        case 'user/sortProductPrice': {
+            const index = args[0];
+            state.sortCondition = index.value;
+            if (index.value === 'false') {
+                state.sortCondition = false;
+            }
+            let newPagiantion = {
+                itemPerPage: 6,
+                currentPage: 1,
+                start: 0,
+                end: 6,
+                totalProduct: 0,
+                totalPage: 1,
+            };
+            const res = await getSearchData(
+                state.searchKey,
+                newPagiantion.start,
+                newPagiantion.itemPerPage,
+                state.conditionSearch,
+                state.sortCondition
+            );
+
+            const totalPage = Math.ceil(
+                res.data.totalResult / newPagiantion.itemPerPage
+            );
+
+            newPagiantion = {
+                ...newPagiantion,
+                totalProduct: res.data.totalResult,
+                totalPage: totalPage,
+            };
+            const newSearchData = res.data.data;
+            return {
+                ...state,
+                pagination: newPagiantion,
+                data: newSearchData,
+                searchData: newSearchData,
+            };
+        }
+        case 'user/sortProduct': {
             const sort = args[0];
             const prevData = state.data;
             const newData = prevData.sort((a, b) => {
                 if (sort === 'increase') {
-                    return parseFloat(a.price) - parseFloat(b.price);
-                } else return parseFloat(b.price) - parseFloat(a.price);
-            });
-            return {
-                ...state,
-                data: newData,
-            };
-        }
-        case 'user/searchAuthor': {
-            const authorId = args[0].getAttribute('author');
-            const payload = new URLSearchParams();
-            payload.set('author', authorId);
-            const res = await fetch('http://localhost/product-author', {
-                method: 'post',
-                body: payload,
-                headers: {
-                    'Content-Type':
-                        'application/x-www-form-urlencoded; charset=UTF-8',
-                },
-            });
-            const result = await res.json();
-            if (result.success) {
-                return {
-                    ...state,
-                    data: result.data,
-                };
-            }
-
-            return {
-                ...state,
-            };
-        }
-        case 'user/searchPriceSelect': {
-            const price = args[0].firstElementChild.value.split('-');
-            const price_start = price[0];
-            const price_end = price[1];
-            const prevData = state.prevData;
-            const newData = prevData.filter((item) => {
-                return +item.price <= +price_end && +item.price >= +price_start;
+                    return (
+                        parseFloat(a.promo_price) - parseFloat(b.promo_price)
+                    );
+                } else
+                    return (
+                        parseFloat(b.promo_price) - parseFloat(a.promo_price)
+                    );
             });
             return {
                 ...state,
@@ -170,7 +398,7 @@ const reducer = async (state = init, action, args) => {
             const productId = currentProduct.product_id
                 ? currentProduct.product_id
                 : args[0];
-            const quantity = currentProduct.quantity_buy | 1;
+            const quantity = currentProduct.quantity_buy;
             const payload = new URLSearchParams();
             payload.set('productId', productId);
             payload.set('quantity', quantity);
@@ -186,20 +414,18 @@ const reducer = async (state = init, action, args) => {
             let newCart = [...state.cart];
             if (result.success) {
                 MessageBox('thông báo', 'đã thêm sản phẩm vào giỏ hàng');
-                const item = state.data.filter(
-                    (product) => product.product_id === productId
-                );
-                newCart = [
-                    ...state.cart,
-                    { ...item[0], quantity_purchased: quantity },
-                ];
-            } else if (!result.success && result.code == 404) {
+
+                newCart = await getCart();
+            } else if (!result.success && result.code === 401) {
+                window.location.href = 'http://localhost/account';
+            } else if (!result.success && result.code === 404) {
                 MessageBox(
                     'thông báo',
                     'sản phẩm đã có trong giỏ hàng',
                     'warning'
                 );
             }
+            console.log(result);
 
             return {
                 ...state,
@@ -224,21 +450,18 @@ const reducer = async (state = init, action, args) => {
             let newCart = [...state.cart];
             if (result.success) {
                 MessageBox('thông báo', 'đã thêm sản phẩm vào giỏ hàng');
-                const item = state.data.filter(
-                    (product) => product.product_id === productId
-                );
 
-                newCart = [
-                    ...state.cart,
-                    { ...item[0], quantity_purchased: quantity },
-                ];
-            } else if (!result.success && result.code == 404) {
+                newCart = await getCart();
+            } else if (!result.success && result.code === 401) {
+                window.location.href = 'http://localhost/account';
+            } else if (!result.success && result.code === 404) {
                 MessageBox(
                     'thông báo',
                     'sản phẩm đã có trong giỏ hàng',
                     'warning'
                 );
             }
+            console.log(result);
 
             return {
                 ...state,
@@ -284,8 +507,9 @@ const reducer = async (state = init, action, args) => {
             };
         }
         case 'user/detailProduct': {
-            const productId = +args[0];
+            const productId = args[0];
             localStorage.setItem('showProductId', JSON.stringify(productId));
+
             window.location.href = 'http://localhost/detail-product';
             return {
                 ...state,
@@ -302,6 +526,30 @@ const reducer = async (state = init, action, args) => {
                 ...state,
                 detailProduct: newState,
             };
+        }
+        case 'user/productDetal/buy': {
+            const productId = args[0];
+            const check = state.cart.some((product) => {
+                return product.product_id === productId;
+            });
+            const payload = { check, data: state.detailProduct };
+
+            const req = await fetch(
+                'http://localhost/user/product-detail/order',
+                {
+                    method: 'post',
+                    body: JSON.stringify(payload),
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            const res = await req.json();
+            if (res.success) {
+                window.location.href = 'http://localhost/checkout/payment';
+            }
+            return state;
         }
         case 'user/popup/cartProduct': {
             const prev = state.popup;
@@ -345,24 +593,57 @@ const reducer = async (state = init, action, args) => {
             };
         }
         case 'user/cartProduct/addManyorder': {
-            const checked = !state.orders.statusChecked;
-            let newState = { ...state.orders, statusChecked: checked };
-            const listProduct = state.cart;
-            const newOrder = [];
-            if (checked) {
-                listProduct.map((product) => {
-                    newOrder.push(product.product_id);
-                });
+            const lists = [];
+            state.cart.map((product) => {
+                if (state.ordersDetail.length === 0) {
+                    lists.push(product);
+                } else {
+                    state.ordersDetail.map((item) => {
+                        if (item.product_id !== product.product_id) {
+                            lists.push(product);
+                        }
+                    });
+                }
+            });
+            if (lists.length === 0) {
+                return state;
             }
-            newState = { ...newState, data: newOrder };
+            const req = await fetch(
+                'http://localhost/user/addManyProductToOrder',
+                {
+                    method: 'post',
+                    body: JSON.stringify({ data: lists }),
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            const response = await req.json();
+            const newOrderDetail = await getOrderDetail();
+            const newOrder = await getOrders();
             return {
                 ...state,
-                orders: newState,
+                orders: { ...state.orders, data: newOrder },
+                ordersDetail: newOrderDetail,
+            };
+        }
+        case 'user/cartProduct/deleteManyOrder': {
+            const req = await fetch('/user/deleteManyProductToOrder', {
+                method: 'post',
+            });
+
+            const newOrderDetail = await getOrderDetail();
+            const newOrder = await getOrders();
+            return {
+                ...state,
+                orders: { ...state.orders, data: newOrder },
+                ordersDetail: newOrderDetail,
             };
         }
         case 'user/cartProduct/addoneOrder': {
             const productId = +args[0];
-            const prevOrder = state.orders.data;
+            const prevOrder = state.orders;
             const totalProductInOrder = prevOrder.length + 1;
             const product = state.cart.filter((item) => {
                 return item.product_id === productId;
@@ -383,26 +664,49 @@ const reducer = async (state = init, action, args) => {
                 }
             );
             const res = await req.json();
-            console.log(res.data);
+
             const newOrder = {
                 ...state.orders,
-                data: [...prevOrder, res.data],
+                data: await getOrders(),
             };
+            const newOrderDetail = await getOrderDetail();
 
-            const newState = { ...state.orders };
             return {
                 ...state,
                 orders: newOrder,
+                ordersDetail: newOrderDetail,
+            };
+        }
+        case 'user/cartProduct/deleteoneOrder': {
+            const product_id = args[0];
+            const payload = new URLSearchParams();
+            payload.set('productId', product_id);
+            const req = await fetch(
+                'http://localhost/delete-one-product-in-order',
+                {
+                    method: 'post',
+                    body: payload,
+                }
+            );
+            const response = await req.json();
+            console.log(response);
+            if (response.success) {
+                const newOrderDetail = await getOrderDetail();
+                const newOrder = await getOrders();
+
+                return {
+                    ...state,
+                    ordersDetail: newOrderDetail,
+                    orders: { ...state.orders, data: newOrder },
+                };
+            }
+            return {
+                ...state,
             };
         }
         case 'user/cartProduct/delete': {
             const productId = +args[0];
-            const prevCart = state.cart;
-            const prevOrder = state.orders.data;
-            const newCart = prevCart.filter((product) => {
-                return product.product_id !== productId;
-            });
-            const newOrder = prevOrder.filter((id) => id !== productId);
+
             const payload = new URLSearchParams();
             payload.set('productId', productId);
             const updateCart = await fetch(
@@ -424,10 +728,11 @@ const reducer = async (state = init, action, args) => {
                 message: '',
                 payload: [],
             };
+            const newCart = await getCart();
             const newState = {
                 ...state,
                 cart: newCart,
-                orders: { ...state.orders, data: newOrder },
+
                 popup: newPopup,
             };
 
@@ -437,21 +742,92 @@ const reducer = async (state = init, action, args) => {
         }
 
         case 'user/cart/order': {
-            const check = state.orders.data.length === 0;
+            const check = state.ordersDetail.length === 0;
             if (check) {
                 MessageBox(
                     'thông báo',
                     'bạn chưa chọn sản phẩn nào',
                     'wraning'
                 );
+            } else {
+                window.location.href = 'http://localhost/checkout/payment';
             }
 
             return {
                 ...state,
             };
         }
-        default:
-            return state;
+        case 'user/order/popup/delete-order': {
+            const prev = state.popup;
+
+            let newPopup = { ...prev, show: false };
+            if (+args[0] === 1) {
+                newPopup = {
+                    ...prev,
+                    show: true,
+                    message: 'xóa đơn hàng ',
+                    type: 'user/order/popup/delete-order',
+                    acceptType: 'user/delete/order',
+                    payload: [3],
+                };
+            } else if (+args[0] === 2) {
+                newPopup = {
+                    type: '',
+                    acceptType: '',
+                    show: false,
+                    accept: false,
+                    message: '',
+                    payload: [],
+                };
+            }
+            return {
+                ...state,
+                popup: newPopup,
+            };
+        }
+        case 'user/delete/order': {
+            const status = 'đơn hàng bị hủy';
+            const payload = new URLSearchParams();
+            const orderId = JSON.parse(localStorage.getItem('user_OrderId'));
+            payload.set('status', status);
+            payload.set('orderId', orderId);
+            fetch('http://localhost/admin/order/update/status-order', {
+                method: 'post',
+                body: payload,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.success) {
+                        window.location.reload();
+                    } else {
+                        MessageBox('cập nhật không thành công', 'thông báo');
+                    }
+                });
+            const newPopup = {
+                type: '',
+                acceptType: '',
+                show: false,
+                accept: false,
+                message: '',
+                payload: [],
+            };
+            return {
+                ...state,
+                popup: newPopup,
+            };
+        }
+        default: {
+            const newTotalPage = Math.ceil(
+                state.pagination.totalProduct / state.pagination.itemPerPage
+            );
+            return {
+                ...state,
+                pagination: {
+                    ...state.pagination,
+                    totalPage: newTotalPage,
+                },
+            };
+        }
     }
 };
 export default reducer;

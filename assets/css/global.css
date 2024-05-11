@@ -189,13 +189,14 @@ body {
     color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
+/* popup css start ============================================================= */
 .popup-wrapper {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
-    z-index: 10;
+    z-index: 1100;
     min-width: 800px;
     min-height: 800px;
     width: 100vw;
@@ -368,4 +369,10 @@ body {
 }
 #notify-bottom-btn-right:hover {
     box-shadow: unset;
+}
+.visibility-hidden {
+    visibility: hidden;
+}
+.visibility-visible {
+    visibility: visible;
 }

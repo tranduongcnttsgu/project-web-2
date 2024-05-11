@@ -39,23 +39,31 @@ phoneMenu.addEventListener('click', (e) => {
         console.log(e.target);
     }
 });
-const itemAccount = document.getElementById('item-account');
-itemAccount.addEventListener('click', async () => {
-    const checkUserlogin = localStorage.getItem('userLogin')
-        ? localStorage.getItem('userLogin')
-        : false;
-    if (!checkUserlogin) {
-        window.location.href = 'http://localhost/account';
-    }
-    window.location.href = 'http://localhost/account/user';
-});
+
 const searchBox = document.getElementById('header-submit-search-product');
 searchBox.addEventListener('submit', (event) => {
     event.preventDefault();
     event.stopPropagation();
-
+    console.log(searchBox);
     const payload = new URLSearchParams(new FormData(searchBox));
     const searchKey = payload.get('searchKey');
 
-    dispatch('user/search', searchBox);
+    dispatch('user/search', new FormData(searchBox));
+});
+const checkUser = async () => {
+    const req = await fetch('http://localhost/account/user-info-login');
+    const res = await req.json();
+    if (!res.success) {
+        return (window.location.href = 'http://localhost/account');
+    }
+    if (res.success && +res.data.type === 0) {
+        return (window.location.href = 'http://localhost/account/user');
+    }
+    if (res.success && +res.data.type === 1) {
+        return (window.location.href = 'http://localhost/admin');
+    }
+};
+const buttonAccount = document.getElementById('item-account');
+buttonAccount.addEventListener('click', () => {
+    checkUser();
 });

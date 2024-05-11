@@ -20,6 +20,15 @@ class Products
     private $total_star;
     private $authorId;
     private $mainImage;
+    private $import_prie;
+    public function getImport_price()
+    {
+        return $this->import_prie;
+    }
+    public function setImport_price($i)
+    {
+        $this->import_prie = $i;
+    }
     public function getMainImage()
     {
         return $this->mainImage;

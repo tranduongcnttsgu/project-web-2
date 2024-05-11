@@ -21,6 +21,18 @@ const cartComponent = ({ data, checked, order }) => {
             }).length > 0;
         return statusChecked;
     };
+    if (data.length === 0) {
+        return html`
+            <div class="no-product-title">
+                <h3>không có sản phẩm nào trong giỏ hàng</h3>
+            </div>
+            <div class="no-product-button">
+                <a href="http://localhost/product">
+                    <button class="button-to-shopPage">Đến cửa hàng</button></a
+                >
+            </div>
+        `;
+    }
     return html` ${data.map(
         (product) => `
           <div class="cart-product-wrapper">
@@ -40,7 +52,9 @@ const cartComponent = ({ data, checked, order }) => {
                 </label>
                 <div class="cart-product-image">
                     <img
-                        src="${product.MainImage}"
+                        src="http://localhost/assets/Db_img/${
+                            product.MainImage
+                        }"
                         alt=""
                     />
                 </div>
@@ -53,21 +67,33 @@ const cartComponent = ({ data, checked, order }) => {
             )}</div>
             <div class="cart-product-wrapper-action-button">
                 <div class="cart-product-quantity">
-                 <button class="decrease-quantity"
+                 <button class="decrease-quantity
+                    ${
+                        checkOrder(product.product_id)
+                            ? 'visibility-hidden'
+                            : 'visibility-visible'
+                    }
+                 "
                  ${
                      product.quantity_purchased === 1
                          ? "style=' pointer-events: none;'"
                          : "style=' pointer-events: auto;'"
                  }
+                 
                    onclick = "dispatch('user/cartProduct/quantity',-1,${
                        product.product_id
                    })" 
                 >-</button>
                
-                <div class="product-quantity">${
-                    product.quantity_purchased
-                }</div>
+                <div class="product-quantity"
+                 
+                >${product.quantity_purchased}</div>
                 <button class="increase-quantity"
+                 ${
+                     checkOrder(product.product_id)
+                         ? "style='  visibility: hidden;'"
+                         : "style=' visibility:visible;'"
+                 }
                 onclick = "dispatch('user/cartProduct/quantity',1,${
                     product.product_id
                 })" 
@@ -77,7 +103,13 @@ const cartComponent = ({ data, checked, order }) => {
                        product.quantity_purchased * product.promo_price
                    )}</div>
             </div>
-            <div class="cart-product-delete"
+            <div class="cart-product-delete
+              ${
+                  checkOrder(product.product_id)
+                      ? 'visibility-hidden'
+                      : 'visibility-visible'
+              }
+            "
               onclick="dispatch('user/popup/cartProduct',1,${
                   product.product_id
               })"

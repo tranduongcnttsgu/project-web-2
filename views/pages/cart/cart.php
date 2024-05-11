@@ -8,7 +8,7 @@
                 <div class="cart-content-title">
 
                     <label for="buyProduct" class="cart-title-text-1">
-                        <input type="checkbox" name="product-buy" id="buyProduct" onchange="dispatch('user/cartProduct/addManyorder',0)">
+                        <input type="checkbox" name="product-buy" id="buyProduct" onclick="handleAddManyProduct(this)">
                         <span class="cart-title-text"> Tất cả sản phẩm</span>
                     </label>
                     <span class="cart-title-text cart-title-text-2">Đơn giá</span>
@@ -27,9 +27,11 @@
                     <h2 class=" transport-title">
                         Giao tới
                     </h2>
-                    <span class="button-change-address">Thay đổi</span>
+                    <a href="http://localhost/account/user">
+                        <span class="button-change-address">Thay đổi</span>
+                    </a>
                 </div>
-                <div class="transport-content-bottom">
+                <div class="transport-content-bottom" id="transport-info">
                     <div class="transport-infor">
                         <h2 class=" transport-title transport-title-second ">
                             user name

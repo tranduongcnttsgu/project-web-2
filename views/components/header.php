@@ -64,15 +64,7 @@
             </div>
             <form action="" class="header-middle-form-search" id="header-submit-search-product">
                 <input type="text" placeholder="Tên sản phẩm" class="form-search-box" name="searchKey" id="header-searchProduct-input" />
-                <div id="search_key_suggest" class="search-key-suggest">
-                    <ul>
-                        <li>key template</li>
-                        <li>key template</li>
-                        <li>key template</li>
-                        <li>key template</li>
-                        <li>key template</li>
-                    </ul>
-                </div>
+
                 <button class="form-button-search">search</button>
             </form>
             <div class="header-middle-nav">

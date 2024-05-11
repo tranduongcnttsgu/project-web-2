@@ -108,7 +108,7 @@ class UserController extends Controller
 
         $res = $this->userModel->adminAddnewAccount($user, $user_permission, $roles);
         if ($res === false) {
-            return $this->responseJSON("faild", false, 404, $payload);
+            return $this->responseJSON("fail", false, 404, $payload);
         }
         return $this->responseJSON("success", true, 200, $payload);
     }
@@ -148,14 +148,35 @@ class UserController extends Controller
         $user_permission->setUser_id($user->getUser_id());
         $update = $this->userModel->adminEditAccount($user, $user_permission, $roles);
         if ($update === false) {
-            return $this->responseJSON("faild", false, 400, $payload);
+            return $this->responseJSON("fail", false, 400, $payload);
         }
         return $this->responseJSON("success", true, 200, $payload);
     }
     public function adminCheckPermision()
     {
         $userId = $this->cookieGet("userLogin");
+        if (!isset($userId)) {
+            return $this->responseJSON("fail", false, 404, $userId);
+        }
         $permission = $this->userModel->adminCheckPermision($userId);
+        if (sizeof($permission) === 0) {
+            return $this->responseJSON("fail", false, 404, $userId);
+        }
         return $this->responseJSON("success", true, 200, $permission);
+    }
+    public function register()
+    {
+        $payload = $this->getPayloadJson();
+        $data    = $payload["info"];
+        $user = new User();
+        $user->setUser_id($this->userModel->autoId());
+        $user->setEmail($data["email"]);
+        $user->setName($data["name"]);
+        $user->setPassword($data["password"]);
+        $addUser = $this->userModel->register($user);
+        if ($addUser === false) {
+            return $this->responseJSON("fail", false, 404, $data);
+        }
+        return $this->responseJSON("success", true, 200, $data);
     }
 }

@@ -8,6 +8,29 @@ if (isset($show)) {
     echo $show;
 }
 ?>">
+        <div class="manager-order-navbar">
+            <h3 class="manager-order-title">sắp xếp đơn hàng theo:</h3>
+            <ul class="manager-order-sort">
+                <li class="manager-order-button" data-sort="0">
+                    tất cả
+                </li>
+                <li class="manager-order-button" data-sort="1">
+                    đơn hàng chở sử lý
+                </li>
+                <li class="manager-order-button" data-sort="2">
+                    đơn hàng đang giao
+                </li>
+                <li class="manager-order-button" data-sort="3">
+                    đơn hàng đã thanh toán
+                </li>
+                <li class="manager-order-button" data-sort="4">
+                    đơn hàng đã giao
+                </li>
+                <li class="manager-order-button" data-sort="5">
+                    đơn hàng bị hủy
+                </li>
+            </ul>
+        </div>
         <div class="fui-table-ui-basic-linh table-wrap">
             <table>
                 <thead>
@@ -22,7 +45,7 @@ if (isset($show)) {
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="table-show-order">
                     <?php
                     $pc =  new ProductController();
                     $orders = $pc->adminGetOrders();

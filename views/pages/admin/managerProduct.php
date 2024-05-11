@@ -30,7 +30,7 @@
                 </button> -->
             </form>
             <div class="button-action-wrapper">
-                <a href="http://localhost/admin/product/addNew">
+                <a href="http://localhost/admin/product/addNew" id="button-manager-product-add-new">
 
                     <div class="product-button-action"><i class="fa-regular fa-square-plus"></i><span style="padding-left: 5px;">Thêm sản phẩm</span></div>
                 </a>

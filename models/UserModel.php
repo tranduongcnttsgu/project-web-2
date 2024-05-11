@@ -270,4 +270,14 @@ class UserModel extends Model
         }
         return $result;
     }
+    public function register(User $user)
+    {
+        $check = $this->findAll("users", ["email = ?"], [$user->getEmail()]);
+        if (sizeof($check) !== 0) {
+            return false;
+        }
+
+        $newUser = $this->insert("users", "user_id,name,password,email", [$user->getUser_id(), $user->getName(), $user->getPassword(), $user->getEmail()]);
+        $newRole = $this->insert("users_permission", "user_permission_id,user_id,action_group", [$this->autoId(), $user->getUser_id(), 0]);
+    }
 }

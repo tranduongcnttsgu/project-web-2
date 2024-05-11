@@ -18,9 +18,7 @@
                 <li titles="mes" key="2" class="active">
                     <span><i class="bx bx-group"></i>sản phẩm đã mua</span>
                 </li>
-                <li titles="user" key="3">
-                    <span><i class="bx bx-group"></i>sản phẩm yêu thích</span>
-                </li>
+
 
             </ul>
             <ul class="side-menu">

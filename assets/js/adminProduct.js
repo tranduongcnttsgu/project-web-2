@@ -1,12 +1,30 @@
 const name_permission = 'quản lý sản phẩm';
 let permission = {};
-
+const buttonAddNew = document.getElementById('button-manager-product-add-new');
+const buttonEdit = document.getElementById('button-form-edit-product-submit');
+const buttonDelete = document.getElementById('button-manager-product-delete');
 const checkPermissions = async () => {
     const req = await fetch('http://localhost/admin/check-permission');
     const res = await req.json();
-    permission = res.data.find((role) => {
-        return role.permission.service === name_permission;
-    }).service;
+    if (!res.success) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
+    permission =
+        res.data.find((role) => {
+            return role.permission.service === name_permission;
+        })?.service ?? false;
+    if (!permission) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
+    if (permission.action_create === 0) {
+        buttonAddNew?.classList.add('button-none');
+    }
+    if (permission.action_delete === 0) {
+        buttonDelete?.classList.add('button-none');
+    }
+    if (permission.action_update === 0) {
+        buttonEdit?.classList.add('button-none');
+    }
 
     console.log(permission);
 };
@@ -60,20 +78,22 @@ if (showDetailProduct) {
         rules: [
             Validator.isRequired('#name', 'Vui lòng nhập tên sản  phẩm'),
             Validator.minLength('#name', 2),
+            Validator.isPrice('#price'),
             Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#price', 1),
-            Validator.isPrice('#price'),
+
             Validator.isRequired('#author', 'Vui lòng nhập tên tác giả'),
             Validator.isRequired('#category', 'Vui lòng nhập tên thể  '),
             Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
             Validator.minLength('#quantity', 1),
             Validator.isNumber('#quantity'),
+            Validator.isPrice('#promo_price'),
             Validator.isRequired('#promo_price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#promo_price', 1),
-            Validator.isPrice('#promo_price'),
-            Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
-            Validator.minLength('#import_price', 1),
             Validator.isPrice('#import_price'),
+            Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
+
+            Validator.minLength('#import_price', 1),
         ],
         onSubmit: function (data) {
             const inputPriviewImage = document.getElementById('img-product');
@@ -91,7 +111,20 @@ if (showDetailProduct) {
                 },
             })
                 .then((res) => res.json())
-                .then((data) => console.log(data));
+                .then((data) => {
+                    if (data.success) {
+                        MessageBox(
+                            'cập nhật  sản phẩm   thành công',
+                            'thông báo'
+                        );
+                    } else {
+                        MessageBox(
+                            'lỗi cập nhật sản phẩm',
+                            'thông báo',
+                            'error'
+                        );
+                    }
+                });
         },
     });
     const buttonSubmit = document.getElementById(
@@ -122,6 +155,7 @@ if (showDetailProduct) {
         }
     });
 }
+//   add  new  product
 const addNewProduct = document.getElementById('mnp-add-product');
 if (addNewProduct) {
     Validator({
@@ -181,6 +215,10 @@ if (addNewProduct) {
     const inputSelectorImage = document.getElementById('input-selector-img');
     const inputPriviewImage = document.getElementById('img-product');
     const buttondeleteImg = document.getElementById('btn-delete-img-product');
+    const buttonDeleteProduct = document.getElementById(
+        'button-manager-product-delete'
+    );
+
     buttondeleteImg.addEventListener('click', () => {
         inputPriviewImage.src =
             'http://localhost/assets/Db_img/default-img-product.png';

@@ -8,7 +8,7 @@
 ">
         <div class="decentralize-title">
             <h3 class="title-text">phần quyền tài khoản</h3>
-            <a href="http://localhost/admin/addAccount">
+            <a id="button-decentralize-add-accout" href="http://localhost/admin/addAccount">
                 <button type="button" class="button-action-1 add"><i class="fa-solid fa-user-plus"></i></button>
             </a>
         </div>
@@ -52,8 +52,8 @@
                                 <?php
                                 if (strcmp($value["user"]["email"], "mark@gmail.com") !== 0) {
                                 ?>
-                                    <button class="button-action-1 edit" onclick="dispatch('admin/edit/account',this)" data-account=" <?php echo $value["user"]["user_id"] ?>"><i class="fa-solid fa-pen-to-square"></i></button>
-                                    <button data-account=" <?php echo $value["user"]["user_id"] ?>" class="button-action-1 delete-btn" onclick="dispatch('admin/delete/account/popup',1,this )">
+                                    <button class="button-action-1 edit" id="button-decentralize-edit" onclick="dispatch('admin/edit/account',this)" data-account=" <?php echo $value["user"]["user_id"] ?>"><i class="fa-solid fa-pen-to-square"></i></button>
+                                    <button data-account=" <?php echo $value["user"]["user_id"] ?>" class="button-action-1 delete-btn" onclick="dispatch('admin/delete/account/popup',1,this )" id="button-decentralize-delete">
                                         <i class="fa-regular fa-trash-can"></i></button>
                                 <?php
                                 }

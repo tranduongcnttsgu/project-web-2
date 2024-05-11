@@ -18,9 +18,7 @@
                 <li titles="mes" key="2">
                     <span><i class="bx bx-group"></i>sản phẩm đã mua</span>
                 </li>
-                <li titles="user" key="3">
-                    <span><i class="bx bx-group"></i>sản phẩm yêu thích</span>
-                </li>
+
 
             </ul>
             <ul class="side-menu">
@@ -135,7 +133,7 @@
                                             <button class="btn-status order-delete" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-delete-order-user">hủy đơn hàng</button>
                                         <?php endif; ?>
                                         <?php
-                                        if (strcmp($value["order"]["status_stransport"], "0") === 0  && strcmp($value["order"]["status_stransport"], "0") !== 0) :
+                                        if (strcmp($value["order"]["status_stransport"], "1") === 0  && strcmp($value["order"]["status_payment"], "0") === 0) :
                                         ?>
                                             <button class="btn-status order-payment" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-payment-order-user">thanh toán đơn hàng</button>
                                         <?php endif; ?>
@@ -143,7 +141,7 @@
                                         <?php
                                         if ($value["order"]["status_stransport"] === 2) :
                                         ?>
-                                            <button class="btn-status received "> đơn hàng đã được giao</button>
+
                                         <?php endif; ?>
                                     <?php endif; ?>
 

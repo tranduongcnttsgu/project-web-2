@@ -186,6 +186,71 @@ const reducer = async (state = init, action, args) => {
                 popup: newPopup,
             };
         }
+        case 'admin/manager-product/popup/delete-product': {
+            const prev = state.popup;
+
+            let newPopup = { ...prev, show: false };
+            if (+args[0] === 1) {
+                newPopup = {
+                    ...prev,
+                    show: true,
+                    message: 'xóa sản phẩm ',
+                    type: 'admin/manager-product/popup/delete-product',
+                    acceptType: 'admin/delete/product',
+                    payload: [3],
+                };
+            } else if (+args[0] === 2) {
+                newPopup = {
+                    type: '',
+                    acceptType: '',
+                    show: false,
+                    accept: false,
+                    message: '',
+                    payload: [],
+                };
+            }
+            return {
+                ...state,
+                popup: newPopup,
+            };
+        }
+        case 'admin/delete/product': {
+            const id = localStorage.getItem('ad-manager-productId')
+                ? JSON.parse(localStorage.getItem('ad-manager-productId'))
+                : false;
+            if (id) {
+                const payload = new URLSearchParams();
+                payload.set('productId', id.trim());
+                const req = await fetch(
+                    'http://localhost/admin/manager-product/delete',
+                    {
+                        method: 'post',
+                        body: payload,
+                    }
+                );
+                const res = await req.json();
+                if (res.success) {
+                    window.location.href =
+                        'http://localhost/admin/manager/products';
+                } else {
+                    MessageBox('xóa sản phẩm không thành công', 'thông báo');
+                }
+            }
+            localStorage.removeItem('ad-manager-productId');
+            const newPopup = {
+                type: '',
+                acceptType: '',
+                show: false,
+                accept: false,
+                message: '',
+                payload: [],
+            };
+
+            return {
+                ...state,
+                popup: newPopup,
+            };
+        }
         default:
             return state;
     }

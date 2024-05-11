@@ -7,7 +7,11 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="http://localhost/assets/css/admin.css">
     <link rel="stylesheet" href="http://localhost/assets/font/font-awesome-pro-v6-6.2.0/css/all.min.css" />
+    <?php
+    require_once __DIR__ . "/../../utils/ImportStyle.php";
+    ?>
     <link rel="stylesheet" href="http://localhost/assets/css/global.css">
+
     <script src="http://localhost/assets/js/core.js"></script>
     <script type="module" src="http://localhost/assets/js/adminSlice/index.js" defer></script>
 

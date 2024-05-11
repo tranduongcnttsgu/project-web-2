@@ -80,7 +80,7 @@
                 <button class="button-action-mn-product  save " type="submit" id="button-form-edit-product-submit"><i class="fa-solid fa-floppy-disk"></i>lưu</button>
             </div>
             <div class="mnp-button-save-product-wrapper">
-                <button class="button-action-mn-product "><i class="fa-solid fa-trash-can"></i>xóa sản phẩm</button>
+                <button class="button-action-mn-product " id="button-manager-product-delete" onclick="dispatch('admin/manager-product/popup/delete-product',1)"><i class="fa-solid fa-trash-can"></i>xóa sản phẩm</button>
             </div>
         </div>
     </div>

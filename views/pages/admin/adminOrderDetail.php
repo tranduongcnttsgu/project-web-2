@@ -1,4 +1,4 @@
-<main class="main-order-wrapper">
+<main class="main-order-wrapper" id="main-manager-order-detail">
     <div class="container-top">
         <div class="order-infor-wrapper">
             <div class="order-content-letf">
@@ -62,7 +62,7 @@
                     <label for="status-order">trạng thái đơn hàng:</label>
                     <select name="status-order" id="status-order">
                         <option value="đang chờ sử lý">đang chờ sử lý</option>
-                        <option value="đơn hàng bị hủy">đơn hàng bị hủy</option>
+                        <option value="đơn hàng bị hủy" id="delete-order-sl">đơn hàng bị hủy</option>
                         <option value="đang giao hàng">đang giao hàng</option>
                         <option value="đã giao hàng">đã giao hàng</option>
 

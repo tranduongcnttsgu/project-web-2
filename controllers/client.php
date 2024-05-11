@@ -81,9 +81,20 @@ class client extends Controller
         ];
         return $this->render("account", $params);
     }
+    public function adminViewStatics()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "styled" => ["admin-statics"],
+            "script" => ['admin']
+        ];
+        $content = $this->getContentLayout("admin/statics", "show");
+        return $this->renderLayout($content, $params);
+    }
     public function register()
     {
         $params  = [
+            "script" => ['validation', 'register'],
             "titleButton" => "go home",
             "buttonLink" => "http://localhost"
         ];
@@ -119,7 +130,7 @@ class client extends Controller
     {
         $this->setLayout("admin");
         $params  = [
-            "script" => ['validation', 'admin']
+            "script" => ['validation', 'admin', 'adminOrder']
         ];
         $content = $this->getContentLayout("admin/managerOrder", "show");
         return $this->renderLayout($content, $params);
@@ -128,7 +139,7 @@ class client extends Controller
     {
         $this->setLayout("admin");
         $params  = [
-            "script" => ['validation', 'admin']
+            "script" => ['validation', 'admin', 'adminProduct']
         ];
         $content = $this->getContentLayout("admin/managerProduct", "show");
         return $this->renderLayout($content, $params);
@@ -196,6 +207,15 @@ class client extends Controller
             "script" => ['validation', 'admin']
         ];
         $content = $this->getContentLayout("admin/adminEditAccount", "");
+        return $this->renderLayout($content, $params);
+    }
+    public function adminShowViewDecentralize()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "script" => ['admin', 'validation', 'decentralize']
+        ];
+        $content = $this->getContentLayout("admin/decentralize", "show");
         return $this->renderLayout($content, $params);
     }
     public function adminOrderViewDetail()

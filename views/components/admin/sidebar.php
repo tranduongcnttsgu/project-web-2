@@ -22,26 +22,6 @@
         $getNav  = $client->adminLayout();
         if (sizeof($getNav) === 0) {
             $getNav[0]["role"]["service"] = 'none';
-        }
-
-        if ($getNav[0]["role"]["service"] === 'admin') {
-
-        ?>
-            <li class="divider " site="role" data-text="phần Quyền  tài khoản">phân quyền tài khoản</li>
-            <a href="http://localhost/admin">
-                <li class=""><span><i class='bx bx-table icon '></i>phần quyền</span></li>
-            </a>
-            <!-- <li>
-                <span><i class='bx bxs-notepad icon'></i>Tài khoản <i class='bx bx-chevron-right icon-right'></i></span>
-                <ul class="side-dropdown">
-                    <li><span>khách hàng</span></li>
-                    <li><span>nhân viên</span></li>
-
-                </ul>
-            </li> -->
-
-
-            <?php
         } else {
             // $value =>>{
             //     role: {
@@ -62,10 +42,13 @@
             foreach ($getNav as $key => $value) {
                 if (strcmp($value["role"]["service"], "thống kê") == 0) {
 
-            ?>
-                    <li site="static"><span class=""><i class='bx bxs-dashboard icon'></i>Thống kê</span></li>
+        ?>
+                    <a href="http://localhost/admin/manager/statics">
+                        <li site="static"><span class=""><i class='bx bxs-dashboard icon'></i>Thống kê</span></li>
+                    </a>
 
                 <?php
+
                 }
                 if (strcmp($value["role"]["service"], "quản lý đơn hàng") === 0) {
                 ?>
@@ -92,6 +75,25 @@
                     <a href="http://localhost/admin/manager/customer">
                         <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>quản lý khách hàng</span></li>
                     </a>
+
+                <?php
+                }
+                if (strcmp($value["role"]["service"], "phần Quyền") == 0) {
+
+                ?>
+
+                    <a href="http://localhost/admin/decentralize">
+                        <li class=""><span><i class='bx bx-table icon '></i>phần quyền</span></li>
+                    </a>
+                    <!-- <li>
+                            <span><i class='bx bxs-notepad icon'></i>Tài khoản <i class='bx bx-chevron-right icon-right'></i></span>
+                            <ul class="side-dropdown">
+                                <li><span>khách hàng</span></li>
+                                <li><span>nhân viên</span></li>
+            
+                            </ul>
+                        </li> -->
+
 
         <?php
                 }

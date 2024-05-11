@@ -11,6 +11,17 @@ const card = ({ data }) => {
         });
         return VND.format(price * 1000);
     };
+    if (data.length === 0) {
+        return html`
+            <div class="no-product-search-wrapper">
+                <h3>không tìm thấy sản phẩm nào</h3>
+                <img
+                    src="http://localhost/assets/Db_img/no-product-search.webp"
+                    alt=""
+                />
+            </div>
+        `;
+    }
     return html`
         ${data.map((product) => {
             return `

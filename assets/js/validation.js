@@ -182,7 +182,7 @@ Validator.isPrice = function (selector, message) {
             const reg = /^\d+$/;
             return reg.test(value.trim())
                 ? undefined
-                : message || 'trường này phải là số';
+                : message || 'định dạng không đúng ex:10,000';
         },
     };
 };

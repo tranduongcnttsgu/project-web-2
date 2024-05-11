@@ -33,11 +33,11 @@
                 giá tiền giảm dần
             </span>
         </div>
-        <div class="filterprice-option-1">
+        <!-- <div class="filterprice-option-1">
             <i class="fa-brands fa-sellsy"></i><span class="filter-price-ct-o-title-1">
                 sản phẩm giảm giá
             </span>
-        </div>
+        </div> -->
     </div>
     <div class="filter-author">
         <h2 class="filter-author-title"> hiển thị theo tác giả</h2>

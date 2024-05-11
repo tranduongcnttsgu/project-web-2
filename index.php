@@ -28,6 +28,7 @@ $app->router->get('/product', [client::class, 'products']);
 $app->router->get('/detail-product', [client::class, 'productDetail']);
 $app->router->get("/checkout/cart", [client::class, "cart"]);
 $app->router->get("/checkout/payment", [client::class, "payment"]);
+$app->router->get("/admin/manager/statics", [client::class, "adminViewStatics"]);
 $app->router->get("/admin/addAccount", [client::class, "adminAddAcount"]);
 $app->router->get("/admin/adminEditAccount", [client::class, "adminEditAccount"]);
 $app->router->get("/admin/order/detail", [client::class, "adminOrderViewDetail"]);
@@ -36,7 +37,7 @@ $app->router->get("/admin/manager/products", [client::class, "adminManagerProduc
 $app->router->get("/admin/manager/orders", [client::class, "adminManagerOrdersView"]);
 $app->router->get("/admin/product/detail", [client::class, "adminManagerProductShowDetail"]);
 $app->router->get("/admin/product/addNew", [client::class, "adminManagerProductAddNewProduct"]);
-
+$app->router->get("/admin/decentralize", [client::class, "adminShowViewDecentralize"]);
 //   get data
 
 // get post product
@@ -68,6 +69,8 @@ $app->router->post("/admin/manager-product/show-product", [ProductController::cl
 $app->router->post("/admin/manager-product/search-product", [ProductController::class, "adminManagerProductSearch"]);
 $app->router->post('/admin/manager-product/update-product', [ProductController::class, "adminManagerProductUpdate"]);
 $app->router->post('/admin/manager-product/add-product', [ProductController::class, "adminManagerProductAddNew"]);
+$app->router->post("/admin/manager-order/sort-order", [ProductController::class, "adminManagerOrderSortOrder"]);
+$app->router->post('/admin/manager-product/delete', [ProductController::class, "adminManagerProductDelete"]);
 // rou
 
 //routerbb  admin
@@ -78,6 +81,7 @@ $app->router->post("/user/order", [UserController::class, "userOrder"]);
 $app->router->get("/account/logout", [UserController::class, "logout"]);
 $app->router->post("/user/update-info", [UserController::class, "updateInfo"]);
 $app->router->get('/user/get/user-order', [UserController::class, "getUserOrder"]);
+$app->router->post("/user/account/register", [UserController::class, "register"]);
 
 
 $app->router->get('/admin/check-permission', [UserController::class, "adminCheckPermision"]);

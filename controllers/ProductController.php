@@ -302,9 +302,9 @@ class ProductController extends Controller
     {
         $payload = $this->getPayload();
         $searchKey = $payload["searchKey"];
-        $searchKey = preg_replace('/\s+/', '', $searchKey);
+        $searchKey = trim($searchKey);
         $categoryId = false;
-        if (strcmp(preg_replace('/\s+/', '', $payload["category"]), 'false') !== 0) {
+        if (strcmp(trim($payload["category"]), 'false') !== 0) {
             $categoryId =  $payload["category"];
         }
         $data = $this->productModel->adminManagerProductSearch($searchKey, $categoryId, "0,7");
@@ -316,6 +316,28 @@ class ProductController extends Controller
     public function adminManagerProductUpdate()
     {
         $payload = $this->getPayloadJson();
+        $data = $payload["data"];
+        $productId = $payload["productId"];
+        $product = new Products();
+        $category = new categories();
+        $author = new Author();
+        $price = (int) str_replace(',', '', $data["price"]);
+        $promo_price = (int)  str_replace(',', '', $data["promo_price"]);
+        $import_price = (int)str_replace(',', '', $data["import_price"]);
+        $product->setProduct_id($productId);
+        $product->setName($data["name"]);
+        $product->setMainImage($data["MainImage"]);
+        $product->setPrice($price / 1000);
+        $product->setPromo_price($promo_price / 1000);
+        $product->setImport_price($import_price / 1000);
+
+        $author->setName(trim($data["author"]));
+        $category->setName(trim($data["category"]));
+        $product->setQuantity($data["quantity"]);
+        $update = $this->productModel->adminManagerProductUpdate($product, $category, $author);
+        if ($update === false) {
+            return $this->responseJSON("fail", false, 404, $payload);
+        }
         return $this->responseJSON("success", true, 200, $payload);
     }
     public function adminManagerProductAddNew()
@@ -344,5 +366,35 @@ class ProductController extends Controller
             return  $this->responseJSON("faild", false, 400, $payload);
         }
         return  $this->responseJSON("success", true, 200, $payload);
+    }
+    public function adminManagerOrderSortOrder()
+    {
+        $paylaod = $this->getPayload();
+        $status_transport = false;
+        if (isset($paylaod["all"])) {
+            $data = $this->productModel->adminManagerOrderSortOrderGetAll();
+            return  $this->responseJSON("success", true, 200, $data);
+        }
+        if (isset($paylaod["status_stransport"])) {
+            $status_transport = $paylaod["status_stransport"];
+        }
+        $status_payment = false;
+        if (isset($paylaod['status_payment'])) {
+            $status_payment = $paylaod['status_payment'];
+        }
+        $data = $this->productModel->adminManagerOrderSortOrder($status_transport, $status_payment);
+        if ($data === false) {
+            return $this->responseJSON("faild", false, 404, $paylaod);
+        }
+        return $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminManagerProductDelete()
+    {
+        $payload = $this->getPayload();
+        $delete = $this->productModel->adminManagerProductDelete($payload["productId"]);
+        if ($delete === false) {
+            return $this->responseJSON("fail", false, 200, $payload);
+        }
+        return $this->responseJSON("success", true, 200, $payload);
     }
 }

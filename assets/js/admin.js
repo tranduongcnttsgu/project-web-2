@@ -466,6 +466,103 @@ if (adminEditAccount) {
     });
 }
 //  manager order action ================================================================
+const listSortButton = document.querySelectorAll('.manager-order-button');
+
+if (listSortButton.length !== 0) {
+    listSortButton.forEach((ele) => {
+        ele.addEventListener('click', (e) => {
+            const id = e.target.getAttribute('data-sort');
+            const payload = new URLSearchParams();
+            if (+id === 0) {
+                payload.set('all', 0);
+            } else if (+id === 1) {
+                payload.set('status_stransport', 0);
+            } else if (+id === 2) {
+                payload.set('status_stransport', 1);
+            } else if (+id === 3) {
+                payload.set('status_payment', 1);
+            } else if (+id === 4) {
+                payload.set('status_stransport', 2);
+            } else if (+id === 5) {
+                payload.set('status_stransport', -1);
+            }
+            fetch('http://localhost/admin/manager-order/sort-order', {
+                method: 'post',
+                body: payload,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    const formatNumber = (n) => {
+                        return (+n * 1000).toLocaleString() + ' đ';
+                    };
+                    const table = document.getElementById('table-show-order');
+                    const infoOrder = data.data;
+                    if (!data.success) {
+                        table.innerHTML =
+                            ' <h3 class="title-no-order-sort">không có đơn hàng nào</h3> ';
+                        return;
+                    }
+                    const value = elementHTML`
+                     ${infoOrder.map((info, index) => {
+                         return `
+                         <tr>
+                            <td>${index}</td>
+                            <td class="pcs">
+                               ${info.order.create_at}
+                            </td>
+                            <td class="cur">
+                                <div class=" info-customer-wrapper">
+                                    <div class="info-name">
+                                     ${info.user.name}
+                                    </div>
+                                    <div class="info-std">
+                                     ${info.user.phone}
+                                    </div>
+                                    <div class="info-email">
+                                    ${info.user.email}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="per">
+                                <div class="info-order-wrapper">
+                                    <div class="info-order-price">
+                                        Tổng tiền đơn hàng:
+                                       ${formatNumber(
+                                           info.order.totail_price
+                                       )}</div>
+                                    <div class="info-quantity">số lượng sản phẩm:
+                                       ${info.order.totail_product}
+                                    </div>
+                                </div>
+                            </td>
+                            </td>
+                            <td class="per">
+                             ${info.order.message_status}
+                            </td>
+                            <td class="per">${
+                                info.order.message_status_payment
+                            }</td>
+                            <td class="per">
+                                <button class="button-action-order" id="button-action-order" data-order="${
+                                    info.order.order_id
+                                }"
+                                onclick ="handleButtonShowOrderDetail(this)"
+                                >thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                            </td>
+                        </tr>
+                        `;
+                     })}
+                    `;
+                    table.innerHTML = value;
+                });
+        });
+    });
+}
+const handleButtonShowOrderDetail = (ele) => {
+    const orderId = ele.getAttribute('data-order');
+    localStorage.setItem('orderId', JSON.stringify(orderId.trim()));
+    window.location.href = 'http://localhost/admin/order/detail';
+};
 const buttonActionOrder = document.querySelectorAll('.button-action-order');
 buttonActionOrder.forEach((button) => {
     button.addEventListener('click', (e) => {

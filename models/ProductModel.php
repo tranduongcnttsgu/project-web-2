@@ -62,34 +62,34 @@ class ProductModel extends Model
     {
         $result = [];
         $totalResult = [];
-
+        $searchKey =  trim(strtolower($searchKey));
 
         if ($condition !== false && strcmp($condition[0], "category") === 0 && $sort === false) {
             $category = $this->get("product_categorys", ["category_id = ?"], [$condition[1]]);
-            $result = $this->findAll("products", ["products.name LIKE ?", "products.category_id = ?"], ["%$searchKey%", $category["category_id"]], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ?", "products.category_id = ?"], ["%$searchKey%", $category["category_id"]], false);
+            $result = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.category_id = ?"], ["%$searchKey%", $category["category_id"]], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name)LIKE ?", "products.category_id = ?"], ["%$searchKey%", $category["category_id"]], false);
         } else if (
             $condition !== false
 
             && strcmp($condition[0], "author") === 0 && $sort === false
         ) {
             $author = $this->get("authors", ["authors.authorId =?"], [$condition[1]]);
-            $result = $this->findAll("products", ["products.name LIKE ?", "products.authorId = ?"], ["%$searchKey%", $author["authorId"]], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ?", "products.authorId = ?"], ["%$searchKey%", $author["authorId"]], false);
+            $result = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.authorId = ?"], ["%$searchKey%", $author["authorId"]], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.authorId = ?"], ["%$searchKey%", $author["authorId"]], false);
         } else if ($condition !== false     && strcmp($condition[0], "author") === 0 && $sort !== false) {
             $author = $this->get("authors", ["authorId =?"], [$condition[1]]);
-            $result = $this->findAll("products", ["products.name  LIKE ? ", "products.authorId = ?", "products.promo_price BETWEEN  ? AND ?  "], ["%$searchKey%", $author["authorId"], $sort[0], $sort[1]], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ? ", "products.authorId  = ?", "products.promo_price BETWEEN  ? AND  ?  "], ["%$searchKey%", $author["authorId"], $sort[0], $sort[1]], false);
+            $result = $this->findAll("products", ["LOWER(products.name)  LIKE ? ", "products.authorId = ?", "products.promo_price BETWEEN  ? AND ?  "], ["%$searchKey%", $author["authorId"], $sort[0], $sort[1]], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name) LIKE ? ", "products.authorId  = ?", "products.promo_price BETWEEN  ? AND  ?  "], ["%$searchKey%", $author["authorId"], $sort[0], $sort[1]], false);
         } else if ($condition !== false && strcmp($condition[0], "category") === 0 && $sort !== false) {
             $category = $this->get("product_categorys", ["category_id =?"], [$condition[1]]);
-            $result = $this->findAll("products", ["products.name LIKE ?", "products.category_id = ?", "products.promo_price BETWEEN ? AND ?"], ["%$searchKey%", $category["category_id"],  $sort[0], $sort[1]], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ?", "products.category_id = ?", "products.promo_price BETWEEN ? AND ? "], ["%$searchKey%", $category["category_id"], $sort[0], $sort[1]], false);
+            $result = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.category_id = ?", "products.promo_price BETWEEN ? AND ?"], ["%$searchKey%", $category["category_id"],  $sort[0], $sort[1]], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.category_id = ?", "products.promo_price BETWEEN ? AND ? "], ["%$searchKey%", $category["category_id"], $sort[0], $sort[1]], false);
         } else if ($sort !== false) {
-            $result = $this->findAll("products", ["products.name LIKE ?", "products.promo_price  BETWEEN ? AND  ?"], ["%$searchKey%", $sort[0], $sort[1]], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ?", "products.promo_price BETWEEN ? AND ?"], ["%$searchKey%", $sort[0], $sort[1]], false);
+            $result = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.promo_price  BETWEEN ? AND  ?"], ["%$searchKey%", $sort[0], $sort[1]], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name) LIKE ?", "products.promo_price BETWEEN ? AND ?"], ["%$searchKey%", $sort[0], $sort[1]], false);
         } else {
-            $result = $this->findAll("products", ["products.name LIKE ?"], ["%$searchKey%"], false, $limit);
-            $totalResult = $this->findAll("products", ["products.name LIKE ?"], ["%$searchKey%"], false);
+            $result = $this->findAll("products", ["LOWER(products.name) LIKE ?"], ["%$searchKey%"], false, $limit);
+            $totalResult = $this->findAll("products", ["LOWER(products.name) LIKE ?"], ["%$searchKey%"], false);
         }
 
         // Đếm tổng số kết quả
@@ -197,9 +197,9 @@ class ProductModel extends Model
     }
     public function getInfoProductDetail($productId)
     {
-        $product =  $this->getById($productId, "product_id", "products") ?? [];
+        $product = $this->get("products", ["product_id=?"], [$productId]);
 
-        return $product[0] ?? null;
+        return $product ?? null;
     }
     public function addOneProductToOrder($userId, Order $order, OrderDetail $orderDetail)
     {
@@ -410,13 +410,86 @@ class ProductModel extends Model
             $category->setCategory_id($checkCategory[0]["category_id"]);
         }
         $productTable = "products";
-        $productColumn = "product_id,name,status,price,promo_price,quantity,category_id,authorId,MainImage,import_price";
+        $productColumn = "product_id,name,status,price,promo_price,quantity,category_id,authorId,MainImage,import_price, rating,totail_pay";
         $productValues = [
             $product->getProduct_id(), $product->getName(), 1, $product->getPrice(), $product->getPromo_price(), $product->getQuantity(), $category->getCategory_id(),
-            $author->getAuthorId(), $product->getMainImage(), $product->getImport_price()
+            $author->getAuthorId(), $product->getMainImage(), $product->getImport_price(), 0, 0
         ];
         $addnewProduct = $this->insert($productTable, $productColumn, $productValues);
         if ($addnewProduct === false) {
+            return false;
+        }
+        return true;
+    }
+    public function adminManagerOrderSortOrderGetAll()
+    {
+        $data = [];
+        $orders = $this->findAll("orders", ["status=?"], [2], "update_at  DESC");
+        foreach ($orders as $key => $value) {
+            $user = $this->get("users", ["user_id=?"], [$value["customer_id"]]);
+            array_push($data, ["order" => $value, "user" => $user]);
+        }
+        return $data;
+    }
+    public    function adminManagerOrderSortOrder($status_transport, $status_payment)
+    {
+        $data = [];
+        if ($status_transport !== false) {
+            $orders = $this->findAll("orders", ["status_stransport=?", "status=?"], [$status_transport, 2], "update_at  DESC");
+            foreach ($orders as $key => $value) {
+                $user = $this->get("users", ["user_id=?"], [$value["customer_id"]]);
+                array_push($data, ["order" => $value, "user" => $user]);
+            }
+        }
+        if ($status_payment !== false) {
+            $orders = $this->findAll("orders", ["status_payment=?", "status=?"], [$status_payment, 2], "update_at  DESC");
+            foreach ($orders as $key => $value) {
+                $user = $this->get("users", ["user_id=?"], [$value["customer_id"]]);
+                array_push($data, ["order" => $value, "user" => $user]);
+            }
+        }
+        if (sizeof($data) === 0) {
+            return false;
+        }
+        return $data;
+    }
+    public function adminManagerProductUpdate(Products $product, categories  $category, Author $author)
+    {
+        $productOld = $this->getInfoProductDetail($product->getProduct_id());
+        $product->setAuthorId($productOld["authorId"]);
+        $product->setCategory_id($productOld["category_id"]);
+        $categoryOfProduct = $this->get("product_categorys", ["category_id=?"], [$productOld["category_id"]]);
+        $authorOfProduct = $this->get("authors", ["authorId=?"], [$productOld["authorId"]]);
+        if (strcmp(strtolower($categoryOfProduct["name"]), strtolower($category->getName())) !== 0) {
+            $category->setCategory_id($this->autoId());
+            $checkCategory = $this->findAll("product_categorys", ["LOWER(name) like ?"], ["%" . strtolower($category->getName()) . "%"], false, 1);
+            if (sizeof($checkCategory) !== 0) {
+                $category->setCategory_id($checkCategory[0]["category_id"]);
+            } else {
+                $this->insert("product_categorys", "category_id,name", [$category->getCategory_id(), $category->getName()]);
+            }
+            $product->setCategory_id($category->getCategory_id());
+        }
+        if (strcmp(strtolower($authorOfProduct["name"]), strtolower($author->getName())) !== 0) {
+            $author->setAuthorId($this->autoId());
+            $checkAuthor = $this->findAll("authors", ["LOWER(name) like ?"], ["%" . strtolower($author->getName()) . "%"], false, 1);
+            if (sizeof($checkAuthor) !== 0) {
+                $author->setAuthorId($checkAuthor[0]["authorId"]);
+            } else {
+                $this->insert("authors", "authorId,name", [$author->getAuthorId(), $author->getName()]);
+            }
+            $product->setAuthorId($author->getAuthorId());
+        }
+        $update = $this->update("products", ["name", "price", "promo_price", "quantity", "category_id", "authorId", "MainImage", "import_price", "rating", "totail_pay"], [$product->getName(), $product->getPrice(), $product->getPromo_price(), $product->getQuantity(), $product->getCategory_id(), $product->getAuthorId(), $product->getMainImage(), $product->getImport_price(), 0, 0], ["product_id=?"], [$product->getProduct_id()]);
+        if ($update === false) {
+            return false;
+        }
+        return true;
+    }
+    public function adminManagerProductDelete($productId)
+    {
+        $delete = $this->delete("products", ["product_id=?"], [$productId]);
+        if ($delete === false) {
             return false;
         }
         return true;

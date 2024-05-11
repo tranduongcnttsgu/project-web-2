@@ -507,8 +507,9 @@ const reducer = async (state = init, action, args) => {
             };
         }
         case 'user/detailProduct': {
-            const productId = +args[0];
+            const productId = args[0];
             localStorage.setItem('showProductId', JSON.stringify(productId));
+
             window.location.href = 'http://localhost/detail-product';
             return {
                 ...state,

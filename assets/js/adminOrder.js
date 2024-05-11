@@ -22,9 +22,17 @@ const button_delete = document.getElementById('button-order-delete');
 const checkPermissions = async () => {
     const req = await fetch('http://localhost/admin/check-permission');
     const res = await req.json();
-    permission = res.data.find((role) => {
-        return role.permission.service === name_permission;
-    }).service;
+    if (!res.success) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
+    permission =
+        res.data.find((role) => {
+            return role.permission.service === name_permission;
+        })?.service ?? false;
+
+    if (!permission) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
     if (permission.action_update === 0) {
         button_update.classList.add('button-none');
     }
@@ -46,78 +54,90 @@ const checkPermissions = async () => {
     console.log(permission);
 };
 checkPermissions();
-button_delete.addEventListener('click', () => {
-    dispatch('admin/order/popup/delete-order', 1);
-});
-button_update.addEventListener('click', () => {
-    const status = status_order.value;
-    const payload = new URLSearchParams();
-    const orderId = JSON.parse(localStorage.getItem('orderId'));
-    payload.set('status', status);
-    payload.set('orderId', orderId);
-    fetch('http://localhost/admin/order/update/status-order', {
-        method: 'post',
-        body: payload,
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.success) {
-                window.location.reload();
-            } else {
-                MessageBox('cập nhật không thành công', 'thông báo');
-            }
-        });
-});
-const getInfoOrder = () => {
-    const orderId = JSON.parse(localStorage.getItem('orderId'));
-    const payload = new URLSearchParams();
-    payload.set('orderId', orderId);
-    fetch('http://localhost/admin/getOrderCustomer', {
-        method: 'post',
-        body: payload,
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            const customer = data.data.customer;
-            customer_name.innerHTML = customer.name;
-            customer_address.innerHTML = customer.address;
-            customer_email.innerHTML = customer.email;
-            customer_phone.innerHTML = customer.phone;
-            const order = data.data.order;
-            order_date.innerHTML = order.order_date;
-            order_quantity.innerHTML = order.totail_product;
-            order_status_payment.innerHTML = order.message_status_payment;
-            order_total_price.innerHTML = (
-                order.totail_price * 1000
-            ).toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-            const orderDetail = data.data.orderDetail;
-            if (order.message_status === 'đã giao hàng') {
-                button_delete.classList.add('button-none');
-                button_update.classList.add('button-none');
-                status_order.classList.add('pointer-none');
-            }
-            if (order.message_status === 'đơn hàng bị hủy') {
-                button_delete.classList.add('button-none');
-                button_update.classList.add('button-none');
-                status_order.classList.add('pointer-none');
-            }
-            for (let i, j = 0; (i = status_order.options[j]); j++) {
-                if (i.value === order.message_status) {
-                    status_order.selectedIndex = j;
+const main = document.getElementById('main-manager-order-detail');
+if (main) {
+    button_delete.addEventListener('click', () => {
+        dispatch('admin/order/popup/delete-order', 1);
+    });
 
-                    break;
+    button_update.addEventListener('click', () => {
+        const status = status_order.value;
+        const payload = new URLSearchParams();
+        const orderId = JSON.parse(localStorage.getItem('orderId'));
+        payload.set('status', status);
+        payload.set('orderId', orderId);
+        fetch('http://localhost/admin/order/update/status-order', {
+            method: 'post',
+            body: payload,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    MessageBox('cập nhật không thành công', 'thông báo');
                 }
-            }
-            const formatPrice = (price) => {
-                return (price * 1000).toLocaleString('it-IT', {
+            });
+    });
+    const getInfoOrder = () => {
+        const orderId = JSON.parse(localStorage.getItem('orderId'));
+        const payload = new URLSearchParams();
+        payload.set('orderId', orderId);
+        fetch('http://localhost/admin/getOrderCustomer', {
+            method: 'post',
+            body: payload,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                const customer = data.data.customer;
+                customer_name.innerHTML = customer.name;
+                customer_address.innerHTML = customer.address;
+                customer_email.innerHTML = customer.email;
+                customer_phone.innerHTML = customer.phone;
+                const order = data.data.order;
+                if (+order.status_payment === 1) {
+                    document
+                        .getElementById('delete-order-sl')
+                        .classList.add('hidden');
+                }
+                order_date.innerHTML = order.order_date;
+                order_quantity.innerHTML = order.totail_product;
+                order_status_payment.innerHTML = order.message_status_payment;
+                order_total_price.innerHTML = (
+                    order.totail_price * 1000
+                ).toLocaleString('it-IT', {
                     style: 'currency',
                     currency: 'VND',
                 });
-            };
-            const valueTable = html`
-                ${orderDetail.map((product, index) => {
-                    return `
+                const orderDetail = data.data.orderDetail;
+
+                if (order.message_status === 'đã giao hàng') {
+                    button_delete.classList.add('button-none');
+                    button_update.classList.add('button-none');
+                    status_order.classList.add('pointer-none');
+                }
+                if (order.message_status === 'đơn hàng bị hủy') {
+                    button_delete.classList.add('button-none');
+                    button_update.classList.add('button-none');
+                    status_order.classList.add('pointer-none');
+                }
+                for (let i, j = 0; (i = status_order.options[j]); j++) {
+                    if (i.value === order.message_status) {
+                        status_order.selectedIndex = j;
+
+                        break;
+                    }
+                }
+                const formatPrice = (price) => {
+                    return (price * 1000).toLocaleString('it-IT', {
+                        style: 'currency',
+                        currency: 'VND',
+                    });
+                };
+                const valueTable = html`
+                    ${orderDetail.map((product, index) => {
+                        return `
                  <tr>
                         <td>${++index}</td>
                         <td class="pcs">
@@ -134,9 +154,10 @@ const getInfoOrder = () => {
 
                     </tr>
                 `;
-                })}
-            `;
-            table_order_detail.innerHTML = valueTable;
-        });
-};
-getInfoOrder();
+                    })}
+                `;
+                table_order_detail.innerHTML = valueTable;
+            });
+    };
+    getInfoOrder();
+}

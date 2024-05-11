@@ -49,6 +49,36 @@
                                 </thead>
                                 <tbody>
                                     <tr class="addRole">
+                                        <td class="nameRole" data-name="phần Quyền">phần Quyền</td>
+                                        <td class="view">
+                                            <input type="checkbox" data-name="view">
+                                        </td>
+                                        <td class="ac-update">
+                                            <input type="checkbox" data-name="action_update">
+                                        </td>
+                                        <td class="ac-delete">
+                                            <input type="checkbox" data-name="action_delete">
+                                        </td>
+                                        <td class="ac-add">
+                                            <input type="checkbox" data-name="action_add">
+                                        </td>
+                                    </tr>
+                                    <tr class="addRole">
+                                        <td class="nameRole" data-name="thống kê">thống kê</td>
+                                        <td class="view">
+                                            <input type="checkbox" data-name="view">
+                                        </td>
+                                        <td class="ac-update">
+                                            <input type="checkbox" data-name="action_update">
+                                        </td>
+                                        <td class="ac-delete">
+                                            <input type="checkbox" data-name="action_delete">
+                                        </td>
+                                        <td class="ac-add">
+                                            <input type="checkbox" data-name="action_add">
+                                        </td>
+                                    </tr>
+                                    <tr class="addRole">
                                         <td class="nameRole" data-name="quản lý đơn hàng">quản lý đơn hàng</td>
                                         <td class="view">
                                             <input type="checkbox" data-name="view">

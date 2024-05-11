@@ -9,8 +9,8 @@ function render(idRoot, html) {
     idRoot.innerHTML = html;
 }
 const MessageBox = (
-    title = '',
     message = '',
+    title = '',
     type = 'success',
     duration = 3000
 ) => {

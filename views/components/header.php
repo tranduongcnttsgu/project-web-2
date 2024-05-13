@@ -65,7 +65,7 @@
             <form action="" class="header-middle-form-search" id="header-submit-search-product">
                 <input type="text" placeholder="Tên sản phẩm" class="form-search-box" name="searchKey" id="header-searchProduct-input" />
 
-                <button class="form-button-search">search</button>
+                <button class="form-button-search">Search</button>
             </form>
             <div class="header-middle-nav">
                 <div class="header-middle-action-wrapper">
@@ -88,7 +88,7 @@
                         </div>
                         <div class="bag-product-infor" id="icon-cart-header">
                             <div>
-                                sản phẩm:<span id="totail-product" style="color: red; font-weight: 600" ;>0</span>
+                                Sản phẩm:<span id="totail-product" style="color: red; font-weight: 600" ;>0</span>
                             </div>
                             <div>số tiền:0đ</div>
                         </div>
@@ -123,7 +123,7 @@
                             </button>
                         </div>
                         <div class="header-button-change-page">
-                            <a href="#">
+                            <a href="http://localhost/product">
                                 <i class="fa-solid fa-shop"></i>
                                 <span>go shop</span>
                             </a>
@@ -151,22 +151,22 @@
                         <nav>
                             <ul class="header-bottom-content phone">
                                 <li class="header-bottom-item phone">
-                                    <a href="http://localhost"> trang chủ</a>
+                                    <a href="http://localhost"> Trang chủ</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="http://localhost/products">sản phẩm</a>
+                                    <a href="http://localhost/product">Sản phẩm</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="#">liên hệ</a>
+                                    <a href="#">Liên hệ</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="#">thể loại</a>
+                                    <a href="#">Thể loại</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="#">giảm giá</a>
+                                    <a href="#">Giảm giá</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="#"> blog</a>
+                                    <a href="#"> Blog</a>
                                 </li>
                             </ul>
                         </nav>
@@ -177,22 +177,22 @@
         <div class="header-bottom">
             <ul class="header-bottom-content">
                 <li class="header-bottom-item ">
-                    <a href="http://localhost"> trang chủ</a>
+                    <a href="http://localhost"> Trang chủ</a>
                 </li>
                 <li class="header-bottom-item ">
-                    <a href="http://localhost/product">sản phẩm</a>
+                    <a href="http://localhost/product">Sản phẩm</a>
                 </li>
                 <li class="header-bottom-item ">
-                    <a href="#">liên hệ</a>
+                    <a href="#">Liên hệ</a>
                 </li>
                 <li class="header-bottom-item ">
-                    <a href="#">thể loại</a>
+                    <a href="#">Thể loại</a>
                 </li>
                 <li class="header-bottom-item ">
-                    <a href="#">giảm giá</a>
+                    <a href="#">Giảm giá</a>
                 </li>
                 <li class="header-bottom-item ">
-                    <a href="#"> blog</a>
+                    <a href="#"> Blog</a>
                 </li>
             </ul>
         </div>

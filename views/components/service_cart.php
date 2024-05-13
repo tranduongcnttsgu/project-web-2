@@ -59,6 +59,16 @@
             width: 100%;
         }
     }
+
+    @media only screen and (max-width: 720px) {
+
+
+        .content-service-wrap .content-service {
+            max-width: none;
+            width: 100%;
+            height: auto;
+        }
+    }
 </style>
 <section class="content-service-wrap">
     <div class="content-service">

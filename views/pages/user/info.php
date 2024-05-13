@@ -16,7 +16,7 @@
                     <span><i class="bx bx-analyse"></i>Đơn hàng</span>
                 </li>
                 <li titles="mes" key="2">
-                    <span><i class="bx bx-group"></i>sản phẩm đã mua</span>
+                    <span><i class="bx bx-group"></i>Sản phẩm đã mua</span>
                 </li>
 
 
@@ -25,7 +25,7 @@
                 <li onclick="dispatch('user/logout',1)" class="logout-btn">
                     <span class="logout">
                         <i class="bx bx-log-out-circle"></i>
-                        đăng xuất
+                        Đăng xuất
                     </span>
                 </li>
             </ul>
@@ -44,7 +44,7 @@
                         <form class="form" action="" autocomplete="off" id="form-info" method="post">
                             <div class="form-group-wrap">
                                 <div class="form-group">
-                                    <label for="fullName">họ tên</label>
+                                    <label for="fullName">Họ&Tên</label>
                                     <input type="text" name="fullName" id="fullName" placeholder="Họ và tên" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
@@ -56,18 +56,18 @@
                             </div>
                             <div class="form-group-wrap">
                                 <div class="form-group">
-                                    <label for="nickname">tên khác</label>
+                                    <label for="nickname">Tên khác</label>
                                     <input type="text" name="nickname" id="nickname" placeholder="tên khác" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="emailInfo">email</label>
+                                    <label for="emailInfo">Email</label>
                                     <input type="text" name="emailInfo" id="emailInfo" placeholder="Email" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="address">địa chỉ</label>
+                                <label for="address">Địa chỉ</label>
                                 <input type="text" name="address" id="address" placeholder="địa chí" class="form-input" />
                                 <span class="error-message"></span>
                             </div>
@@ -75,7 +75,7 @@
                             <div class="form-btn-wrap">
 
                                 <button type="submit" id="btnSubmit" class="form-btn form-btn--submit">
-                                    cập nhật
+                                    Cập nhật
                                 </button>
                             </div>
 

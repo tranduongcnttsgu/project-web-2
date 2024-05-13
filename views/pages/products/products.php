@@ -1,6 +1,7 @@
 <style>
     .main-product {
-        width: 1200px;
+        max-width: 1200px;
+        width: 100%;
         display: flex;
         margin: 0 auto;
         margin-top: 10px;
@@ -18,6 +19,28 @@
 
     .container-right {
         width: 100%;
+    }
+
+    @media screen and (max-width:1020px) {
+        .container-right {
+            width: max-content;
+        }
+
+        .pagination-wrap {
+            width: 100%;
+        }
+
+        h2 {
+            font-size: clamp(0.625rem, 0.4948rem + 0.6944vw, 0.9375rem);
+        }
+    }
+
+    @media screen and (max-width:720px) {
+        .conaienr-left {
+            max-width: 200px;
+            width: 100%;
+            min-width: 150px;
+        }
     }
 </style>
 <main class="main-product">

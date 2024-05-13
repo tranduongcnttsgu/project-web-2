@@ -85,3 +85,27 @@
     box-shadow: var(--primary-boxshadow);
     overflow: hidden;
 }
+@media screen and (max-width: 1020px) {
+    .container-banner {
+        height: auto;
+    }
+    .banner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: fit-content;
+    }
+    .banner-right {
+        width: 100%;
+        padding: 0 20px;
+        height: auto;
+    }
+    .banner-left {
+        display: none;
+    }
+}
+@media screen and (max-width: 720px) {
+    .banner-right {
+        padding: 0 5px;
+    }
+}

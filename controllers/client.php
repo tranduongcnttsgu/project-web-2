@@ -67,7 +67,7 @@ class client extends Controller
         $params = [
             "styled" => ["payment"],
             "script" => ["validation", "user"],
-            "titleButton" => "go shop",
+            "titleButton" => "Go shop",
             "buttonLink" => "http://localhost/product"
         ];
         return $this->render("payment", $params);
@@ -75,7 +75,7 @@ class client extends Controller
     public function account()
     {
         $params  = [
-            "titleButton" => "go home",
+            "titleButton" => "Go home",
             "buttonLink" => "http://localhost",
             "script" => ["validation", "login"]
         ];
@@ -95,7 +95,7 @@ class client extends Controller
     {
         $params  = [
             "script" => ['validation', 'register'],
-            "titleButton" => "go home",
+            "titleButton" => "Go home",
             "buttonLink" => "http://localhost"
         ];
         return $this->render("register", $params);
@@ -163,7 +163,7 @@ class client extends Controller
         $params = [
             "styled" => ["UserNav"],
             "script" => ["validation", "user"],
-            "titleButton" => "go home",
+            "titleButton" => "Go home",
             "buttonLink" => "http://localhost"
         ];
         $content = $this->getContentLayout('user/info', "");
@@ -174,7 +174,7 @@ class client extends Controller
         $params = [
             "styled" => ["UserNav"],
             "script" => ["validation", "user"],
-            "titleButton" => "go home",
+            "titleButton" => "Go home",
             "buttonLink" => "http://localhost"
         ];
         $content = $this->getContentLayout('user/order', "");
@@ -185,7 +185,7 @@ class client extends Controller
         $params = [
             "styled" => ["UserNav"],
             "script" => ["validation", "user"],
-            "titleButton" => "go home",
+            "titleButton" => "Go home",
             "buttonLink" => "http://localhost"
         ];
         $content = $this->getContentLayout('user/purchased', "");

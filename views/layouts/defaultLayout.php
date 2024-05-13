@@ -45,6 +45,7 @@
             delay: 2500,
             disableOnInteraction: false,
         },
+
         loop: true,
         pagination: {
             el: ".swiper-pagination",
@@ -62,6 +63,36 @@
         autoplay: {
             delay: 7500,
             disableOnInteraction: false,
+        },
+        breakpoints: {
+            // when window width is >= 320px
+            200: {
+                slidesPerView: 2,
+
+            },
+            320: {
+                slidesPerView: 2,
+
+            },
+            // when window width is >= 480px
+            480: {
+                slidesPerView: 2,
+
+            },
+            // when window width is >= 640px
+            640: {
+                slidesPerView: 2,
+
+            },
+
+            820: {
+                slidesPerView: 3,
+
+            },
+            1024: {
+                slidesPerView: 4,
+
+            }
         },
         loop: true,
         allowTouchMove: false,

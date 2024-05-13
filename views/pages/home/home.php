@@ -174,6 +174,47 @@ require_once __DIR__ . "/../../components/banner.php";
         flex-direction: column;
         align-items: center;
     }
+
+    @media screen and (max-width:1020px) {
+        .promotion-item {
+            width: calc(100% /2);
+            height: auto;
+        }
+
+        .c-u__des {
+            width: 100%;
+            text-wrap: wrap;
+            word-wrap: break-word;
+
+        }
+
+        .payment {
+            display: none;
+        }
+
+    }
+
+    @media screen and (max-width:720px) {
+        .c-u__card-wrapper {
+            width: 100%;
+            overflow: hidden;
+            overflow-x: scroll;
+        }
+
+        .payment {
+            max-width: none;
+            width: 100%;
+            overflow: hidden;
+
+        }
+
+        .payment img {
+
+            padding: 0 5px;
+            object-fit: cover;
+            width: auto;
+        }
+    }
 </style>
 <main>
     <?php

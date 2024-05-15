@@ -208,6 +208,16 @@ Validator.minLength = function (selector, min, message) {
         },
     };
 };
+Validator.maxLength = function (selector, max, message) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value.length <= max
+                ? undefined
+                : message || `Vui lòng nhập tối đa ${max} kí tự`;
+        },
+    };
+};
 
 Validator.isConfirmed = function (selector, getConfirmValue, message) {
     return {

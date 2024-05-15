@@ -6,7 +6,7 @@
 
     <section class="container-right">
         <div class="container-right-logo">
-            <img src="http://localhost/assets/img/logo.png" alt="logo" />
+            <img src="http://localhost/assets/img/logo.png" alt="logo" style="height:fit-content ;" />
             <span>mua hàng trực tuyến an toàn</span>
         </div>
 

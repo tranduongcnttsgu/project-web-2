@@ -494,4 +494,14 @@ class ProductModel extends Model
         }
         return true;
     }
+    public function adminMangerOrderSordByDate($date_start, $data_end)
+    {
+        $data = [];
+        $orders = $this->findAll("orders", ["order_date between ? AND ?", "status=?"], [$date_start, $data_end, 2], "update_at  DESC");
+        foreach ($orders as $key => $value) {
+            $user = $this->get("users", ["user_id=?"], [$value["customer_id"]]);
+            array_push($data, ["order" => $value, "user" => $user]);
+        }
+        return $data;
+    }
 }

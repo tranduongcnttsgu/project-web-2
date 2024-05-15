@@ -277,7 +277,7 @@ class UserModel extends Model
             return false;
         }
 
-        $newUser = $this->insert("users", "user_id,name,password,email", [$user->getUser_id(), $user->getName(), $user->getPassword(), $user->getEmail()]);
+        $newUser = $this->insert("users", "user_id,name,password,email,status", [$user->getUser_id(), $user->getName(), $user->getPassword(), $user->getEmail(), $user->getStatus()]);
         $newRole = $this->insert("users_permission", "user_permission_id,user_id,action_group", [$this->autoId(), $user->getUser_id(), 0]);
     }
 }

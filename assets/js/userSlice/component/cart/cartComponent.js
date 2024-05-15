@@ -17,7 +17,7 @@ const cartComponent = ({ data, checked, order }) => {
     const checkOrder = (id) => {
         statusChecked =
             order.filter((product) => {
-                return product.product_id === id;
+                return +product.product_id === +id;
             }).length > 0;
         return statusChecked;
     };

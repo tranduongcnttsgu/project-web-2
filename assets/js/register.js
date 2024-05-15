@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             .then((data) => {
                                 if (data.success) {
                                     return (window.location.href =
-                                        'http://localhost');
+                                        'http://localhost/account/user');
                                 }
                             });
                     } else {

@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // check validation
     Validator({
         form: '#form-login',
         formGroupSelector: '.input-box',

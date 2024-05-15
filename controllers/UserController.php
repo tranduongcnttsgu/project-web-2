@@ -64,6 +64,10 @@ class UserController extends Controller
     }
     public function updateInfo()
     {
+        $checkLogin = $this->getHeader("userLogin") ?? false;
+        if (!$checkLogin) {
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+        }
         $payload = $this->getPayload();
         $userId = $this->cookieGet("userLogin");
         $info = [$payload["fullName"], $payload["address"], $payload["emailInfo"], $payload["nickname"], $payload["phone"]];
@@ -73,12 +77,20 @@ class UserController extends Controller
     }
     public function userOrder()
     {
+        $checkLogin = $this->getHeader("userLogin") ?? false;
+        if (!$checkLogin) {
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+        }
         $userId = $this->cookieGet("userLogin");
         $data =  $this->userModel->userOrder($userId);
         return $this->responseJSON("đặt hàng thành công", true, 200, $data);
     }
     public function getUserOrder()
     {
+        $checkLogin = $this->getHeader("userLogin") ?? false;
+        if (!$checkLogin) {
+            return $this->responseJSON("Người dùng chưa đăng nhập", false, 404);
+        }
         $userId  = $this->cookieGet("userLogin");
         $data = $this->userModel->getUserOrder($userId);
         return $this->responseJSON("success", true, 200, $data);
@@ -173,9 +185,10 @@ class UserController extends Controller
         $user->setEmail($data["email"]);
         $user->setName($data["name"]);
         $user->setPassword($data["password"]);
+        $user->setStatus(1);
         $addUser = $this->userModel->register($user);
         if ($addUser === false) {
-            return $this->responseJSON("fail", false, 404, $data);
+            return $this->responseJSON("email đã tồn tại ", false, 404, $data);
         }
         return $this->responseJSON("success", true, 200, $data);
     }

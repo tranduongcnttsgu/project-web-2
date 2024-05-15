@@ -35,7 +35,8 @@
 
 .container-left .product-image img {
     width: 100%;
-    height: 400px;
+    height: auto;
+    padding: 5px;
     object-fit: cover;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     transition: all 0.4s ease;
@@ -209,7 +210,8 @@
 
 .container-right-logo img {
     width: 100%;
-    object-fit: cover;
+
+    object-fit: contain;
 }
 
 .container-right-logo span {

@@ -4,15 +4,7 @@ if (buttonBuyNow) {
     console.log(buttonBuyNow);
     buttonBuyNow.addEventListener('click', () => {
         const productId = JSON.parse(localStorage.getItem('showProductId'));
-        fetch('http://localhost/account/user-info-login')
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success) {
-                    dispatch('user/productDetal/buy', productId);
-                } else {
-                    window.location.href = 'http://localhost/account';
-                }
-            });
+        dispatch('user/productDetal/buy', productId);
     });
 }
 
@@ -95,7 +87,6 @@ if (button_payment_order.length !== 0) {
         });
     });
 }
-
 const formInfo = document.getElementById('form-info');
 if (formInfo) {
     let user = {};
@@ -146,7 +137,6 @@ if (formInfo) {
             Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại'),
             Validator.isNumber('#phone'),
             Validator.minLength('#phone', 10),
-            Validator.maxLength('#phone', 11),
         ],
         onSubmit: function (data) {
             const payload = new URLSearchParams(new FormData(formInfo));
@@ -156,13 +146,7 @@ if (formInfo) {
                 body: payload,
             })
                 .then((res) => res.json())
-                .then((data) => {
-                    if (data.success) {
-                        window.location.reload();
-                    } else {
-                        MessageBox(data.message, 'Thông báo', 'warning');
-                    }
-                });
+                .then((data) => window.location.reload());
         },
     });
 }

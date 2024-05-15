@@ -21,13 +21,46 @@
                 <div class="form-group-wrap">
 
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">tác giả</label>
+                        <div class="lable-wrapper">
+                            <label class="form-lable-product" for="">tác giả</label>
+                            <select name="" id="select-author">
+                                <option value="">thêm mới</option>
+                                <?php
+
+                                use controllers\ProductController;
+
+                                $pc = new ProductController();
+                                $authors = $pc->getAuthor();
+                                foreach ($authors as $key => $value) :
+                                ?>
+                                    <option value="<?php echo $value->getName(); ?>"><?php echo $value->getName(); ?></option>
+                                <?php
+                                endforeach;
+                                ?>
+                            </select>
+                        </div>
                         <input type="text" name="author" id="author" placeholder="tác giả" class="form-input" />
                         <span class="error-message"></span>
                     </div>
 
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">thể loại</label>
+                        <div class="lable-wrapper">
+                            <label class="form-lable-product" for="">thể loại</label>
+                            <select name="" id="select-category">
+                                <option value="">thêm mới</option>
+                                <?php
+
+
+                                $pc = new ProductController();
+                                $authors = $pc->getCategory();
+                                foreach ($authors as $key => $value) :
+                                ?>
+                                    <option value="<?php echo $value->getName(); ?>"><?php echo $value->getName(); ?></option>
+                                <?php
+                                endforeach;
+                                ?>
+                            </select>
+                        </div>
                         <input type="text" name="category" id="category" placeholder="thể loại" class="form-input" />
                         <span class="error-message"></span>
                     </div>

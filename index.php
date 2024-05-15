@@ -38,6 +38,8 @@ $app->router->get("/admin/manager/orders", [client::class, "adminManagerOrdersVi
 $app->router->get("/admin/product/detail", [client::class, "adminManagerProductShowDetail"]);
 $app->router->get("/admin/product/addNew", [client::class, "adminManagerProductAddNewProduct"]);
 $app->router->get("/admin/decentralize", [client::class, "adminShowViewDecentralize"]);
+
+$app->router->get("/admin/managerCustomer/showInfoUser", [client::class, "adminManagerCustomerShowInfo"]);
 //   get data
 
 // get post product
@@ -89,4 +91,6 @@ $app->router->post('/admin/addAccount', [UserController::class, "adminAddnewAcco
 $app->router->post("/admin/deleteAccount", [UserController::class, "adminDeleteAccount"]);
 $app->router->post('/admin/edit/getAccount', [UserController::class, "adminEditGetAccount"]);
 $app->router->post("/admin/editAccount", [UserController::class, "adminEditAccount"]);
+$app->router->post("/admin/managerCustomer/getInfoCustomer", [UserController::class, "adminManagerCustomerGetInfoCus"]);
+$app->router->post("/admin/managerCustomer/UpdateStatus", [UserController::class, "adminManagerCustomerUpdate"]);
 $app->run();

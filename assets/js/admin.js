@@ -563,14 +563,17 @@ const handleButtonShowOrderDetail = (ele) => {
     localStorage.setItem('orderId', JSON.stringify(orderId.trim()));
     window.location.href = 'http://localhost/admin/order/detail';
 };
+
 const buttonActionOrder = document.querySelectorAll('.button-action-order');
-buttonActionOrder.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        const orderId = e.target.getAttribute('data-order');
-        localStorage.setItem('orderId', JSON.stringify(orderId.trim()));
-        window.location.href = 'http://localhost/admin/order/detail';
+if (buttonActionOrder) {
+    buttonActionOrder.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const orderId = e.target.getAttribute('data-order');
+            localStorage.setItem('orderId', JSON.stringify(orderId));
+            window.location.href = 'http://localhost/admin/order/detail';
+        });
     });
-});
+}
 //manager product action ========================================================
 const buttonActionProduct = document.querySelectorAll(
     '#button-action-mnProduct'
@@ -812,4 +815,21 @@ if (paginationTitle) {
         }),
         500
     );
+}
+// ================manager user page =======================
+const buttonShowInforCustomer = document.querySelectorAll(
+    '#button-action-show-user'
+);
+if (buttonShowInforCustomer) {
+    buttonShowInforCustomer.forEach((ele) => {
+        ele.addEventListener('click', (e) => {
+            const userId = e.target.getAttribute('data-user');
+            localStorage.setItem(
+                'manager-user-show-userId',
+                JSON.stringify(userId)
+            );
+            window.location.href =
+                'http://localhost/admin/managerCustomer/showInfoUser';
+        });
+    });
 }

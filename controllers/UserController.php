@@ -29,6 +29,9 @@ class UserController extends Controller
         if (sizeof($data) === 0 || !$data) {
             return  json_encode(["message" => "user not exist!", "success" => false, "code" => 404]);
         }
+        if (strcmp($data[0]["status"], "0") === 0) {
+            return  json_encode(["message" => "block!", "success" => false, "code" => 403]);
+        }
         $password =  $payload["password"];
         if (strcasecmp($password, $data[0]["password"]) === 0) {
             $this->cookiePush("userLogin", $data[0]["user_id"], 7, "/");
@@ -178,5 +181,34 @@ class UserController extends Controller
             return $this->responseJSON("fail", false, 404, $data);
         }
         return $this->responseJSON("success", true, 200, $data);
+    }
+    public function adminGetListCustomer()
+    {
+        $data = $this->userModel->adminGetListCustomer();
+        if ($data === false) {
+            return [];
+        }
+        return $data;
+    }
+    public function adminManagerCustomerGetInfoCus()
+    {
+        $payload = $this->getPayload();
+        $userId = $payload["userId"];
+        $data  = $this->userModel->adminManagerCustomerGetInfoCus($userId);
+        if ($data === false) {
+            $this->responseJSON("fald ", false, 404, $payload);
+        }
+        return  $this->responseJSON("success ", true, 200, $data);
+    }
+    public function adminManagerCustomerUpdate()
+    {
+        $payload = $this->getPayload();
+        $userId = $payload["userId"];
+        $status = $payload["status"];
+        $data = $this->userModel->adminManagerCustomerUpdate($userId, $status);
+        if ($data === false) {
+            $this->responseJSON("fald ", false, 404, $payload);
+        }
+        return  $this->responseJSON("success ", true, 200, $payload);
     }
 }

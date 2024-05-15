@@ -29,6 +29,14 @@ const checkPermissions = async () => {
     console.log(permission);
 };
 checkPermissions();
+const optionSelectAuthor = document.getElementById('select-author');
+optionSelectAuthor?.addEventListener('change', (e) => {
+    document.getElementById('author').value = e.target.value;
+});
+const optionSelectCategory = document.getElementById('select-category');
+optionSelectCategory?.addEventListener('change', (e) => {
+    document.getElementById('category').value = e.target.value;
+});
 const showDetailProduct = document.getElementById('show-product-detail-page');
 const getInfoOrder = () => {
     const name = document.getElementById('name');
@@ -65,8 +73,9 @@ const getInfoOrder = () => {
                 'http://localhost/assets/Db_img/' + product.MainImage;
             img_product.setAttribute('data-img', product.MainImage);
             author.value = authorP.name;
-
+            document.getElementById('select-author').value = authorP.name;
             category.value = categoryP.name;
+            document.getElementById('select-category').value = categoryP.name;
         });
 };
 if (showDetailProduct) {

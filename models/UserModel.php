@@ -280,4 +280,95 @@ class UserModel extends Model
         $newUser = $this->insert("users", "user_id,name,password,email", [$user->getUser_id(), $user->getName(), $user->getPassword(), $user->getEmail()]);
         $newRole = $this->insert("users_permission", "user_permission_id,user_id,action_group", [$this->autoId(), $user->getUser_id(), 0]);
     }
+    public function adminGetListCustomer()
+    {
+        $customer = $this->findAll("users_permission", ["action_group= ?"], [0]);
+        $listUser = [];
+        foreach ($customer as $key => $value) {
+            $listUser[] = $this->get("users", ["user_id=?"], [$value["user_id"]]);
+        }
+
+        $result = [];
+        try {
+
+            $conn = $this->db->connect();
+
+            foreach ($listUser as $key => $value) {
+                $sql = "SELECT DISTINCT COUNT(*) AS total_orders FROM orders WHERE customer_id = ? AND status_stransport=2";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(1, $value["user_id"]);
+
+
+                $stmt->execute();
+
+
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+                $result[] = ["user" => $value, "InfoOrder" => $data["total_orders"]];
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+        return $result;
+    }
+    public function adminManagerCustomerGetInfoCus($userId)
+    {
+        $user = $this->get("users", ["user_id=?"], [$userId]);
+        $inforOrder = false;
+        $listProduct = false;
+        try {
+
+            $conn = $this->db->connect();
+
+
+            $sql = "SELECT
+            COUNT(*) as total_order,
+            SUM(totail_price) AS total_price 
+            , SUM(totail_product) AS total_product 
+        FROM orders 
+        WHERE customer_id = ? AND status = 2 And status_stransport=2;";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $userId);
+
+
+            $stmt->execute();
+
+
+            $inforOrder = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+        try {
+
+            $conn = $this->db->connect();
+
+
+            $sql = "SELECT
+             *
+        FROM orders,orders_detail 
+        WHERE orders.customer_id = ? AND orders.status = 2 And orders.status_stransport=2 AND
+          orders_detail.order_id = orders.order_id
+        ";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $userId);
+
+
+            $stmt->execute();
+
+
+            $listProduct = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+        return ["user" => $user, "infoOrder" => $inforOrder, "listPoduct" => $listProduct];
+    }
+    public  function adminManagerCustomerUpdate($userId, $status)
+    {
+        $update = $this->update("users", ["status"], [$status], ["user_id=?"], [$userId]);
+        if ($update === false) {
+            return false;
+        }
+        return true;
+    }
 }

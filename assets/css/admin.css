@@ -1271,6 +1271,10 @@ table td {
     font-size: 14px;
     container-type: inline-size;
 }
+.lable-wrapper {
+    display: flex;
+    column-gap: 10px;
+}
 
 .phone-from-search .phone-input-box {
     width: 100%;

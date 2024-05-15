@@ -191,6 +191,15 @@ class client extends Controller
         $content = $this->getContentLayout('user/purchased', "");
         return $this->renderLayout($content, $params);
     }
+    public function adminManagerCustomerShowInfo()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "script" => ["admin", "adminCustomer"]
+        ];
+        $content = $this->getContentLayout("admin/muShowInfoCus", "show");
+        return $this->renderLayout($content, $params);
+    }
     public function adminAddAcount()
     {
         $this->setLayout("admin");

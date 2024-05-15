@@ -62,6 +62,22 @@ body {
     font-size: 25px;
     color: black;
 }
+.tick-green {
+    border: none;
+    display: inline-block;
+    background-color: #47d864;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+.tick-red {
+    border: none;
+    display: inline-block;
+    background-color: #fc0000;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
 /* message box css  */
 #messageBox {
     position: fixed;

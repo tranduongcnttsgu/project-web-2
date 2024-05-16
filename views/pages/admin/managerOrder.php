@@ -30,15 +30,6 @@ if (isset($show)) {
                 <li class="manager-order-button" data-sort="5">
                     đơn hàng bị hủy
                 </li>
-                <li class="filter-sort-date" data-sort="6">
-                    <input type="date" name="" id="date-start" value="null">
-                    <span> đến</span>
-                    <input type="date" name="" id="date-end" value="null">
-                    <span style="
-                      padding: 0 5px;
-                     " id="filter-by-date"><i class="fa-solid fa-magnifying-glass"></i></span>
-                </li>
-
             </ul>
         </div>
         <div class="fui-table-ui-basic-linh table-wrap">

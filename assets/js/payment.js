@@ -64,7 +64,7 @@ Validator({
 
         Validator.isRequired('#fullName', 'Vui lòng nhập tên đầy đủ của bạn'),
         Validator.minLength('#fullName', 2),
-        Validator.isRequired('#address', 'Vùi lòng địa chỉ của bạn'),
+        Validator.isRequired('#address', 'Vùi lòng nhập tài khoản của bạn'),
         Validator.minLength('#address', 12),
         Validator.isRequired('#emailInfo', 'Vui lòng nhập email của bạn'),
         Validator.isEmail('#emailInfo'),

@@ -1234,13 +1234,6 @@ table td {
     background-color: #ffffff;
     cursor: pointer;
 }
-.filter-sort-date {
-    padding: 5px;
-    border-radius: 5px;
-    border: 0.5px solid black;
-    background-color: #ffffff;
-    cursor: pointer;
-}
 .manager-order-sort {
     display: flex;
     column-gap: 10px;

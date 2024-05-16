@@ -34,12 +34,12 @@
                 <div class="transport-content-bottom" id="transport-info">
                     <div class="transport-infor">
                         <h2 class=" transport-title transport-title-second ">
-                            Tên khách hàng:Chưa có thông tin
+                            user name
                         </h2>
-                        <span class="transport-phone-number">SĐT:chưa có thông tin</span>
+                        <span class="transport-phone-number">942834942</span>
                     </div>
                     <div class="transport-address">
-                        Địa chỉ:chưa có thông tin
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, non repellendus! Voluptas rem cupiditate eius a earum, ullam perspiciatis pariatur
                     </div>
                 </div>
             </div>

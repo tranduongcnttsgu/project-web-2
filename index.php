@@ -73,8 +73,6 @@ $app->router->post('/admin/manager-product/update-product', [ProductController::
 $app->router->post('/admin/manager-product/add-product', [ProductController::class, "adminManagerProductAddNew"]);
 $app->router->post("/admin/manager-order/sort-order", [ProductController::class, "adminManagerOrderSortOrder"]);
 $app->router->post('/admin/manager-product/delete', [ProductController::class, "adminManagerProductDelete"]);
-$app->router->post("/admin/mamagerOrder/sortByDate", [ProductController
-::class, "adminMangerOrderSordByDate"]);
 // rou
 
 //routerbb  admin

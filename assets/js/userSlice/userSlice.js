@@ -475,7 +475,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'Bạn muốn đăng xuất',
+                    message: 'Bạn muốn đăng xuất?',
                     type: 'user/logout',
                     acceptType: 'user/logout',
                     payload: [3],

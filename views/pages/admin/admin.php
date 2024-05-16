@@ -13,8 +13,8 @@ if (sizeof($getcontent) === 0) {
                     align-items:center;
                   ">
             <h3 class="authenlication-title">
-                <span style="color: red;">lỗi!</span>
-                tài khoản chưa được cấp quyền truy cập
+                <span style="color: red;">Lỗi!</span>
+                Tài khoản chưa được cấp quyền truy cập
             </h3>
             <img src="http://localhost/assets/Db_img/error-authenlication.webp" alt="">
         </div>

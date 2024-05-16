@@ -11,7 +11,7 @@
                         <span class="error-message"></span>
                     </div>
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">giá</label>
+                        <label class="form-lable-product" for="">Giá</label>
                         <input type="text" name="price" id="price" placeholder="giá" class="form-input" />
                         <span class="error-message"></span>
                     </div>
@@ -22,9 +22,9 @@
 
                     <div class="form-group form-pc">
                         <div class="lable-wrapper">
-                            <label class="form-lable-product" for="">tác giả</label>
+                            <label class="form-lable-product" for="">Tác giả</label>
                             <select name="" id="select-author">
-                                <option value="">thêm mới</option>
+                                <option value="">Thêm mới</option>
                                 <?php
 
                                 use controllers\ProductController;
@@ -39,15 +39,15 @@
                                 ?>
                             </select>
                         </div>
-                        <input type="text" name="author" id="author" placeholder="tác giả" class="form-input" />
+                        <input type="text" name="author" id="author" placeholder="Tác giả" class="form-input" />
                         <span class="error-message"></span>
                     </div>
 
                     <div class="form-group form-pc">
                         <div class="lable-wrapper">
-                            <label class="form-lable-product" for="">thể loại</label>
+                            <label class="form-lable-product" for="">Thể loại</label>
                             <select name="" id="select-category">
-                                <option value="">thêm mới</option>
+                                <option value="">Thêm mới</option>
                                 <?php
 
 
@@ -62,33 +62,33 @@
                             </select>
                         </div>
 
-                        <input type="text" name="category" id="category" placeholder="thể loại" class="form-input" />
+                        <input type="text" name="category" id="category" placeholder="Thể loại" class="form-input" />
                         <span class="error-message"></span>
                     </div>
                 </div>
 
                 <div class="form-group-wrap">
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">số lượng</label>
-                        <input type="text" name="quantity" id="quantity" placeholder="số lượng" class="form-input" />
+                        <label class="form-lable-product" for="">Số lượng</label>
+                        <input type="text" name="quantity" id="quantity" placeholder="Số lượng" class="form-input" />
                         <span class="error-message"></span>
                     </div>
 
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">số sao</label>
+                        <label class="form-lable-product" for="">Số sao</label>
                         <input type="text" name="rating" id="rating" placeholder="" class="form-input" disabled />
                     </div>
                 </div>
 
                 <div class="form-group-wrap">
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">giá bán</label>
-                        <input type="text" name="promo_price" id="promo_price" placeholder="giá bán" class="form-input" />
+                        <label class="form-lable-product" for="">Giá bán</label>
+                        <input type="text" name="promo_price" id="promo_price" placeholder="Giá bán" class="form-input" />
                         <span class="error-message"></span>
                     </div>
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">gía nhập</label>
-                        <input type="text" name="import_price" id="import_price" placeholder="giá   nhập" class="form-input" />
+                        <label class="form-lable-product" for="">Giá nhập</label>
+                        <input type="text" name="import_price" id="import_price" placeholder="Giá nhập" class="form-input" />
                         <span class="error-message"></span>
                     </div>
                 </div>
@@ -108,10 +108,10 @@
             <div class="mn-input-img-product">
 
                 <input type="file" class="input-mnp-img" id="input-selector-img">
-                <button class="button-action-mn-product change" id="button-change-image">thay đổi hình ảnh</button>
+                <button class="button-action-mn-product change" id="button-change-image">Đổi hình ảnh</button>
             </div>
             <div class="mnp-button-save-product-wrapper">
-                <button class="button-action-mn-product  save " type="submit" id="button-form-edit-product-submit"><i class="fa-solid fa-floppy-disk"></i>lưu</button>
+                <button class="button-action-mn-product  save " type="submit" id="button-form-edit-product-submit"><i class="fa-solid fa-floppy-disk"></i>Lưu</button>
             </div>
 
         </div>

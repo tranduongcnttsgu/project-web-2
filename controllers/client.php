@@ -144,6 +144,15 @@ class client extends Controller
         $content = $this->getContentLayout("admin/managerProduct", "show");
         return $this->renderLayout($content, $params);
     }
+    public  function adminManagerImportProductsView()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "script" => ['validation', 'admin', 'adminProduct']
+        ];
+        $content = $this->getContentLayout("admin/managerImport", "show");
+        return $this->renderLayout($content, $params);
+    }
     public function adminManagerProductShowDetail()
     {
         $this->setLayout("admin");
@@ -234,6 +243,15 @@ class client extends Controller
             "script" => ['admin', 'validation', 'adminOrder']
         ];
         $content = $this->getContentLayout("admin/adminOrderDetail", "");
+        return $this->renderLayout($content, $params);
+    }
+    public function adminImportViewDetail()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "script" => ['admin', 'validation', 'adminOrder']
+        ];
+        $content = $this->getContentLayout("admin/adminImportDetail", "");
         return $this->renderLayout($content, $params);
     }
     public  function   adminManagerProductAddNewProduct()

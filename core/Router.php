@@ -29,7 +29,7 @@ class Router
 
             $this->response->setStatusCode(404);
             $params  = [
-                "titleButton" => "go home",
+                "titleButton" => "Go home",
                 "buttonLink" => "http://localhost",
                 "script" => ["validation", "login"]
             ];

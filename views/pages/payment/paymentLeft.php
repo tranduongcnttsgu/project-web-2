@@ -14,7 +14,7 @@
             </div>
             <div class="form-group-wrap">
                 <div class="form-group">
-                    <input type="text" name="nickname" id="nickname" placeholder="tên khác" class="form-input" />
+                    <input type="text" name="nickname" id="nickname" placeholder="Tên khác" class="form-input" />
                     <span class="error-message"></span>
                 </div>
                 <div class="form-group">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" name="address" id="address" placeholder="địa chí" class="form-input" />
+                <input type="text" name="address" id="address" placeholder="Địa chỉ" class="form-input" />
                 <span class="error-message"></span>
             </div>
             <div class="form-group">
@@ -33,7 +33,7 @@
             <div class="form-btn-wrap">
 
                 <button type="submit" id="btnSubmit" class="form-btn form-btn--submit">
-                    cập nhật
+                    Cập nhật
                 </button>
             </div>
 

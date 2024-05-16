@@ -16,7 +16,7 @@
                     <span><i class="bx bx-analyse"></i>Đơn hàng</span>
                 </li>
                 <li titles="mes" key="2" class="active">
-                    <span><i class="bx bx-group"></i>sản phẩm đã mua</span>
+                    <span><i class="bx bx-group"></i>Sản phẩm đã mua</span>
                 </li>
 
 
@@ -25,7 +25,7 @@
                 <li onclick="dispatch('user/logout',1)" class="logout-btn">
                     <span class="logout">
                         <i class="bx bx-log-out-circle"></i>
-                        đăng xuất
+                        Đăng xuất
                     </span>
                 </li>
             </ul>
@@ -46,7 +46,7 @@
             if ($orders === false) {
             ?>
                 <div class="no-product-wrapper">
-                    <h3 class="no-product-title">chưa có sản phẩm nào</h3>
+                    <h3 class="no-product-title">Chưa có sản phẩm nào</h3>
                     <img src="http://localhost/assets/Db_img/no-product.webp" alt="">
                 </div>
                 <?php } else {
@@ -87,8 +87,8 @@
                                         </div>
                                         <div class="product-option-bottom">
                                             <button class="product-option-button" onclick='dispatch("user/addProduct","<?php echo $product["product_id"] ?>")'>
-                                                <i class="fa-solid fa-cart-shopping"></i> thêm vào giỏ
-                                                hảng
+                                                <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ
+                                                hàng
                                             </button>
                                         </div>
                                     </div>

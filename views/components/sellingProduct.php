@@ -433,8 +433,7 @@
                                         </div>
                                         <div class="product-option-bottom">
                                             <button class="product-option-button">
-                                                <i class="fa-solid fa-cart-shopping"></i> thêm vào giỏ
-                                                hảng
+                                                <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng
                                             </button>
                                         </div>
                                     </div>

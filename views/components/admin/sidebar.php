@@ -79,7 +79,7 @@
                         }
                         ?>
                      ">
-                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>quản lý đơn hàng</span></li>
+                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Quản lý đơn hàng</span></li>
             </a>
             <a href="http://localhost/admin/manager/products" class="
                      <?php
@@ -88,7 +88,16 @@
                         }
                         ?>
                      ">
-                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>quản sản phẩm</span></li>
+                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Quản lý sản phẩm</span></li>
+            </a>
+            <a href="http://localhost/admin/manager/importproducts" class="
+                     <?php
+                        if ($navManagerProduct === false) {
+                            echo "hidden";
+                        }
+                        ?>
+                     ">
+                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Nhập hàng</span></li>
             </a>
             <a href="http://localhost/admin/manager/customer" class="
                      <?php
@@ -97,7 +106,7 @@
                         }
                         ?>
                      ">
-                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>quản lý khách hàng</span></li>
+                <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Quản lý khách hàng</span></li>
             </a>
 
             <a href="http://localhost/admin/decentralize" class="
@@ -107,7 +116,7 @@
                         }
                         ?>
                      ">
-                <li class=""><span><i class='bx bx-table icon '></i>phần quyền</span></li>
+                <li class=""><span><i class='bx bx-table icon '></i>Phân quyền</span></li>
             </a>
 
 

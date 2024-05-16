@@ -15,7 +15,7 @@
             </div>
             <div>
                 <button class="button-payment" id="button-payment">
-                    đặt hàng
+                    Đặt hàng
                 </button>
             </div>
         </div>

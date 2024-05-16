@@ -165,10 +165,10 @@
 
                     <div class="contant_box_404">
                         <h3 class="title">
-                            lỗi truy cập
+                            Lỗi truy cập
                         </h3>
 
-                        <p style="text-align: center;">trang bạn đang tìm kiếm không có sẵn!!</p>
+                        <p style="text-align: center;">Trang bạn đang tìm kiếm không có sẵn!!</p>
 
 
                         <div class="button-wrapper">

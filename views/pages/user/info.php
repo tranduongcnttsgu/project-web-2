@@ -44,12 +44,12 @@
                         <form class="form" action="" autocomplete="off" id="form-info" method="post">
                             <div class="form-group-wrap">
                                 <div class="form-group">
-                                    <label for="fullName">Họ&Tên</label>
+                                    <label for="fullName">Họ và tên</label>
                                     <input type="text" name="fullName" id="fullName" placeholder="Họ và tên" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">phone</label>
+                                    <label for="phone">Điện thoại</label>
                                     <input type="text" name="phone" id="phone" placeholder="Số điện thoại" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ</label>
-                                <input type="text" name="address" id="address" placeholder="địa chí" class="form-input" />
+                                <input type="text" name="address" id="address" placeholder="địa chỉ" class="form-input" />
                                 <span class="error-message"></span>
                             </div>
 

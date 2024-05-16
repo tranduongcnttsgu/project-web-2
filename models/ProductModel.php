@@ -316,6 +316,20 @@ class ProductModel extends Model
         }
         return $result;
     }
+    public function adminGetImports()
+    {
+        $imports =  $this->findAll("imports", ["status=?"], [1], "import_date DESC");
+        $result = [];
+        foreach ($imports as $key => $value) {
+            $supplier = $this->get("suppliers", ["supplier_id=?"], [$value["supplier_id"]]);
+            array_push(
+                $result,
+                ["import" => $value, "supplier" => $supplier]
+            );
+        }
+        return $result;
+    }
+
     public function adminGetInfoOrder($orderId)
     {
         $order = $this->get("orders", ["order_id=?"], [$orderId]);
@@ -323,10 +337,24 @@ class ProductModel extends Model
         $orderDetail = $this->findAll("orders_detail", ["order_id=?"], [$orderId]);
         return ["customer" => $customer, "order" => $order, "orderDetail" => $orderDetail];
     }
+    public function adminGetInfoImport($importId)
+    {
+        $import = $this->get("imports", ["import_id=?"], [$importId]);
+        $supplier = $this->get("users", ["user_id=?"], [$import["customer_id"]]);
+        $importDetail = $this->findAll("imports_detail", ["import_id=?"], [$importId]);
+        return ["customer" => $supplier, "order" => $import, "importDetail" => $importDetail];
+    }
     public function adminUpdateStatusOrder($orderId, $status, $status_transport)
     {
         $update = $this->update("orders", ["message_status", "status_stransport"], [$status, $status_transport], ["order_id=?"], [
             $orderId
+        ]);
+        return $update;
+    }
+    public function adminUpdateStatusImport($importId, $status, $status_transport)
+    {
+        $update = $this->update("imports", ["message_status", "status_stransport"], [$status, $status_transport], ["import_id=?"], [
+            $importId
         ]);
         return $update;
     }

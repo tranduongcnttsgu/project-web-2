@@ -81,7 +81,7 @@ if (button_payment_order.length !== 0) {
                     if (data.success) {
                         window.location.reload();
                     } else {
-                        MessageBox('cập nhật không thành công', 'thông báo');
+                        MessageBox('Cập nhật không thành công', 'thông báo');
                     }
                 });
         });
@@ -130,7 +130,7 @@ if (formInfo) {
                 'Vui lòng nhập tên đầy đủ của bạn'
             ),
             Validator.minLength('#fullName', 2),
-            Validator.isRequired('#address', 'Vùi lòng nhập tài khoản của bạn'),
+            Validator.isRequired('#address', 'Vui lòng nhập tài khoản của bạn'),
             Validator.minLength('#address', 12),
             Validator.isRequired('#emailInfo', 'Vui lòng nhập email của bạn'),
             Validator.isEmail('#emailInfo'),

@@ -574,6 +574,17 @@ if (buttonActionOrder) {
         });
     });
 }
+
+const buttonActionImport = document.querySelectorAll('.button-action-import');
+if (buttonActionImport) {
+    buttonActionImport.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const orderId = e.target.getAttribute('data-order');
+            localStorage.setItem('orderId', JSON.stringify(orderId));
+            window.location.href = 'http://localhost/admin/import/detail';
+        });
+    });
+}
 //manager product action ========================================================
 const buttonActionProduct = document.querySelectorAll(
     '#button-action-mnProduct'

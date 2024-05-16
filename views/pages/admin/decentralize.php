@@ -7,7 +7,7 @@
     ?>
 ">
         <div class="decentralize-title">
-            <h3 class="title-text">phần quyền tài khoản</h3>
+            <h3 class="title-text">Phân quyền tài khoản</h3>
             <a id="button-decentralize-add-accout" href="http://localhost/admin/addAccount">
                 <button type="button" class="button-action-1 add"><i class="fa-solid fa-user-plus"></i></button>
             </a>
@@ -19,10 +19,10 @@
                     <tr>
 
                         <th></th>
-                        <th>email</th>
-                        <th>số điện thoại</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
 
-                        <th>quyền</th>
+                        <th>Quyền</th>
                     </tr>
                 </thead>
                 <tbody id="rootTableAccount">
@@ -64,16 +64,16 @@
                             <td colspan="5">
                                 <div class="fold-content-wrap">
                                     <div class="fold-content">
-                                        <h3>bảng quyền chi tiết</h3>
+                                        <h3>Bảng quyền chi tiết</h3>
 
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>tên nhóm quyền</th>
-                                                    <th>xem</th>
-                                                    <th>sữa</th>
-                                                    <th>xóa</th>
-                                                    <th>thêm</th>
+                                                    <th>Tên nhóm quyền</th>
+                                                    <th>Xem</th>
+                                                    <th>Sửa</th>
+                                                    <th>Xóa</th>
+                                                    <th>Thêm</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

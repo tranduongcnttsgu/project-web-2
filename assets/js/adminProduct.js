@@ -50,7 +50,14 @@ const getInfoOrder = () => {
     const img_product = document.getElementById('img-product');
     const productId = JSON.parse(localStorage.getItem('ad-manager-productId'));
     const formatPrice = (price) => {
-        return (price * 1000).toLocaleString();
+        const multipliedPrice = (price * 1000).toString();
+
+        const formattedPrice = multipliedPrice.replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            ','
+        );
+
+        return formattedPrice;
     };
     const payload = new URLSearchParams();
     payload.set('productId', productId);
@@ -85,21 +92,21 @@ if (showDetailProduct) {
         formGroupSelector: '.form-group',
         errorSelector: '.error-message',
         rules: [
-            Validator.isRequired('#name', 'Vui lòng nhập tên sản  phẩm'),
+            Validator.isRequired('#name', 'Vui lòng nhập tên sản phẩm'),
             Validator.minLength('#name', 2),
-            Validator.isPrice('#price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#price', 'Sai định dạng ex:10,000'),
             Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#price', 1),
 
             Validator.isRequired('#author', 'Vui lòng nhập tên tác giả'),
-            Validator.isRequired('#category', 'Vui lòng nhập tên thể  '),
+            Validator.isRequired('#category', 'Vui lòng nhập tên thể loại '),
             Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
             Validator.minLength('#quantity', 1),
             Validator.isNumber('#quantity'),
-            Validator.isPrice('#promo_price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#promo_price', 'Sai định dạng ex:10,000'),
             Validator.isRequired('#promo_price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#promo_price', 1),
-            Validator.isPrice('#import_price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#import_price', 'Sai định dạng ex:10,000'),
             Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
 
             Validator.minLength('#import_price', 1),
@@ -123,14 +130,14 @@ if (showDetailProduct) {
                 .then((data) => {
                     if (data.success) {
                         MessageBox(
-                            'cập nhật  sản phẩm   thành công',
-                            'thông báo'
+                            'cập nhật sản phẩm thành công',
+                            'Thông báo'
                         );
                     } else {
                         MessageBox(
-                            'lỗi cập nhật sản phẩm',
-                            'thông báo',
-                            'error'
+                            'Lỗi cập nhật sản phẩm',
+                            'Thông báo',
+                            'Error'
                         );
                     }
                 });
@@ -176,7 +183,7 @@ if (addNewProduct) {
             Validator.minLength('#name', 2),
             Validator.isRequired('#price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#price', 1),
-            Validator.isPrice('#price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#price', 'Sai định dạng ex:10,000'),
             Validator.isRequired('#author', 'Vui lòng nhập tên tác giả'),
             Validator.isRequired('#category', 'Vui lòng nhập tên thể  '),
             Validator.isRequired('#quantity', 'Vui lòng nhập số lượng'),
@@ -184,10 +191,10 @@ if (addNewProduct) {
             Validator.isNumber('#quantity'),
             Validator.isRequired('#promo_price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#promo_price', 1),
-            Validator.isPrice('#promo_price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#promo_price', 'Sai định dạng ex:10,000'),
             Validator.isRequired('#import_price', 'Vui lòng nhập giá tiền'),
             Validator.minLength('#import_price', 1),
-            Validator.isPrice('#import_price', 'sai định dạng ex:10,000'),
+            Validator.isPrice('#import_price', 'Sai định dạng ex:10,000'),
         ],
         onSubmit: function (data) {
             const inputPriviewImage = document.getElementById('img-product');
@@ -206,9 +213,9 @@ if (addNewProduct) {
                 .then((data) => {
                     console.log(data);
                     if (data.success) {
-                        MessageBox('thêm sản phẩm thành công', 'thông báo');
+                        MessageBox('Thêm sản phẩm thành công', 'Thông báo');
                     } else {
-                        MessageBox('lỗi thêm sản phẩm', 'error');
+                        MessageBox('lLỗi thêm sản phẩm', 'error');
                     }
                 });
         },

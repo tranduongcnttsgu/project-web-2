@@ -41,7 +41,7 @@ buttonPayment.addEventListener('click', () => {
     const address = inputs[4].value.length === 0;
     const phone = inputs[1].value.length === 0;
     if (name || address || phone) {
-        MessageBox('thông báo', 'bạn không được để trống thông tin', 'error');
+        MessageBox('Thông báo', 'Bạn không được để trống thông tin', 'Error');
         return;
     }
     fetch('http://localhost/user/order', {
@@ -64,7 +64,7 @@ Validator({
 
         Validator.isRequired('#fullName', 'Vui lòng nhập tên đầy đủ của bạn'),
         Validator.minLength('#fullName', 2),
-        Validator.isRequired('#address', 'Vùi lòng nhập tài khoản của bạn'),
+        Validator.isRequired('#address', 'Vui lòng nhập tài khoản của bạn'),
         Validator.minLength('#address', 12),
         Validator.isRequired('#emailInfo', 'Vui lòng nhập email của bạn'),
         Validator.isEmail('#emailInfo'),

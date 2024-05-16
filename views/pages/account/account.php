@@ -139,7 +139,8 @@
 
      .container-formlogin .sub-title {
          width: 100%;
-         height: 40px;
+         height: 30px;
+         padding-top: 5px;
      }
 
      .container-formlogin .sub-title h3 {
@@ -209,25 +210,25 @@
          <form action="" class="form" autocomplete="off" id="form-login" method="post">
              <div class="input-box ">
                  <label for="email">Tên người dùng</label>
-                 <input type="email" placeholder="vui lòng nhập email đăng nhập" id="email" name="username" />
+                 <input type="email" placeholder="Vui lòng nhập email đăng nhập" id="email" name="username" />
                  <span id="ele-form-message-email" class="form-message"></span>
              </div>
              <div class="input-box">
-                 <label for="password">mật khẩu</label>
-                 <input type="password" placeholder="vui lòng nhập mật khẩu" id="password" name="password" />
+                 <label for="password">Mật khẩu</label>
+                 <input type="password" placeholder="Vui lòng nhập mật khẩu" id="password" name="password" />
                  <span id="ele-form-message-pass" class="form-message"></span>
              </div>
              <button class="buttons" type="submit" id="ele-form-btn-submit-login">
-                 đăng nhập
+                 Đăng nhập
              </button>
          </form>
          <div class="sub-title">
-             <h3>các phương thưc đăng nhập khác</h3>
+             <h3>Các phương thức đăng nhập khác:</h3>
          </div>
          <div class="icon-list">
              <div class="icon-item">
                  <i class="fa-brands fa-facebook"></i>
-                 <span>facebook</span>
+                 <span>Facebook</span>
              </div>
              <div class="icon-item">
                  <i class="fa-brands fa-google"> <span>Google</span></i>
@@ -238,7 +239,7 @@
              </div>
          </div>
          <div class="register-title">
-             <span>bạn chủa có tài khoản <a href="http://localhost/account/register" class="register-link">tạo tài khoản</a></span>
+             <span>Bạn chưa có tài khoản? <a href="http://localhost/account/register" class="register-link">Tạo tài khoản</a></span>
          </div>
      </section>
 

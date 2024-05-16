@@ -75,7 +75,7 @@ if (main) {
                 if (data.success) {
                     window.location.reload();
                 } else {
-                    MessageBox('cập nhật không thành công', 'thông báo');
+                    MessageBox('Cập nhật không thành công', 'thông báo');
                 }
             });
     });

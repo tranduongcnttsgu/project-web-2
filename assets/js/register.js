@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }
                             });
                     } else {
-                        MessageBox('Email đã tồn tại!', 'Thông báo', 'Error');
+                        MessageBox('Thông báo', 'Email đã tồn tại!', 'Error');
                     }
                 });
         },

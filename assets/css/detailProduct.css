@@ -219,13 +219,13 @@
 .container-right-middle {
     width: 100%;
     height: auto;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .button-change-quantity-wrapper {
     display: flex;
     column-gap: 10px;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .decrease,

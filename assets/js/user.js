@@ -18,13 +18,11 @@ if (showInforTransport) {
                 user = data.data.data;
                 const html = `
                 <div class="transport-infor" >
-                <h2 class=" transport-title transport-title-second ">
                           Tên: ${user.name}
-                        </h2>
-                        <span class="transport-phone-number">Std:${user.phone}</span>
-                    </div>
+                        </div>
+                        <div class="transport-phone-number">SDT: ${user.phone}</div>
                     <div class="transport-address">
-                     địa chỉ: ${user.address}
+                     Địa chỉ: ${user.address}
                     </div>
                  `;
                 showInforTransport.innerHTML = html;

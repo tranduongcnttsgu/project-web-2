@@ -88,10 +88,10 @@ const productDetail = async () => {
                     <span>(${product.totail_rating})</span>
                 </div>
                 <div class="product-totail-buy">
-                    đã bán:${product.totail_pay} sản phẩm
+                    Đã bán: ${product.totail_pay} sản phẩm
                 </div>
                 <div class="product-quantity">
-                    còn lại:${product.quantity} sản phẩm
+                    Còn lại: ${product.quantity} sản phẩm
                 </div>
                 <h1 class="product-price">
                     <span class="product-price-pr"
@@ -100,14 +100,9 @@ const productDetail = async () => {
                 </h1>
             </div>
             <!-- info product  -->
-            <div class="content-middle">
-                <h1>thông tin sản phẩm</h1>
-                <table id="customers">
-                    ${renderContentDetail()}
-                </table>
-            </div>
+            
             <div class="description-product">
-                <h1>mô tả sản phẩm</h1>
+                <h1>Mô tả sản phẩm</h1>
                 <div>${product.description}</div>
             </div>
         </section>

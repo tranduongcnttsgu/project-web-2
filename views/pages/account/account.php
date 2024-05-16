@@ -96,10 +96,12 @@
          height: 60px;
          display: flex;
          flex-direction: column;
+         margin-bottom: 10px;
      }
 
      .container-formlogin .form .input-box label {
-         font-size: 16px;
+         font-size: 18px;
+         font-weight: 600;
      }
 
      .container-formlogin .form .input-box input {
@@ -109,6 +111,7 @@
          outline: none;
          border-radius: 8px;
          padding-left: 5px;
+         margin-top: 5px;
          border: none;
          box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
      }
@@ -116,6 +119,7 @@
      .container-formlogin .form .buttons {
          width: 100%;
          height: 40px;
+         font-size: 20px;
          overflow: hidden;
          box-shadow: var(--primary-boxshadow);
          background-color: var(--primary-color);

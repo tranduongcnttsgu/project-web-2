@@ -6,14 +6,14 @@ const connector = connect((state) => ({
 const Avatar = ({ userData }) => {
     return html`
         <div class="user-info-phone-email">
-            <h3 class="user-info-phone-email-title">Số điện thoại và Email</h3>
+            <h3 class="user-info-phone-email-title">Số điện thoại và email</h3>
             <div class="user-info-content-phone-email">
                 <div class="user-info-phone">
                     <span class="icon-phone">
                         <i class="fa-solid fa-phone"></i>
                     </span>
                     <div class="info-phone-content">
-                        <span>số điện thoại</span>
+                        <span>Số điện thoại</span>
                         <span>${userData.phone}</span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const Avatar = ({ userData }) => {
                         <i class="fa-solid fa-envelope"></i>
                     </span>
                     <div class="info-phone-content">
-                        <span>email</span>
+                        <span>Email</span>
                         <span>${userData.email}</span>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ const Avatar = ({ userData }) => {
                     class="button-edit-info-phone"
                     style=" visibility: hidden;"
                 >
-                    cập nhật
+                    Cập nhật
                 </div>
             </div>
         </div>

@@ -21,8 +21,8 @@ class Order
     public function __construct()
     {
         $this->order_id = $this->autoId();
-        $this->messge_status = "đang chở xác nhận";
-        $this->message_status_payment = "chưa thanh toán";
+        $this->messge_status = "Đang chờ xác nhận";
+        $this->message_status_payment = "Chưa thanh toán";
     }
     function autoId()
     {

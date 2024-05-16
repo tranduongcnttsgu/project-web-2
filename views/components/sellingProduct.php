@@ -377,7 +377,7 @@
 </style>
 <section class="selling-container">
     <div class="selling-top-content">
-        <h1 class="selling-titile">sản phẩm mới</h1>
+        <h1 class="selling-titile">Sản phẩm mới</h1>
 
     </div>
     <div class="selling-controll-slide">

@@ -34,7 +34,7 @@ const formChangeInfo = ({ userData }) => {
                 </div>
                 <div class="form-info-user">
                     <div class="user-input-box">
-                        <label for="input-name-user">họ tên</label>
+                        <label for="input-name-user">Họ và tên</label>
                         <input
                             type="text"
                             id="input-name-user"
@@ -56,7 +56,7 @@ const formChangeInfo = ({ userData }) => {
                 id="user-info-button-sumit"
                 onclick="formChangeInfoUserSubmit(this,document.getElementById('input-name-user'))"
             >
-                cập nhật thông tin
+                Cập nhật thông tin
             </button>
         </form>
     `;

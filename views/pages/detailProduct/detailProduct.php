@@ -11,7 +11,7 @@
         </div>
 
         <div class="container-right-middle">
-            <h1 class="container-right-middle-title">Số lượng</h1>
+            <h1 class="container-right-middle-title">Số lượng:</h1>
             <div id="rootProductDetailRight"></div>
             <div class="container-right-middle">
                 <button class="button-buy" id="button-product-detail-buy-now">Mua ngay</button>

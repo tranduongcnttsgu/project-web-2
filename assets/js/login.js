@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         MessageBox('', 'Tài khoản không tồn tại', 'error');
                         return;
                     } else if (data.code === 200 && !data.success) {
-                        MessageBox('', 'Mật khẩu không đúng', 'Error');
+                        MessageBox('', 'Mật khẩu không đúng', 'error');
                         return;
                     } else if (data.code === 403) {
                         MessageBox(
                             '',
-                            'Tài khoản của bạn  đã bị chặn',
-                            'Error'
+                            'Tài khoản của bạn đã bị chặn',
+                            'error'
                         );
                         return;
                     }

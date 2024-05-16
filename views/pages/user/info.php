@@ -57,7 +57,7 @@
                             <div class="form-group-wrap">
                                 <div class="form-group">
                                     <label for="nickname">Tên khác</label>
-                                    <input type="text" name="nickname" id="nickname" placeholder="tên khác" class="form-input" />
+                                    <input type="text" name="nickname" id="nickname" placeholder="Tên khác" class="form-input" />
                                     <span class="error-message"></span>
                                 </div>
                                 <div class="form-group">
@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="address">Địa chỉ</label>
-                                <input type="text" name="address" id="address" placeholder="địa chỉ" class="form-input" />
+                                <input type="text" name="address" id="address" placeholder="Địa chỉ" class="form-input" />
                                 <span class="error-message"></span>
                             </div>
 

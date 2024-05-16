@@ -12,6 +12,12 @@
     padding: 16px;
     height: auto;
 }
+
+@media screen and (max-width: 1200px) {
+    .cart-container-left{
+        width: 800px;
+    }
+}
 .cart-content-title {
     width: 100%;
     display: flex;
@@ -146,7 +152,6 @@
 .transport-content-top {
     width: 100%;
     display: flex;
-
     align-items: center;
     text-align: center;
     justify-content: space-between;
@@ -163,9 +168,6 @@
 .transport-phone-number {
     display: inline-block;
     font-size: 16px;
-}
-.transport-title-second {
-    font-size: 18px;
 }
 .transport-infor {
     display: flex;

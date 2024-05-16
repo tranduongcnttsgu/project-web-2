@@ -61,10 +61,10 @@
                 <div class="status-order-wrapper">
                     <label for="status-order">Trạng thái đơn hàng:</label>
                     <select name="status-order" id="status-order">
-                        <option value="đang chờ sử lý">Đang chờ xử lý</option>
-                        <option value="đơn hàng bị hủy" id="delete-order-sl">Đơn hàng bị hủy</option>
-                        <option value="đang giao hàng">Đang giao hàng</option>
-                        <option value="đã giao hàng">Đã giao hàng</option>
+                        <option value="Đang chờ xử lý">Đang chờ xử lý</option>
+                        <option value="Đơn hàng bị hủy" id="delete-order-sl">Đơn hàng bị hủy</option>
+                        <option value="Đang giao hàng">Đang giao hàng</option>
+                        <option value="Đã giao hàng">Đã giao hàng</option>
 
                     </select>
                 </div>

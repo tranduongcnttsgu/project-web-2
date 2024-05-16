@@ -25,7 +25,7 @@
             <div class="transport-wrapper">
                 <div class="transport-content-top">
                     <h2 class=" transport-title">
-                        Giao tới
+                        Giao đến:
                     </h2>
                     <a href="http://localhost/account/user">
                         <span class="button-change-address">Thay đổi</span>
@@ -33,11 +33,11 @@
                 </div>
                 <div class="transport-content-bottom" id="transport-info">
                     <div class="transport-infor">
-                        <h2 class=" transport-title transport-title-second ">
+                        <span class=" transport-title transport-title-second ">
                             User name
-                        </h2>
-                        <span class="transport-phone-number">942834942</span>
+                        </span>
                     </div>
+                    <div class="transport-phone-number">942834942</div>
                     <div class="transport-address">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, non repellendus! Voluptas rem cupiditate eius a earum, ullam perspiciatis pariatur
                     </div>

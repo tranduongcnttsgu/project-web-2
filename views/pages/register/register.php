@@ -172,7 +172,7 @@
                 </div>
 
                 <input type="submit" class="registerbtn" value="Đăng ký" />
-                <h4>Phương thức đăng ký khác</h4>
+                <h4>Phương thức đăng ký khác:</h4>
                 <div class="selection">
                     <!-- logo 4 cái -->
                     <div class="facebook">
@@ -187,6 +187,9 @@
                         <i style="color: aliceblue; font-size: 14px; margin-right: 5px" class="fa-brands fa-github"></i>
                         <h4>Github</h4>
                     </div>
+                </div>
+                <div class="register-title">
+                    <span>Bạn đã có tài khoản? <a href="http://localhost/account" class="register-link">Đăng nhập</a></span>
                 </div>
             </form>
         </div>

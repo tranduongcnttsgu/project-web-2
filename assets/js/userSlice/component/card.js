@@ -14,7 +14,7 @@ const card = ({ data }) => {
     if (data.length === 0) {
         return html`
             <div class="no-product-search-wrapper">
-                <h3>không tìm thấy sản phẩm nào</h3>
+                <h3>Không tìm thấy sản phẩm nào</h3>
                 <img
                     src="http://localhost/assets/Db_img/no-product-search.webp"
                     alt=""
@@ -65,8 +65,8 @@ const card = ({ data }) => {
                          product.product_id
                      })"
                     >
-                        <i class="fa-solid fa-cart-shopping"></i> thêm vào giỏ
-                        hảng
+                        <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ
+                        hàng
                     </button>
                 </div>
             </div>

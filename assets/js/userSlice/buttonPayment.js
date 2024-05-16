@@ -14,7 +14,7 @@ const buttonPayment = ({ products }) => {
     };
     return html`
         <div class="total-price">
-            tổng tiền thanh toán
+            Tổng tiền thanh toán:
             <span>${formatPrice(products.totail_price)}</span>
         </div>
     `;

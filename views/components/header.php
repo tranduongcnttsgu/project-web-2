@@ -163,9 +163,6 @@
                                     <a href="#">Thể loại</a>
                                 </li>
                                 <li class="header-bottom-item phone">
-                                    <a href="#">Giảm giá</a>
-                                </li>
-                                <li class="header-bottom-item phone">
                                     <a href="#"> Blog</a>
                                 </li>
                             </ul>

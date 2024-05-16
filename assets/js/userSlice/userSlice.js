@@ -413,7 +413,7 @@ const reducer = async (state = init, action, args) => {
             const result = await res.json();
             let newCart = [...state.cart];
             if (result.success) {
-                MessageBox('thông báo', 'đã thêm sản phẩm vào giỏ hàng');
+                MessageBox('thông báo', 'Đã thêm sản phẩm vào giỏ hàng');
 
                 newCart = await getCart();
             } else if (!result.success && result.code === 401) {
@@ -421,7 +421,7 @@ const reducer = async (state = init, action, args) => {
             } else if (!result.success && result.code === 404) {
                 MessageBox(
                     'thông báo',
-                    'sản phẩm đã có trong giỏ hàng',
+                    'Sản phẩm đã có trong giỏ hàng',
                     'warning'
                 );
             }
@@ -449,15 +449,15 @@ const reducer = async (state = init, action, args) => {
             const result = await res.json();
             let newCart = [...state.cart];
             if (result.success) {
-                MessageBox('thông báo', 'đã thêm sản phẩm vào giỏ hàng');
+                MessageBox('thông báo', 'Đã thêm sản phẩm vào giỏ hàng');
 
                 newCart = await getCart();
             } else if (!result.success && result.code === 401) {
                 window.location.href = 'http://localhost/account';
             } else if (!result.success && result.code === 404) {
                 MessageBox(
-                    'thông báo',
-                    'sản phẩm đã có trong giỏ hàng',
+                    'Thông báo',
+                    'Sản phẩm đã có trong giỏ hàng',
                     'warning'
                 );
             }
@@ -475,7 +475,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'bạn muốn đăng xuất',
+                    message: 'Bạn muốn đăng xuất',
                     type: 'user/logout',
                     acceptType: 'user/logout',
                     payload: [3],
@@ -558,7 +558,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'xóa sản phẩm ra khỏi giỏ hàng ?',
+                    message: 'Xóa sản phẩm ra khỏi giỏ hàng ?',
                     payload: [args[1]],
                     type: 'user/popup/cartProduct',
                     acceptType: 'user/cartProduct/delete',
@@ -745,8 +745,8 @@ const reducer = async (state = init, action, args) => {
             const check = state.ordersDetail.length === 0;
             if (check) {
                 MessageBox(
-                    'thông báo',
-                    'bạn chưa chọn sản phẩn nào',
+                    'Thông báo',
+                    'Bạn chưa chọn sản phẩn nào',
                     'wraning'
                 );
             } else {
@@ -765,7 +765,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'xóa đơn hàng ',
+                    message: 'Xóa đơn hàng ',
                     type: 'user/order/popup/delete-order',
                     acceptType: 'user/delete/order',
                     payload: [3],
@@ -800,7 +800,7 @@ const reducer = async (state = init, action, args) => {
                     if (data.success) {
                         window.location.reload();
                     } else {
-                        MessageBox('cập nhật không thành công', 'thông báo');
+                        MessageBox('Cập nhật không thành công', 'thông báo');
                     }
                 });
             const newPopup = {

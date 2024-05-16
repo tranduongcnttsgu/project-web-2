@@ -118,7 +118,7 @@
                                         Tổng tiền đơn hàng:
                                         <?php
 
-                                        echo    number_format($value["order"]["totail_price"] * 1000, 0, '', ',');
+                                        echo    number_format($value["order"]["totail_price"] * 1000, 0, '', ',') . 'đ';
 
                                         ?>
                                     </div>

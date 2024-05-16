@@ -137,6 +137,7 @@ if (formInfo) {
             Validator.isRequired('#phone', 'Vui lòng nhập số điện thoại'),
             Validator.isNumber('#phone'),
             Validator.minLength('#phone', 10),
+            Validator.maxLength('#phone', 11),
         ],
         onSubmit: function (data) {
             const payload = new URLSearchParams(new FormData(formInfo));

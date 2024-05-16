@@ -330,27 +330,6 @@ if (isset($show)) {
 }
 ?>">
         <h3 style="padding: 10px;">Quản lý đơn hàng</h3>
-        <div class="admin-control">
-            <div class="admin-control-center">
-                <form method="GET" action="" class="form-search">
-                    <span class="search-btn"><i class="fa-light fa-magnifying-glass"></i></span>
-                    <input type="text" id="search_input" name="search_input" class="form-search-input" placeholder="Nhập tên hoặc mã sản phẩm...">
-                </form>
-            </div>
-            <div class="admin-control-right">
-                <form method="GET" action="" class="fillter-date">
-                    <div>
-                        <label for="from_date">Từ ngày:</label>
-                        <input type="date" id="from_date" class="form-control-date" name="from_date">
-                    </div>
-                    <div>
-                        <label for="to_date">Đến ngày:</label>
-                        <input type="date" id="to_date" class="form-control-date" name="to_date">
-                    </div>
-                    <input type="submit" value="Lọc" name="Lọc">
-                </form>
-            </div>
-        </div>
         <div class="manager-order-navbar">
             <h3 class="manager-order-title">Sắp xếp đơn hàng theo:</h3>
             <ul class="manager-order-sort">

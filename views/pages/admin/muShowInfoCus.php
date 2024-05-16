@@ -61,10 +61,8 @@
                 <div class="status-order-wrapper">
                     <label for="status-customer">Trạng thái tài khoản:</label>
                     <select name="status-customer" id="status-customer">
-                        <option value="1">Hoạt động</option>
+                        <option value="1" selected>Hoạt động</option>
                         <option value="0">Chặn tài khoản</option>
-
-
                     </select>
                 </div>
                 <div class="button-wrapper">

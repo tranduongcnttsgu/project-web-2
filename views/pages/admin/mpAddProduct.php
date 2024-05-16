@@ -12,7 +12,7 @@
                     </div>
                     <div class="form-group form-pc">
                         <label class="form-lable-product" for="">Giá</label>
-                        <input type="text" name="price" id="price" placeholder="giá" class="form-input" />
+                        <input type="text" name="price" id="price" placeholder="Giá" class="form-input" />
                         <span class="error-message"></span>
                     </div>
                 </div>
@@ -24,7 +24,8 @@
                         <div class="lable-wrapper">
                             <label class="form-lable-product" for="">Tác giả</label>
                             <select name="" id="select-author">
-                                <option value="">Thêm mới</option>
+                                <option value="" disabled selected>Nhấp chọn tác giả</option>
+
                                 <?php
 
                                 use controllers\ProductController;
@@ -47,7 +48,7 @@
                         <div class="lable-wrapper">
                             <label class="form-lable-product" for="">Thể loại</label>
                             <select name="" id="select-category">
-                                <option value="">Thêm mới</option>
+                                <option value="" disabled selected>Nhấp chọn thể loại</option>
                                 <?php
 
 

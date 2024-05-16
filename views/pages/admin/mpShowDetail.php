@@ -24,7 +24,6 @@
                         <div class="lable-wrapper">
                             <label class="form-lable-product" for="">Tác giả</label>
                             <select name="" id="select-author">
-                                <option value="">Thêm mới</option>
                                 <?php
 
                                 use controllers\ProductController;
@@ -47,7 +46,6 @@
                         <div class="lable-wrapper">
                             <label class="form-lable-product" for="">Thể loại</label>
                             <select name="" id="select-category">
-                                <option value="">Thêm mới</option>
                                 <?php
 
 
@@ -74,19 +72,19 @@
                     </div>
 
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">số sao</label>
+                        <label class="form-lable-product" for="">Số sao</label>
                         <input type="text" name="rating" id="rating" placeholder="" class="form-input" disabled />
                     </div>
                 </div>
 
                 <div class="form-group-wrap">
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">giá bán</label>
+                        <label class="form-lable-product" for="">Giá bán</label>
                         <input type="text" name="promo_price" id="promo_price" placeholder="Giá bán" class="form-input" />
                         <span class="error-message"></span>
                     </div>
                     <div class="form-group form-pc">
-                        <label class="form-lable-product" for="">gía nhập</label>
+                        <label class="form-lable-product" for="">Giá nhập</label>
                         <input type="text" name="import_price" id="import_price" placeholder="Giá nhập" class="form-input" />
                         <span class="error-message"></span>
                     </div>

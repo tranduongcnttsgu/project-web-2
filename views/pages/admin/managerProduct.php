@@ -41,7 +41,8 @@
             <table>
                 <thead>
                     <tr>
-                        <th>STT</th>
+                        <th>STT
+                        </th>
                         <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Giá</th>

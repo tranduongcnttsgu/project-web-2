@@ -90,7 +90,7 @@
                      ">
                 <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Quản lý sản phẩm</span></li>
             </a>
-            <a href="http://localhost/admin/manager/importproducts" class="
+            <!-- <a href="http://localhost/admin/manager/importproducts" class="
                      <?php
                         if ($navManagerProduct === false) {
                             echo "hidden";
@@ -98,7 +98,7 @@
                         ?>
                      ">
                 <li site="managerOrder"><span><i class='bx bxs-chart icon'></i>Nhập hàng</span></li>
-            </a>
+            </a> -->
             <a href="http://localhost/admin/manager/customer" class="
                      <?php
                         if ($navManagerCustomer === false) {

@@ -26,7 +26,7 @@ const popup = ({ popup }) => {
                         id="acceptBtn"
                         onclick="dispatch('${popup.type}',2)"
                     >
-                        không
+                        Không
                     </button>
                     <button
                         class="modelBox-button"
@@ -34,7 +34,7 @@ const popup = ({ popup }) => {
                         onclick="dispatch('${popup.acceptType}',${popup
                             .payload[0]})"
                     >
-                        đồng ý
+                        Đồng ý
                     </button>
                 </div>
             </div>

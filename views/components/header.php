@@ -41,7 +41,7 @@
                         <span class="header-top-item-link">
                             <img src="http://localhost/assets/img/User-Outline.png" alt="user-icon" class="header-top-option-icon" />
                             <h4 class="header-top-option-title">
-                                tài khoản
+                                Tài khoản
                             </h4>
                         </span>
                     </li>
@@ -49,7 +49,7 @@
                         <a href="#" class="header-top-item-link">
                             <img src="http://localhost/assets/img/Like-Outline.png" alt="user-icon" class="header-top-option-icon" />
                             <h4 class="header-top-option-title">
-                                sản phẩm đã thích
+                                Đã thích
                             </h4>
                         </a>
                     </li>
@@ -90,7 +90,7 @@
                             <div>
                                 Sản phẩm:<span id="totail-product" style="color: red; font-weight: 600" ;>0</span>
                             </div>
-                            <div>số tiền:0đ</div>
+                            <div>Số tiền: 0đ</div>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                         <div class="header-button-change-page">
                             <a href="http://localhost/product">
                                 <i class="fa-solid fa-shop"></i>
-                                <span>go shop</span>
+                                <span>Go shop</span>
                             </a>
                         </div>
                         <div class="header-bag-wrapper">
@@ -143,7 +143,7 @@
                                     sản phẩm:<span id="totail-product" style="
                                                     color: red;
                                                     font-weight: 600;
-                                                " ;>0</span>
+                                                " ;> 0</span>
                                 </div>
 
                             </div>
@@ -237,7 +237,7 @@
 
                 <input type="text" name="searchKey" class="phone-input-box" placeholder="search" />
                 <button type="submit" class="phone-button-form-search">
-                    search
+                    Search
                 </button>
             </form>
         </div>

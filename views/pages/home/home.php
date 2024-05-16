@@ -285,7 +285,7 @@ require_once __DIR__ . "/../../components/banner.php";
                             Đổi mới mô hình thành viên với Triathlon Australia
                         </h3>
                         <div class="c-u__card-subButton">
-                            <h3>đọc thêm</h3>
+                            <h3>Đọc thêm</h3>
                             <span>
                                 <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M16.5 16.399L19.7929 13.1062C20.1834 12.7156 20.1834 12.0825 19.7929 11.6919L16.5 8.39905M19.5 12.399L5.5 12.399" stroke="#4CAF4F" stroke-width="1.5" stroke-linecap="round" />

@@ -63,7 +63,7 @@ class UserController extends Controller
 
         $data = array_diff_key($data[0], ["password" => "any"]);
         $type = $this->cookieGet("action_group");
-        return $this->responseJSON("người dùng đã login", true, 200, ["data" => $data, "type" => $type]);
+        return $this->responseJSON("Người dùng đã login", true, 200, ["data" => $data, "type" => $type]);
     }
     public function updateInfo()
     {
@@ -78,7 +78,7 @@ class UserController extends Controller
     {
         $userId = $this->cookieGet("userLogin");
         $data =  $this->userModel->userOrder($userId);
-        return $this->responseJSON("đặt hàng thành công", true, 200, $data);
+        return $this->responseJSON("Đặt hàng thành công", true, 200, $data);
     }
     public function getUserOrder()
     {
@@ -121,9 +121,9 @@ class UserController extends Controller
         $userId = $payload["userId"];
         $req = $this->userModel->adminDeleteAccount($userId);
         if ($req === false) {
-            return $this->responseJSON("xóa không thành công", false, 404, $payload);
+            return $this->responseJSON("Xóa không thành công", false, 404, $payload);
         }
-        return $this->responseJSON("xóa thành công", true, 200, $payload);
+        return $this->responseJSON("Xóa thành công", true, 200, $payload);
     }
     public function adminEditGetAccount()
     {

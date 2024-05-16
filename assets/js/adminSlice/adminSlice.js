@@ -18,7 +18,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'bạn muốn đăng xuất',
+                    message: 'Bạn muốn đăng xuất?',
                     type: 'admin/popup',
                     acceptType: 'admin/logout',
                     payload: [3],
@@ -65,7 +65,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'bạn xóa tài khoản ',
+                    message: 'Bạn muốn xóa tài khoản? ',
                     type: 'admin/delete/account/popup',
                     acceptType: 'admin/delete/account',
                     payload: [3],
@@ -103,7 +103,7 @@ const reducer = async (state = init, action, args) => {
                 if (res.success) {
                     window.location.reload();
                 } else {
-                    MessageBox('xóa tài khoản không thành công', 'thông báo');
+                    MessageBox('Xóa tài khoản không thành công', 'thông báo');
                 }
             }
             localStorage.removeItem('id');
@@ -135,7 +135,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'xóa đơn hàng ',
+                    message: 'Xóa đơn hàng ',
                     type: 'admin/order/popup/delete-order',
                     acceptType: 'admin/delete/order',
                     payload: [3],
@@ -170,7 +170,7 @@ const reducer = async (state = init, action, args) => {
                     if (data.success) {
                         window.location.reload();
                     } else {
-                        MessageBox('cập nhật không thành công', 'thông báo');
+                        MessageBox('cCập nhật không thành công', 'thông báo');
                     }
                 });
             const newPopup = {
@@ -194,7 +194,7 @@ const reducer = async (state = init, action, args) => {
                 newPopup = {
                     ...prev,
                     show: true,
-                    message: 'xóa sản phẩm ',
+                    message: 'Xóa sản phẩm ',
                     type: 'admin/manager-product/popup/delete-product',
                     acceptType: 'admin/delete/product',
                     payload: [3],
@@ -233,7 +233,7 @@ const reducer = async (state = init, action, args) => {
                     window.location.href =
                         'http://localhost/admin/manager/products';
                 } else {
-                    MessageBox('xóa sản phẩm không thành công', 'thông báo');
+                    MessageBox('Xóa sản phẩm không thành công', 'thông báo');
                 }
             }
             localStorage.removeItem('ad-manager-productId');

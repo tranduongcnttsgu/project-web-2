@@ -8,27 +8,27 @@ if (isset($show)) {
     echo $show;
 }
 ?>">
-        <h3 style="padding: 10px;">quản lý đơn hàng</h3>
+        <h3 style="padding: 10px;">Quản lý đơn hàng</h3>
         <div class="manager-order-navbar">
-            <h3 class="manager-order-title">sắp xếp đơn hàng theo:</h3>
+            <h3 class="manager-order-title">Sắp xếp đơn hàng theo:</h3>
             <ul class="manager-order-sort">
                 <li class="manager-order-button" data-sort="0">
-                    tất cả
+                    Tất cả
                 </li>
                 <li class="manager-order-button" data-sort="1">
-                    đơn hàng chở sử lý
+                    Đơn hàng chở sử lý
                 </li>
                 <li class="manager-order-button" data-sort="2">
-                    đơn hàng đang giao
+                    Đơn hàng đang giao
                 </li>
                 <li class="manager-order-button" data-sort="3">
-                    đơn hàng đã thanh toán
+                    Đơn hàng đã thanh toán
                 </li>
                 <li class="manager-order-button" data-sort="4">
-                    đơn hàng đã giao
+                    Đơn hàng đã giao
                 </li>
                 <li class="manager-order-button" data-sort="5">
-                    đơn hàng bị hủy
+                    Đơn hàng bị hủy
                 </li>
             </ul>
         </div>
@@ -39,9 +39,9 @@ if (isset($show)) {
                         <th>STT</th>
                         <th>Ngày tạo</th>
                         <th>Người mua</th>
-                        <th>thông tin </th>
-                        <th>trạng thái</th>
-                        <th>thanh toán</th>
+                        <th>Thông tin </th>
+                        <th>Trạng thái</th>
+                        <th>Thanh toán</th>
                         <th>Thao tác</th>
 
                     </tr>
@@ -59,7 +59,7 @@ if (isset($show)) {
                             <td class="pcs">
                                 <?php
                                 $timestamp = strtotime($value["order"]["order_date"]);
-                                echo  date("H:i:s   \\n\g\à\y d-m-Y", $timestamp);
+                                echo  date("H:i:s   \\N\g\à\y d-m-Y", $timestamp);
                                 ?>
                             </td>
                             <td class="cur">
@@ -74,7 +74,7 @@ if (isset($show)) {
                                     <div class="info-order-price">
                                         Tổng tiền đơn hàng:
                                         <?php echo  number_format($value["order"]["totail_price"] * 1000, 0, '', ','); ?></div>
-                                    <div class="info-quantity">số lượng sản phẩm:
+                                    <div class="info-quantity">Số lượng sản phẩm:
                                         <?php echo $value["order"]["totail_product"]; ?>
                                     </div>
                                 </div>

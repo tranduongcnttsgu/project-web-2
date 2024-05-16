@@ -71,10 +71,10 @@ const getInforUser = () => {
                 selectStatus.value = user.status;
                 if (+user.status === 1) {
                     status.innerHTML =
-                        "  <span class='tick-green'></span> đang hoạt động";
+                        "  <span class='tick-green'></span> Đang hoạt động";
                 } else {
                     status.innerHTML =
-                        "  <span class='tick-red'></span>  tài khoản đã khóa";
+                        "  <span class='tick-red'></span>Tài khoản đã khóa";
                 }
                 const valueTable = html`
                     ${infoProduct.map((product, index) => {
@@ -120,7 +120,7 @@ buttonUpdate.addEventListener('click', () => {
                 MessageBox('Cập nhật thành công', 'thông báo');
                 setTimeout(() => window.location.reload(), 3000);
             } else {
-                MessageBox('Cập nhật   không thành công', 'thông báo');
+                MessageBox('Cập nhật không thành công', 'thông báo');
             }
         });
 });

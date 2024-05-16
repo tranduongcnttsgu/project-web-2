@@ -238,6 +238,10 @@ class ProductController extends Controller
     {
         return $this->productModel->adminGetOrders();
     }
+    public function adminGetImports()
+    {
+        return $this->productModel->adminGetImports();
+    }
     public function  adminGetInfoOrder()
     {
         $payload = $this->getPayload();

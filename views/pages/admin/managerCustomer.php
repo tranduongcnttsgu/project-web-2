@@ -7,9 +7,9 @@
                     <th>STT</th>
                     <th>Tên</th>
                     <th>Email</th>
-                    <th>số đơn hàng đã mua</th>
-                    <th>trạng thái</th>
-                    <th>chi tiết</th>
+                    <th>Số đơn hàng đã mua</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,16 +32,16 @@
                                         if (strcmp($value["user"]["status"], "1") === 0) {
                                             echo "
                                             <span class='tick-green'></span>
-                                            đang hoạt động";
+                                            Đang hoạt động";
                                         } else {
                                             echo "
                                             
                                             <span class='tick-red'></span>
-                                            đã bị khóa";
+                                            Đã bị khóa";
                                         }
                                         ?></td>
                         <td class="per">
-                            <button class="button-action-order" id="button-action-show-user" data-user="<?php echo $value["user"]["user_id"]; ?>">chi tiết<i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class="button-action-order" id="button-action-show-user" data-user="<?php echo $value["user"]["user_id"]; ?>">Chi tiết<i class="fa-solid fa-pen-to-square"></i></button>
                         </td>
                     </tr>
                 <?php

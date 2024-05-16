@@ -150,8 +150,8 @@
                 </div>
                 <div class="form-goup">
                     <div class="input-box">
-                        <label for="name">Họ tên người dùng</label>
-                        <input id="name" type="text" name="name" placeholder="tên của bạn" value="" />
+                        <label for="name">Họ và tên</label>
+                        <input id="name" type="text" name="name" placeholder="Nhập tên" value="" />
                         <span class="handle-error"></span>
                     </div>
                     <div class="input-box">

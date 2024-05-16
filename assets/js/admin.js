@@ -547,7 +547,7 @@ if (listSortButton.length !== 0) {
                                     info.order.order_id
                                 }"
                                 onclick ="handleButtonShowOrderDetail(this)"
-                                >thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                >Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         `;
@@ -571,6 +571,17 @@ if (buttonActionOrder) {
             const orderId = e.target.getAttribute('data-order');
             localStorage.setItem('orderId', JSON.stringify(orderId));
             window.location.href = 'http://localhost/admin/order/detail';
+        });
+    });
+}
+
+const buttonActionImport = document.querySelectorAll('.button-action-import');
+if (buttonActionImport) {
+    buttonActionImport.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const orderId = e.target.getAttribute('data-order');
+            localStorage.setItem('orderId', JSON.stringify(orderId));
+            window.location.href = 'http://localhost/admin/import/detail';
         });
     });
 }
@@ -673,7 +684,7 @@ const paginationPage = async () => {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 
@@ -738,7 +749,7 @@ const paginationPage = async () => {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 
@@ -803,7 +814,7 @@ if (paginationTitle) {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 

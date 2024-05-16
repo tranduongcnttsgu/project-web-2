@@ -3,7 +3,7 @@
         <div class="order-infor-wrapper">
             <div class="order-content-letf">
                 <div class="fui-table-ui-basic-linh table-wrap">
-                    <h3 class="order-title">thông tin khách hàng</h3>
+                    <h3 class="order-title">Thông tin khách hàng</h3>
                     <table>
 
                         <tbody>
@@ -17,11 +17,11 @@
                                 <td class="per" id="customer_phone">123123</td>
                             </tr>
                             <tr>
-                                <td class="cur">email:</td>
+                                <td class="cur">Email:</td>
                                 <td class="per" id="customer_email">root</td>
                             </tr>
                             <tr>
-                                <td class="cur">địa chỉ:</td>
+                                <td class="cur">Địa chỉ:</td>
                                 <td class="per" id="customer_address">root</td>
                             </tr>
                         </tbody>
@@ -35,19 +35,19 @@
 
                         <tbody>
                             <tr>
-                                <td class="cur">số đơn hàm đã mua</td>
+                                <td class="cur">Số đơn hàm đã mua</td>
                                 <td class="per" id="order_quantity">số đơn hàng đã mua</td>
                             </tr>
                             <tr>
-                                <td class="cur">tổng sản phẩm:</td>
+                                <td class="cur">Tổng sản phẩm:</td>
                                 <td class="per" id="order_product">root</td>
                             </tr>
                             <tr>
-                                <td class="cur">tổng tiền đã chi:</td>
+                                <td class="cur">Tổng tiền đã chi:</td>
                                 <td class="per" id="order_total_price">root</td>
                             </tr>
                             <tr>
-                                <td class="cur">trạng thái:</td>
+                                <td class="cur">Trạng thái:</td>
                                 <td class="per" id="status">root</td>
                             </tr>
                         </tbody>
@@ -56,36 +56,36 @@
             </div>
         </div>
         <div class="order-action-wrapper">
-            <h3 class="container-order-title">thao tác</h3>
+            <h3 class="container-order-title">Thao tác</h3>
             <div class="action-wrapper">
                 <div class="status-order-wrapper">
-                    <label for="status-customer">trạng thái tài khoản:</label>
+                    <label for="status-customer">Trạng thái tài khoản:</label>
                     <select name="status-customer" id="status-customer">
-                        <option value="1">hoạt động</option>
-                        <option value="0">chặn tài khoản</option>
+                        <option value="1">Hoạt động</option>
+                        <option value="0">Chặn tài khoản</option>
 
 
                     </select>
                 </div>
                 <div class="button-wrapper">
-                    <button class="order-button-action order-button-acept" id="button-customer-update">cập nhật</button>
+                    <button class="order-button-action order-button-acept" id="button-customer-update">Cập nhật</button>
 
                 </div>
             </div>
         </div>
     </div>
     <div class="container-bottom">
-        <h3 class="container-order-title">danh sách sản phẩm đã mua</h3>
+        <h3 class="container-order-title">Danh sách sản phẩm đã mua</h3>
         <div class="fui-table-ui-basic-linh table-wrap">
             <table>
                 <thead>
                     <tr>
-                        <th>std</th>
-                        <th>ảnh</th>
+                        <th>STT</th>
+                        <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
-                        <th>giá</th>
-                        <th>số lượng</th>
-                        <th>tổng giá</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng giá</th>
                     </tr>
                 </thead>
                 <tbody id="table-order-detail">

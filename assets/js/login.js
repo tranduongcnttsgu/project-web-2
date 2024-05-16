@@ -23,16 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then((data) => {
                     console.log(data);
                     if (data.code === 404) {
-                        MessageBox('', 'Tài khoản  không  tồn tại', 'error');
+                        MessageBox('', 'Tài khoản không tồn tại', 'error');
                         return;
                     } else if (data.code === 200 && !data.success) {
-                        MessageBox('', 'Mật khẩu   không đúng', 'error');
+                        MessageBox('', 'Mật khẩu không đúng', 'Error');
                         return;
                     } else if (data.code === 403) {
                         MessageBox(
                             '',
-                            'tài khoản của bạn  đã bị chặn',
-                            'error'
+                            'Tài khoản của bạn  đã bị chặn',
+                            'Error'
                         );
                         return;
                     }

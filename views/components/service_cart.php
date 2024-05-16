@@ -74,29 +74,29 @@
     <div class="content-service">
         <img src="./assets/img/service-1.png" alt="" />
         <div class="title">
-            <h2>miễn phí vận chuyển</h2>
-            <span>đơn hàng trên 5 triệu đồng</span>
+            <h2>Miễn phí vận chuyển</h2>
+            <span>Đơn hàng trên 5 triệu đồng</span>
         </div>
     </div>
     <div class="content-service">
         <img src="./assets/img/service-2.png" alt="" />
         <div class="title">
-            <h2>hoàng trả miễn phí</h2>
-            <span>áp dụng cho đơn hàng trền 5 triệu đồng</span>
+            <h2>Hoàn trả miễn phí</h2>
+            <span>Áp dụng cho đơn hàng trên 5 triệu đồng</span>
         </div>
     </div>
     <div class="content-service">
         <img src="./assets/img/service-3.png" alt="" />
         <div class="title">
             <h2>Thanh toán an toàn</h2>
-            <span>thanh toán trực tuyến 100%</span>
+            <span>Thanh toán trực tuyến 100%</span>
         </div>
     </div>
     <div class="content-service">
         <img src="./assets/img/service-4.png" alt="" />
         <div class="title">
-            <h2>chất lượng tốt nhất</h2>
-            <span>đảm bảo sản phẩm chính hảng</span>
+            <h2>Chất lượng tốt nhất</h2>
+            <span>Đảm bảo sản phẩm chính hãng</span>
         </div>
     </div>
 </section>

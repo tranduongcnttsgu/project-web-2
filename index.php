@@ -32,8 +32,10 @@ $app->router->get("/admin/manager/statics", [client::class, "adminViewStatics"])
 $app->router->get("/admin/addAccount", [client::class, "adminAddAcount"]);
 $app->router->get("/admin/adminEditAccount", [client::class, "adminEditAccount"]);
 $app->router->get("/admin/order/detail", [client::class, "adminOrderViewDetail"]);
+$app->router->get("/admin/import/detail", [client::class, "adminImportViewDetail"]);
 $app->router->get("/admin/manager/customer", [client::class, "adminManagerCustomerView"]);
 $app->router->get("/admin/manager/products", [client::class, "adminManagerProductsView"]);
+$app->router->get("/admin/manager/importproducts", [client::class, "adminManagerImportProductsView"]);
 $app->router->get("/admin/manager/orders", [client::class, "adminManagerOrdersView"]);
 $app->router->get("/admin/product/detail", [client::class, "adminManagerProductShowDetail"]);
 $app->router->get("/admin/product/addNew", [client::class, "adminManagerProductAddNewProduct"]);
@@ -52,6 +54,8 @@ $app->router->post('/user/search', [ProductController::class, "userSearch"]);
 $app->router->post("/product-detail", [ProductController::class, "getInfoProductDetail"]);
 $app->router->get("/orders", [ProductController::class, "getOrders"]);
 $app->router->get("/orderDetail", [ProductController::class, "getOrderDetail"]);
+$app->router->get("/imports", [ProductController::class, "getIrders"]);
+$app->router->get("/importDetail", [ProductController::class, "getImportDetail"]);
 $app->router->post("/add-one-product-to-order", [ProductController::class, "addOneProductToOrder"]);
 
 

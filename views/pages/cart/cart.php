@@ -9,7 +9,7 @@
 
                     <label for="buyProduct" class="cart-title-text-1">
                         <input type="checkbox" name="product-buy" id="buyProduct" onclick="handleAddManyProduct(this)">
-                        <span class="cart-title-text"> Tất cả sản phẩm</span>
+                        <span class="cart-title-text">Tất cả sản phẩm</span>
                     </label>
                     <span class="cart-title-text cart-title-text-2">Đơn giá</span>
                     <span class="cart-title-text cart-title-text-3">Số lượng</span>
@@ -34,7 +34,7 @@
                 <div class="transport-content-bottom" id="transport-info">
                     <div class="transport-infor">
                         <h2 class=" transport-title transport-title-second ">
-                            user name
+                            User name
                         </h2>
                         <span class="transport-phone-number">942834942</span>
                     </div>

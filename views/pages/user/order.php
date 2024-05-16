@@ -16,7 +16,7 @@
                     <span><i class="bx bx-analyse"></i>Đơn hàng</span>
                 </li>
                 <li titles="mes" key="2">
-                    <span><i class="bx bx-group"></i>sản phẩm đã mua</span>
+                    <span><i class="bx bx-group"></i>Sản phẩm đã mua</span>
                 </li>
 
 
@@ -25,7 +25,7 @@
                 <li onclick="dispatch('user/logout',1)" class="logout-btn">
                     <span class="logout">
                         <i class="bx bx-log-out-circle"></i>
-                        đăng xuất
+                        Đăng xuất
                     </span>
                 </li>
             </ul>
@@ -43,7 +43,7 @@
 
         <main class="user-order-main">
             <div class="order-main-wrapper">
-                <h2 class="main-title">đơn hàng của tôi</h2>
+                <h2 class="main-title">Đơn hàng của tôi</h2>
                 <ul class="list-order-detail" id="container-list-order">
 
                     <?php
@@ -55,7 +55,7 @@
                             <div class="item-order-title-wrapper">
                                 <h5 class="order-detail-status-title">
                                     <i class="fa-regular fa-bell"></i>
-                                    trạng thái: <span class="">
+                                    Trạng thái: <span class="">
                                         <?php echo  $value["order"]["message_status"] ?>
                                     </span>
 
@@ -105,7 +105,7 @@
                    
                   
                  ">
-                                    <div>tổng tiền đã thanh toán:
+                                    <div>Tổng tiền đã thanh toán:
                                         <?php
                                         if (strcmp($value["order"]["status_payment"], "1") === 0) {
                                             echo    number_format($value["order"]["totail_price"] * 1000, 0, '', ',');
@@ -115,7 +115,7 @@
                                         ?>
                                     </div>
                                     <div>
-                                        tổng tiền đơn hàng:
+                                        Tổng tiền đơn hàng:
                                         <?php
 
                                         echo    number_format($value["order"]["totail_price"] * 1000, 0, '', ',');
@@ -130,12 +130,12 @@
                                         <?php
                                         if (strcmp($value["order"]["status_stransport"], "0") === 0) :
                                         ?>
-                                            <button class="btn-status order-delete" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-delete-order-user">hủy đơn hàng</button>
+                                            <button class="btn-status order-delete" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-delete-order-user">Hủy đơn hàng</button>
                                         <?php endif; ?>
                                         <?php
                                         if (strcmp($value["order"]["status_stransport"], "1") === 0  && strcmp($value["order"]["status_payment"], "0") === 0) :
                                         ?>
-                                            <button class="btn-status order-payment" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-payment-order-user">thanh toán đơn hàng</button>
+                                            <button class="btn-status order-payment" data-order='<?php echo $value["order"]["order_id"];  ?>' id="button-payment-order-user">Thanh toán đơn hàng</button>
                                         <?php endif; ?>
 
                                         <?php

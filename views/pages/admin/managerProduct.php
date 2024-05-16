@@ -1,11 +1,11 @@
 <main>
-    <h3 style="padding: 10px;">quản lý sản phẩm</h3>
+    <h3 style="padding: 10px;">Quản lý sản phẩm</h3>
     <div class="container-top">
         <div class="manager-order-nav">
             <form action="" class="phone-from-search" id="mnp-form-search-product">
                 <select class="phone-product-category-select" name="category" id="categori-select">
                     <option value="false" selected>
-                        tất cả danh mục
+                        Tất cả danh mục
                     </option>
                     <?php
 
@@ -25,7 +25,7 @@
                     ?>
                 </select>
 
-                <input type="text" name="searchKey" class="phone-input-box" id="mnp-input-search-product" placeholder="search" />
+                <input type="text" name="searchKey" class="phone-input-box" id="mnp-input-search-product" placeholder="Search" />
                 <!-- <button type="submit" class="phone-button-form-search">
                     search
                 </button> -->
@@ -42,11 +42,11 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>ảnh</th>
+                        <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
-                        <th>giá</th>
-                        <th>số lượng còn lại</th>
-                        <th>thao tác</th>
+                        <th>Giá</th>
+                        <th>Số lượng còn lại</th>
+                        <th>Thao tác</th>
 
                     </tr>
                 </thead>
@@ -73,7 +73,7 @@
                             </td>
                             <td class=""><?php echo $product["quantity"] ?></td>
                             <td>
-                                <button class="button-action-mnProduct" id="button-action-mnProduct" data-product="<?php echo $product["product_id"] ?>">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                <button class="button-action-mnProduct" id="button-action-mnProduct" data-product="<?php echo $product["product_id"] ?>">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                     <?php } ?>

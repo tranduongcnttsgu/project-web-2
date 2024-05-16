@@ -283,7 +283,6 @@ class ProductModel extends Model
         $columns = "order_id, status,message_status, customer_id, totail_product, status_payment,message_status_payment, status_stransport, totail_price";
         $orderId = $this->autoId();
         $valueOrders = [$orderId, 1, "Đang chờ xác nhận", $userId, 1, 0, "Chưa thanh toán", 0, $totalPrice];
-        $newOrderS = $this->insert($table, $columns, $valueOrders);
         $orderDetailTable = "orders_detail";
         $orderDetailColumns = "product_id, product_name, product_image, delivered, price, totail_price, status, quantity, order_id";
         $orderDetailValue =  [$product["product_id"], $product["name"], $product["MainImage"], 0, $product["promo_price"], $totalPrice, 1, $product["quantity_buy"], $orderId];
@@ -329,7 +328,16 @@ class ProductModel extends Model
         }
         return $result;
     }
-
+    public function adminMangerOrderSordByDate($date_start, $data_end)
+    {
+        $data = [];
+        $orders = $this->findAll("orders", ["order_date between ? AND ?", "status=?"], [$date_start, $data_end, 2], "update_at  DESC");
+        foreach ($orders as $key => $value) {
+            $user = $this->get("users", ["user_id=?"], [$value["customer_id"]]);
+            array_push($data, ["order" => $value, "user" => $user]);
+        }
+        return $data;
+    }
     public function adminGetInfoOrder($orderId)
     {
         $order = $this->get("orders", ["order_id=?"], [$orderId]);

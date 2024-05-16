@@ -320,7 +320,8 @@
 </style>
 
 <?php
-include 'connect.php';
+
+require_once __DIR__ . "/conect.php";
 $conn = DbConnect::getInstance();
 
 $query = "SELECT * FROM orders_detail"; // Thay đổi tên bảng nếu cần

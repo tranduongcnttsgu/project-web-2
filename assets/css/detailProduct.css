@@ -225,7 +225,7 @@
 .button-change-quantity-wrapper {
     display: flex;
     column-gap: 10px;
-    margin-top: 0px;
+    margin-top: 20px;
 }
 
 .decrease,
@@ -257,7 +257,7 @@
 .container-right-middle {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 10px;
 }
 
 .container-right-middle-title {

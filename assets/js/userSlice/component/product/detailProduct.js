@@ -1,18 +1,5 @@
 import html from '../../../redux/core.js';
 
-const renderContentDetail = (content = [' ', ' ']) => {
-    return html`
-        ${content.map((item) => {
-            return `
-           <tr>
-             <td>Laughing Bacchus Winecellars</td>
-            <td>Yoshi Tannamuri</td>
-            </tr>
-        `;
-        })}
-    `;
-};
-
 const productDetail = async () => {
     const renderStar = (number) => {
         const temp = Array.apply(null, { length: +number });
@@ -100,7 +87,11 @@ const productDetail = async () => {
                 </h1>
             </div>
             <!-- info product  -->
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> 204b18b2811acae1a78df1384950899835a99318
             <div class="description-product">
                 <h1>Mô tả sản phẩm</h1>
                 <div>${product.description}</div>

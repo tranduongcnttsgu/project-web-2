@@ -467,7 +467,106 @@ if (adminEditAccount) {
 }
 //  manager order action ================================================================
 const listSortButton = document.querySelectorAll('.manager-order-button');
+const buttonFilterBYdate = document.getElementById('filter-by-date');
+buttonFilterBYdate?.addEventListener('click', () => {
+    let date_start = document.getElementById('date-start').value;
+    let date_end = document.getElementById('date-end').value;
+    if (!date_start) {
+        MessageBox('ngày bắt đầu chưa xác định', 'thông báo', 'error');
+        return;
+    }
+    if (!date_end) {
+        MessageBox('ngày kết thúc chưa xác định', 'thông báo', 'error');
+        return;
+    }
+    const check = new Date(date_end) - new Date(date_start);
 
+    if (check < 0) {
+        MessageBox('khoảng ngày không xác đinh', 'thông báo', 'error');
+        return;
+    }
+    if (date_end && date_end) {
+        const payload = new URLSearchParams();
+        payload.set('date_start', date_start);
+        payload.set('date_end', date_end);
+        fetch('http://localhost/admin/mamagerOrder/sortByDate', {
+            method: 'post',
+            body: payload,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                const formatNumber = (n) => {
+                    return (+n * 1000).toLocaleString() + ' đ';
+                };
+                const table = document.getElementById('table-show-order');
+                const infoOrder = data.data;
+                if (!data.success) {
+                    table.innerHTML =
+                        ' <h3 class="title-no-order-sort">không có đơn hàng nào</h3> ';
+                    return;
+                }
+                if (data.success) {
+                    if (data.data.length === 0) {
+                        table.innerHTML =
+                            ' <h3 class="title-no-order-sort">không có đơn hàng nào</h3> ';
+                        return;
+                    }
+                }
+                const value = elementHTML`
+                     ${infoOrder.map((info, index) => {
+                         return `
+                         <tr>
+                            <td>${index}</td>
+                            <td class="pcs">
+                               ${info.order.create_at}
+                            </td>
+                            <td class="cur">
+                                <div class=" info-customer-wrapper">
+                                    <div class="info-name">
+                                     ${info.user.name}
+                                    </div>
+                                    <div class="info-std">
+                                     ${info.user.phone}
+                                    </div>
+                                    <div class="info-email">
+                                    ${info.user.email}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="per">
+                                <div class="info-order-wrapper">
+                                    <div class="info-order-price">
+                                        Tổng tiền đơn hàng:
+                                       ${formatNumber(
+                                           info.order.totail_price
+                                       )}</div>
+                                    <div class="info-quantity">số lượng sản phẩm:
+                                       ${info.order.totail_product}
+                                    </div>
+                                </div>
+                            </td>
+                            </td>
+                            <td class="per">
+                             ${info.order.message_status}
+                            </td>
+                            <td class="per">${
+                                info.order.message_status_payment
+                            }</td>
+                            <td class="per">
+                                <button class="button-action-order" id="button-action-order" data-order="${
+                                    info.order.order_id
+                                }"
+                                onclick ="handleButtonShowOrderDetail(this)"
+                                >thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                            </td>
+                        </tr>
+                        `;
+                     })}
+                    `;
+                table.innerHTML = value;
+            });
+    }
+});
 if (listSortButton.length !== 0) {
     listSortButton.forEach((ele) => {
         ele.addEventListener('click', (e) => {
@@ -501,6 +600,13 @@ if (listSortButton.length !== 0) {
                         table.innerHTML =
                             ' <h3 class="title-no-order-sort">không có đơn hàng nào</h3> ';
                         return;
+                    }
+                    if (data.success) {
+                        if (data.data.length === 0) {
+                            table.innerHTML =
+                                ' <h3 class="title-no-order-sort">không có đơn hàng nào</h3> ';
+                            return;
+                        }
                     }
                     const value = elementHTML`
                      ${infoOrder.map((info, index) => {

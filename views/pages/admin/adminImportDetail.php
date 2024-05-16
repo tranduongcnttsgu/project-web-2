@@ -1,4 +1,5 @@
 <main class="main-order-wrapper" id="main-manager-order-detail">
+    <h3>Nhập hàng</h3>
     <div class="container-top">
         <div class="order-infor-wrapper">
             <div class="order-content-letf">

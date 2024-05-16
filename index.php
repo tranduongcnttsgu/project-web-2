@@ -29,6 +29,7 @@ $app->router->get('/detail-product', [client::class, 'productDetail']);
 $app->router->get("/checkout/cart", [client::class, "cart"]);
 $app->router->get("/checkout/payment", [client::class, "payment"]);
 $app->router->get("/admin/manager/statics", [client::class, "adminViewStatics"]);
+$app->router->get("/admin/manager/statisMonth", [client::class, "adminViewStaticsMonth"]);
 $app->router->get("/admin/addAccount", [client::class, "adminAddAcount"]);
 $app->router->get("/admin/adminEditAccount", [client::class, "adminEditAccount"]);
 $app->router->get("/admin/order/detail", [client::class, "adminOrderViewDetail"]);
@@ -77,8 +78,7 @@ $app->router->post('/admin/manager-product/update-product', [ProductController::
 $app->router->post('/admin/manager-product/add-product', [ProductController::class, "adminManagerProductAddNew"]);
 $app->router->post("/admin/manager-order/sort-order", [ProductController::class, "adminManagerOrderSortOrder"]);
 $app->router->post('/admin/manager-product/delete', [ProductController::class, "adminManagerProductDelete"]);
-$app->router->post("/admin/mamagerOrder/sortByDate", [ProductController
-::class, "adminMangerOrderSordByDate"]);
+$app->router->post("/admin/mamagerOrder/sortByDate", [ProductController::class, "adminMangerOrderSordByDate"]);
 // rou
 
 //routerbb  admin

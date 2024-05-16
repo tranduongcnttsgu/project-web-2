@@ -364,7 +364,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                         <h4 class="order-statistical-item-content-h" id="quantity-product"><?php echo $totalProductsSold; ?></h4>
                     </div>
                     <div class="order-statistical-item-icon">
-                        <i class="fa-light fa-salad"></i>
+                        <i class="fa-light fa-book"></i>
                     </div>
                 </div>
                 <div class="order-statistical-item">
@@ -379,7 +379,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                 <div class="order-statistical-item">
                     <div class="order-statistical-item-content">
                         <p class="order-statistical-item-content-desc">Doanh thu</p>
-                        <h4 class="order-statistical-item-content-h" id="quantity-sale"><?php echo vnds($totalRevenue); ?></h4>
+                        <h4 class="order-statistical-item-content-h" id="quantity-sale"><?php echo number_format($totalRevenue * 1000, 0, '', ',') . 'đ'; ?></h4>
                     </div>
                     <div class="order-statistical-item-icon">
                         <i class="fa-light fa-dollar-sign"></i>
@@ -403,7 +403,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                         <div>
                             <label for="to_date">Đến ngày:</label>
                             <input type="date" id="to_date" class="form-control-date" name="to_date">
-                            <input type="submit" value="Lọc" name="Lọc">
+                            <input class="button" type="submit" value="Lọc" name="Lọc">
                         </div>
                     </form>
                 </div>
@@ -472,7 +472,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                                 echo "<td>" . $row["product_id"] . "</td>"; // In ra mã sản phẩm
                                 echo "<td>" . $row["product_name"] . "</td>"; // In ra tên sản phẩm
                                 echo "<td>" . $row["total_quantity"] . "</td>"; // In ra số lượng đã bán
-                                echo "<td>" . vnds($row["total_revenue"]) . "</td>"; // In ra doanh thu
+                                echo "<td>" . number_format($row["total_revenue"] * 1000, 0, '', ',') . 'đ' . "</td>"; // In ra doanh thu
                                 echo "</tr>";
                             }
                         } else {
@@ -484,63 +484,9 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                     </tbody>
                 </table>
             </div>
-            <h1>Thống kê theo tháng</h1>
-            <div class="table">
-                <table width="100%">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tháng/Năm</th>
-                            <th>Số lượng hóa đơn</th>
-                            <th>Doanh thu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (isset($_GET['ngaytruoc']) && !empty($_GET['ngaytruoc']) && isset($_GET['ngaysau']) && !empty($_GET['ngaysau'])) {
-                            $ngaytruoc = $_GET['ngaytruoc'];
-                            $ngaysau = $_GET['ngaysau'];
+            <button class="button-transport"><a href="http://localhost/admin/manager/statisMonth">>> Thống kê theo tháng >></a></button>
 
-                            $queryDT = mysqli_query($conn, "SELECT *, MONTH(o.order_date) AS month, YEAR(o.order_date) AS year, COUNT(o.order_id) AS total_orders, SUM(od.totail_price) AS total_revenue
-                                        FROM orders AS o
-                                        INNER JOIN orders_detail AS od ON o.order_id = od.order_id
-                                        WHERE MONTH(o.order_date) BETWEEN MONTH('$ngaytruoc') AND MONTH('$ngaysau')
-                                        AND YEAR(o.order_date) BETWEEN YEAR('$ngaytruoc') AND YEAR('$ngaysau')
-                                        GROUP BY MONTH(o.order_date)");
-                        } else {
-                            $queryDT = mysqli_query($conn, "SELECT *, MONTH(o.order_date) AS month, YEAR(o.order_date) AS year, COUNT(o.order_id) AS total_orders, SUM(od.totail_price) AS total_revenue
-                                        FROM orders AS o
-                                        INNER JOIN orders_detail AS od ON o.order_id = od.order_id
-                                        GROUP BY MONTH(o.order_date)");
-                        }
-
-                        $i = 0;
-
-                        if ($queryDT) {
-                            while ($dataDoanhThu = mysqli_fetch_array($queryDT)) {
-                                $i++;
-                        ?>
-                                <tr>
-                                    <?php
-                                    $thang = $dataDoanhThu['month'];
-                                    $nam = $dataDoanhThu['year'];
-                                    ?>
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $thang . '/' . $nam; ?></td>
-                                    <td><?php echo $dataDoanhThu['total_orders']; ?> </td>
-                                    <td><?php echo number_format($dataDoanhThu['total_revenue']); ?> VNĐ</td>
-                                </tr>
-                        <?php
-                            }
-                        } else {
-                            echo "Không tìm thấy dữ liệu!";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
 </main>
 
 <script>

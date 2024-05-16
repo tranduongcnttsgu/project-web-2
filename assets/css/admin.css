@@ -1431,6 +1431,8 @@ table td {
 .manager-order-sort {
     display: flex;
     column-gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .manager-order-nav {
@@ -1738,7 +1740,7 @@ select {
     outline: 0;
     box-shadow: none;
     border: 0 !important;
-    background: #ffffffe2;
+    background: #f9f9f9;
     background-image: none;
     flex: 1;
     padding: 0 .5em;
@@ -1776,4 +1778,107 @@ select::-ms-expand {
 
 .select:hover::after {
     color: #23b499;
+}
+
+/* Order */
+li.manager-order-button {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    /* Hiệu ứng chuyển đổi */
+}
+
+
+li.manager-order-button,
+li.manager-order-button:hover {
+    color: #000;
+    /* Màu chữ đen */
+}
+
+
+li[data-sort="1"] {
+    background-color: #ffeead;
+}
+
+li[data-sort="2"] {
+    background-color: #d1e5d7;
+}
+
+li[data-sort="3"] {
+    background-color: #bdd7ff;
+}
+
+li[data-sort="4"] {
+    background-color: #ccffd6;
+}
+
+li[data-sort="5"] {
+    background-color: #ffb3b3;
+}
+
+
+li.manager-order-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Button */
+.button {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-image: var(--btn-gradient);
+    transition: all 0.2s ease;
+}
+
+.button:active {
+    transform: scale(0.96);
+}
+
+.button:before,
+.button:after {
+    position: absolute;
+    content: "";
+    width: 150%;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: -1000;
+    background-repeat: no-repeat;
+}
+
+.button-transport {
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-image: var(--light-green);
+    transition: all 0.2s ease;
+}
+
+.button-transport:active {
+    transform: scale(0.96);
+}
+
+.button-transport:before,
+.button-transport:after {
+    position: absolute;
+    content: "";
+    width: 150%;
+    left: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: -1000;
+    background-repeat: no-repeat;
 }

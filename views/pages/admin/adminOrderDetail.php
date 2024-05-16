@@ -107,3 +107,36 @@
         </div>
     </div>
 </main>
+<style>
+    .status-order-wrapper {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+
+    label {
+        font-weight: bold;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+
+
+        select:hover {
+            border-color: #999;
+        }
+
+
+        option {
+            font-size: 14px;
+        }
+    }
+</style>

@@ -87,11 +87,6 @@ const productDetail = async () => {
                 </h1>
             </div>
             <!-- info product  -->
-<<<<<<< HEAD
-            
-=======
-
->>>>>>> 204b18b2811acae1a78df1384950899835a99318
             <div class="description-product">
                 <h1>Mô tả sản phẩm</h1>
                 <div>${product.description}</div>

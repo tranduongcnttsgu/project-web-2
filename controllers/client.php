@@ -91,6 +91,16 @@ class client extends Controller
         $content = $this->getContentLayout("admin/statics", "show");
         return $this->renderLayout($content, $params);
     }
+    public function adminViewStaticsMonth()
+    {
+        $this->setLayout("admin");
+        $params  = [
+            "styled" => ["admin-statics"],
+            "script" => ['admin']
+        ];
+        $content = $this->getContentLayout("admin/statisMonth", "show");
+        return $this->renderLayout($content, $params);
+    }
     public function register()
     {
         $params  = [

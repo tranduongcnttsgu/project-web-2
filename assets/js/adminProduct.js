@@ -52,7 +52,14 @@ const getInfoOrder = () => {
     const img_product = document.getElementById('img-product');
     const productId = JSON.parse(localStorage.getItem('ad-manager-productId'));
     const formatPrice = (price) => {
-        return (price * 1000).toLocaleString();
+        const multipliedPrice = (price * 1000).toString();
+
+        const formattedPrice = multipliedPrice.replace(
+            /\B(?=(\d{3})+(?!\d))/g,
+            ','
+        );
+
+        return formattedPrice;
     };
     const payload = new URLSearchParams();
     payload.set('productId', productId);

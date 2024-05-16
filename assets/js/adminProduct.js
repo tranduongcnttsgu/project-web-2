@@ -3,7 +3,6 @@ let permission = {};
 const buttonAddNew = document.getElementById('button-manager-product-add-new');
 const buttonEdit = document.getElementById('button-form-edit-product-submit');
 const buttonDelete = document.getElementById('button-manager-product-delete');
-const buttonEditImage = document.getElementById('button-change-image');
 const checkPermissions = async () => {
     const req = await fetch('http://localhost/admin/check-permission');
     const res = await req.json();
@@ -25,7 +24,6 @@ const checkPermissions = async () => {
     }
     if (permission.action_update === 0) {
         buttonEdit?.classList.add('button-none');
-        buttonEditImage?.classList.add('button-none');
     }
 
     console.log(permission);

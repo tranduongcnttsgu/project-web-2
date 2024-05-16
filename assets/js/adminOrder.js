@@ -34,12 +34,12 @@ const checkPermissions = async () => {
         return (window.location.href = 'http://localhost/undefind-href');
     }
     if (permission.action_update === 0) {
-        button_update?.classList.add('button-none');
+        button_update.classList.add('button-none');
     }
     if (permission.action_delete === 0) {
-        button_delete?.classList.add('button-none');
+        button_delete.classList.add('button-none');
     }
-    status_order?.addEventListener('change', (e) => {
+    status_order.addEventListener('change', (e) => {
         if (e.target.value === 'đơn hàng bị hủy') {
             if (
                 permission.action_update !== 0 &&

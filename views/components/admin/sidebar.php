@@ -57,7 +57,7 @@
                 if (strcmp($value["role"]["service"], "quản lý khách hàng") === 0) {
                     $navManagerCustomer = true;
                 }
-                if (strcmp($value["role"]["service"], "phần Quyền") !== 0) {
+                if (strcmp($value["role"]["service"], "phần Quyền") === 0) {
                     $navManagerDecen = true;
                 }
             }

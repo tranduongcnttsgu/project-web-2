@@ -7,7 +7,7 @@
                     <th>STT</th>
                     <th>Tên</th>
                     <th>Email</th>
-                    <th>số hàng đã mua</th>
+                    <th>số đơn hàng đã mua</th>
                     <th>trạng thái</th>
                     <th>chi tiết</th>
                 </tr>

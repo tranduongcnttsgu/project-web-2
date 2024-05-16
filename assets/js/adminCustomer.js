@@ -4,6 +4,32 @@ function html([first, ...strings], ...values) {
         .filter((x) => (x && x !== true) || x === 0)
         .join('');
 }
+const name_permission = 'quản lý sản phẩm';
+let permission = {};
+
+const checkPermissions = async () => {
+    const buttonUpdate = document.getElementById('button-customer-update');
+
+    const req = await fetch('http://localhost/admin/check-permission');
+    const res = await req.json();
+    if (!res.success) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
+    permission =
+        res.data.find((role) => {
+            return role.permission.service === name_permission;
+        })?.service ?? false;
+    if (!permission) {
+        return (window.location.href = 'http://localhost/undefind-href');
+    }
+
+    if (permission.action_update === 0) {
+        buttonUpdate.classList.add('button-none');
+    }
+
+    console.log(permission);
+};
+checkPermissions();
 const getInforUser = () => {
     const UserId = JSON.parse(localStorage.getItem('manager-user-show-userId'));
     const payload = new URLSearchParams();
@@ -16,6 +42,7 @@ const getInforUser = () => {
     const total_price = document.getElementById('order_total_price');
     const status = document.getElementById('status');
     const table = document.getElementById('table-order-detail');
+    const selectStatus = document.getElementById('status-customer');
     payload.set('userId', UserId);
     fetch('http://localhost/admin/managerCustomer/getInfoCustomer', {
         method: 'post',
@@ -41,6 +68,7 @@ const getInforUser = () => {
                 total_order.innerHTML = infoOrder.total_order;
                 total_price.innerHTML = formatPrice(+infoOrder.total_price);
                 total_product.innerHTML = infoOrder.total_product;
+                selectStatus.value = user.status;
                 if (+user.status === 1) {
                     status.innerHTML =
                         "  <span class='tick-green'></span> đang hoạt động";

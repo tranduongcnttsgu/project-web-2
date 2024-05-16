@@ -4,21 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
         formGroupSelector: '.input-box',
         errorSelector: '.handle-error',
         rules: [
-            Validator.isRequired('#name', 'vui lòng nhập tên của bạn'),
-            Validator.isRequired('#email', 'vui lòng nhập email của bạn'),
+            Validator.isRequired('#name', 'Vui lòng nhập tên của bạn!'),
+            Validator.isRequired('#email', 'Vui lòng nhập email của bạn!'),
             Validator.isEmail('#email'),
-            Validator.isRequired('#password', 'Vui lòng nhập mật khẩu của bạn'),
+            Validator.isRequired('#password', 'Vui lòng nhập mật khẩu của bạn!'),
             Validator.minLength('#password', 6),
             Validator.isRequired(
                 '#password-confirm',
-                'Vui lòng nhập mật khẩu của bạn'
+                'Vui lòng nhập mật khẩu của bạn!'
             ),
             Validator.isConfirmed(
                 '#password-confirm',
                 function () {
                     return document.querySelector('#form #password').value;
                 },
-                'Mật khẩu nhập lại không chính xác'
+                'Mật khẩu nhập lại không chính xác!'
             ),
         ],
         onSubmit: function (data) {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }
                             });
                     } else {
-                        MessageBox('Email đã tồn tại !', 'Thông báo', 'Error');
+                        MessageBox('Email đã tồn tại!', 'Thông báo', 'Error');
                     }
                 });
         },

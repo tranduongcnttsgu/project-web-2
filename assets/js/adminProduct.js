@@ -130,7 +130,7 @@ if (showDetailProduct) {
                 .then((data) => {
                     if (data.success) {
                         MessageBox(
-                            'cập nhật sản phẩm thành công',
+                            'Cập nhật sản phẩm thành công',
                             'Thông báo'
                         );
                     } else {

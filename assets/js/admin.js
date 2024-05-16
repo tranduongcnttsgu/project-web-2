@@ -547,7 +547,7 @@ if (listSortButton.length !== 0) {
                                     info.order.order_id
                                 }"
                                 onclick ="handleButtonShowOrderDetail(this)"
-                                >thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                >Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
                         `;
@@ -684,7 +684,7 @@ const paginationPage = async () => {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 
@@ -749,7 +749,7 @@ const paginationPage = async () => {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 
@@ -814,7 +814,7 @@ if (paginationTitle) {
                             <td>
                                 <button class="button-action-mnProduct" 
                                 onclick = "handleButtonActionShowProduct(this)"
-                                id="button-show-product-action" data-product="${product.product_id}">thao tác<i class="fa-solid fa-pen-to-square"></i></button>
+                                id="button-show-product-action" data-product="${product.product_id}">Thao tác<i class="fa-solid fa-pen-to-square"></i></button>
                             </td>
                         </tr>
 

@@ -11,10 +11,10 @@ const infoAddress = document.getElementById('info-address');
 const infoPhone = document.getElementById('info-phone');
 const infoEmail = document.getElementById('info-email');
 infoAddress.innerHTML = `  <span>Địa chỉ:</span>
-                   ${user.address ? user.address : 'chưa được cập nhật'}`;
+                   ${user.address ? user.address : 'Chưa được cập nhật'}`;
 infoPhone.innerHTML = `
                      <span>Số điện thoại:</span>
-                       ${user.phone ? user.phone : 'chưa được cập nhật'}
+                       ${user.phone ? user.phone : 'Chưa được cập nhật'}
                    `;
 infoEmail.innerHTML = `
      <span>email:</span>

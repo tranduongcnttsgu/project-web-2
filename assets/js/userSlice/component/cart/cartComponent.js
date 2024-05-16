@@ -17,14 +17,14 @@ const cartComponent = ({ data, checked, order }) => {
     const checkOrder = (id) => {
         statusChecked =
             order.filter((product) => {
-                return product.product_id === id;
+                return product.product_id + '' === id + '';
             }).length > 0;
         return statusChecked;
     };
     if (data.length === 0) {
         return html`
             <div class="no-product-title">
-                <h3>không có sản phẩm nào trong giỏ hàng</h3>
+                <h3>Không có sản phẩm nào trong giỏ hàng</h3>
             </div>
             <div class="no-product-button">
                 <a href="http://localhost/product">

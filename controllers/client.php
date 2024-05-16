@@ -249,7 +249,7 @@ class client extends Controller
     {
         $this->setLayout("admin");
         $params  = [
-            "script" => ['admin', 'validation', 'adminOrder']
+            "script" => ['admin', 'validation',]
         ];
         $content = $this->getContentLayout("admin/adminImportDetail", "");
         return $this->renderLayout($content, $params);

@@ -36,7 +36,7 @@ const renderContentRight = ({ data }) => {
             </div>
         </div>
         <div class="totail-prive">
-            <h1 class="totail-prive-title">tạm tính</h1>
+            <h1 class="totail-prive-title">Tạm tính</h1>
             <h1 class="totail-prive-price">
                 ${formatPrice(
                     parseInt(buyProduct.quantity_buy) *

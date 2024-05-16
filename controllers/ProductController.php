@@ -248,6 +248,15 @@ class ProductController extends Controller
         $data = $this->productModel->adminGetInfoOrder($payload["orderId"]);
         return  $this->responseJSON("success", true, 200, $data);
     }
+    public function adminMangerOrderSordByDate()
+    {
+        $paylaod = $this->getPayload();
+        $date_start = $paylaod["date_start"];
+        $date_end = $paylaod["date_end"];
+        $data = $this->productModel->adminMangerOrderSordByDate($date_start, $date_end);
+
+        return $this->responseJSON("success", true, 200, $data);
+    }
     public function adminUpdateStatusOrder()
     {
         $payload    = $this->getPayload();

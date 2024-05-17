@@ -383,6 +383,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                         $queryDT = mysqli_query($conn, "SELECT *, MONTH(o.order_date) AS month, YEAR(o.order_date) AS year, COUNT(o.order_id) AS total_orders, SUM(od.totail_price) AS total_revenue
                                         FROM orders AS o
                                         INNER JOIN orders_detail AS od ON o.order_id = od.order_id
+                                        WHERE status_payment = 1
                                         GROUP BY MONTH(o.order_date)");
                     }
 

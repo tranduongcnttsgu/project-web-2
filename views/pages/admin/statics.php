@@ -336,22 +336,26 @@ function vnds($price)
 {
     return number_format($price, 0, '', '.') . ' VND';
 }
-$queryProductsSold = "SELECT COUNT(DISTINCT product_id) AS total_products_sold FROM orders_detail";
+$queryProductsSold = "SELECT COUNT(DISTINCT product_id) AS total_products_sold FROM orders_detail AS od INNER JOIN orders AS o ON o.order_id = od.order_id WHERE o.status_payment = 1";
 $resultProductsSold = $conn->query($queryProductsSold);
 $rowProductsSold = $resultProductsSold->fetch_assoc();
 $totalProductsSold = $rowProductsSold['total_products_sold'];
 
 // Tính tổng số lượng sản phẩm đã bán ra
-$queryQuantityOrder = "SELECT SUM(quantity) AS total_quantity_sold FROM orders_detail";
+$queryQuantityOrder = "SELECT SUM(quantity) AS total_quantity_sold FROM orders_detail AS od INNER JOIN orders AS o ON o.order_id = od.order_id WHERE o.status_payment = 1";
 $resultQuantityOrder = $conn->query($queryQuantityOrder);
 $rowQuantityOrder = $resultQuantityOrder->fetch_assoc();
 $totalQuantitySold = $rowQuantityOrder['total_quantity_sold'];
 
 // Tính tổng doanh thu
-$queryTotalRevenue = "SELECT SUM(totail_price) AS total_revenue FROM orders_detail";
+$queryTotalRevenue = "SELECT SUM(od.totail_price) AS total_revenue 
+                      FROM orders_detail AS od 
+                      INNER JOIN orders AS o ON o.order_id = od.order_id 
+                      WHERE o.status_payment = 1";
 $resultTotalRevenue = $conn->query($queryTotalRevenue);
 $rowTotalRevenue = $resultTotalRevenue->fetch_assoc();
-$totalRevenue = $rowTotalRevenue['total_revenue'];
+$totalRevenue = $rowTotalRevenue['total_revenue'] ?? 0;
+
 ?>
 <main>
     <div class="section active">
@@ -457,7 +461,8 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                         $result = $conn->query("SELECT od.product_id, p.name AS product_name, SUM(od.quantity) AS total_quantity, SUM(od.totail_price) AS total_revenue
                                                     FROM orders_detail AS od
                                                     INNER JOIN products AS p ON od.product_id = p.product_id
-                                                    WHERE 1 $date_condition $search_condition
+                                                    INNER JOIN orders AS o ON o.order_id = od.order_id
+                                                    WHERE 1 $date_condition $search_condition AND o.status_payment = 1
                                                     GROUP BY od.product_id
                                                     ORDER BY $column $sort_order");
 

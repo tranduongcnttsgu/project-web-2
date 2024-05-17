@@ -282,7 +282,8 @@ class ProductModel extends Model
         $colums = $table = "orders";
         $columns = "order_id, status,message_status, customer_id, totail_product, status_payment,message_status_payment, status_stransport, totail_price";
         $orderId = $this->autoId();
-        $valueOrders = [$orderId, 1, "Đang chờ xác nhận", $userId, 1, 0, "Chưa thanh toán", 0, $totalPrice];
+        $valueOrders = [$orderId, 1, "Đang chở xác nhận", $userId, 1, 0, "chưa thanh toán", 0, $totalPrice];
+        $newOrderS = $this->insert($table, $columns, $valueOrders);
         $orderDetailTable = "orders_detail";
         $orderDetailColumns = "product_id, product_name, product_image, delivered, price, totail_price, status, quantity, order_id";
         $orderDetailValue =  [$product["product_id"], $product["name"], $product["MainImage"], 0, $product["promo_price"], $totalPrice, 1, $product["quantity_buy"], $orderId];

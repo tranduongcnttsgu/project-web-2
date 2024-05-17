@@ -363,7 +363,7 @@ $totalRevenue = $rowTotalRevenue['total_revenue'];
                         <h4 class="order-statistical-item-content-h" id="quantity-product"><?php echo $totalProductsSold; ?></h4>
                     </div>
                     <div class="order-statistical-item-icon">
-                        <i class="fa-light fa-salad"></i>
+                        <i class="fa-solid fa-book"></i>
                     </div>
                 </div>
                 <div class="order-statistical-item">
